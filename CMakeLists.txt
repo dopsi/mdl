@@ -30,6 +30,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_executable(mdl 
 	main.cpp
 	display_driver.cpp
+	ncurses_display_driver.cpp
 	plaintext_display_driver.cpp
 	document.cpp
 	line_element.cpp
@@ -43,5 +44,6 @@ add_executable(mdl
 
 set_property(TARGET mdl PROPERTY CXX_STANDARD 11)
 
-target_link_libraries(mdl readline 
-	${Boost_LIBRARIES})
+target_link_libraries(mdl 
+	${Boost_LIBRARIES}
+	ncurses)

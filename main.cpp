@@ -2,6 +2,7 @@
 #include "configure.hpp"
 #include "md_parser.hpp"
 #include "plaintext_display_driver.hpp"
+#include "ncurses_display_driver.hpp"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ int main(int argc, char ** argv) {
 	}
 
 	MdParser parser(argv[1]);
-	PlainTextDisplayDriver drv;
+	NcursesDisplayDriver drv;
 	drv.display(parser.get_document());
 	return 0;
 }
