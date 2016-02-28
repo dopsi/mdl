@@ -54,7 +54,7 @@ void MdParser::parse() {
 				p1 = nullptr;
 			} else {
 				// other content
-				if (last_e && (last_e->content()).back() != ' ' && line.front() != ' ') {
+				if (p0->size() && last_e && (last_e->content()).back() != ' ' && line.front() != ' ') {
 					line = " "+line;
 				}
 				e = new TextLineElement(line);
