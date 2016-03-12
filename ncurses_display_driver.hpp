@@ -3,11 +3,17 @@
 
 #include "display_driver.hpp"
 
+#include "paragraph.hpp"
+
 #include <ncurses.h>
 
 class NcursesDisplayDriver : public DisplayDriver {
 	private:
-		WINDOW* _window;
+		WINDOW* _stdscr;
+		WINDOW* _title_window;
+		WINDOW* _display_window;
+		WINDOW* _footer_window;
+		size_t _display_offset;
 	public:
 		NcursesDisplayDriver();
 		virtual ~NcursesDisplayDriver();
