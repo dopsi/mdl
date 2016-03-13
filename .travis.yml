@@ -1,6 +1,10 @@
 language: c++
+sudo: required
 compiler:
 - gcc
+
+before_install:
+- sudo apt-get install boost-dev
 
 script:
 - mkdir build && cd build && cmake .. && make
