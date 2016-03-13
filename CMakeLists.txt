@@ -12,6 +12,11 @@ set(CMAKE_BUILD_TYPE Debug)
 
 include(CheckFunctionExists)
 
+# Set compiler flags
+if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+endif()
+
 # Set project data
 project(mdl)
 set(mdl_VERSION_MAJOR 0)
@@ -41,8 +46,6 @@ add_executable(mdl
 	title2_paragraph.cpp
 	parser.cpp
 	md_parser.cpp) 
-
-target_compile_features(mdl PRIVATE cxx_nullptr cxx_strong_enums)
 
 target_link_libraries(mdl 
 	${Boost_LIBRARIES}
