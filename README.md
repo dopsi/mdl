@@ -6,39 +6,33 @@ Goal
 
 Build a functionnaly similar program to 
 [visit1985's mdp](http://github.com/visit1985/mdp), at least for the parser,
-to display a Markdown file in the way `less(1)` does for text files.
+to display a Markdown file in the way *less(1)* does for text files.
 
-Technical solutions
--------------------
+Building
+--------
 
-* Use `cmake(1)` as build system.
-* Use `ncurses` as display library.
-* Use C++ to write the program.
-* Write a parser-independent display system (i.e. the parser can easily be
-replaced for another one (maybe one day load an external `.so` file to 
-parse the results).
+This program depends on :
 
-C++ coding
-----------
+* C++11
+* ncurses
+* Doxygen (to generate the documentation)
 
-* Use std::wstring to store the data
-* Use a vector of vectors of line elements (maybe use a typedef such as 
-in the following code)
+To build the program, follow these steps :
 
-    typedef vector<LineElement*> Paragraph
+* create a `build` directory
+* run `cmake $source_directory`
+* run `make`
 
-* Have a vector of *top-level* elements (aka paragraphs, titles, tables, code, 
-quotes). Each one of these elements must have the same interface as all 
-the others, to enable them to be easily replaced or completed.
-* Each top level element must provide at least one displayable element
-(aka text portion of a line, with a specific typesetting) to be displayed.
+This program cannot be installed as of now.
+
+To build the documentation, run `doxygen` in the source directory
 
 Versionning
 -----------
 
 this project follows the semantic versionning guidelines provided at
-[semver.org](http://semver.org/) with versions numbered as `major.minor.
-revision` :
+[semver.org](http://semver.org/) with versions numbered as 
+`major.minor.revision` :
 
 * `major` is increased after a backwards incompatible api change.
 * `minor` is increased after a backwards compatible api change.
