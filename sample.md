@@ -11,10 +11,13 @@ This list does summarize the supported functions :
 
 * titles (up to 2 levels at the moment)
 
-Lorem ipsum text
-----------------
+# Lorem ipsum text
+
+## First paragraph
 
 Potenti dui, interdum consequat ac, lectus dapibus gravida. Non pellentesque lectus netus neque ante dui. Proin placerat massa, convallis per, curae, massa, aliquam. Hymenaeos mus, justo aenean sociis eni ante pede felis curabitur diam nunc eu nibh tellus at proin sem. Quam consectetuer vestibulum pede purus neque ligula ad enim fusce, vivamus. Mattis dolor. Congue. Massa. Eleifend sit, id justo aenean. At platea rhoncus tristique mollis curae leo felis adipiscing pulvinar nisl ve sollicitudin cursus, congue. Tincidunt morbi curabitur torquent ante nec. Elit enim nam montes a.
+
+## Second paragraph
 
 Blandit molestie posuere tellus nisi. Ridiculus metus, elit rutrum, habitant elit, iaculis metus. Elit vitae habitasse nec porta. Cras ve justo rutrum nisl in. Dictum velit diam, libero. Nec erat nisl vel duis. Augue ligula ligula eni, sociis, vitae scelerisque lobortis. Aliquam. Mi. Parturient. Nulla. Quam velit elit egestas. Parturient amet aenean rhoncus eget nibh duis cubilia ante, nisi class enim lacus. Feugiat. Imperdiet proin ac proin mus accumsan vitae ad ac taciti id, primis diam pede id lacus. Mollis non ante consectetuer at.
 

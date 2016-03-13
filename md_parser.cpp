@@ -10,6 +10,19 @@ namespace {
 	bool string_has_only(const std::string & s, const char & c) {
 		return (s.find_first_not_of(c) == std::string::npos);
 	}
+
+	size_t string_startswith(const std::string & s, const char & c) {
+		size_t i(0);
+		while (s[i] == c and i < s.length()){
+			++i;
+		}
+
+		return i;
+	}
+
+	std::string string_clear_leading(const std::string & s, const std::string & subset) {
+		return s.substr(s.find_first_not_of(subset));
+	}
 };
 
 MdParser::MdParser(const std::string & filename) :
@@ -26,6 +39,7 @@ void MdParser::parse() {
 	_document = new Document();
 	Paragraph *p0(nullptr), *p1(nullptr);
 	LineElement *e = nullptr, *last_e = nullptr;
+	size_t sharps(0);
 	while (getline(_input_file, line)) {
 		if (line.empty()) {
 			// end of line, change paragraph
@@ -34,19 +48,33 @@ void MdParser::parse() {
 			}
 			p0 = new TextParagraph();
 		} else {
+			sharps = string_startswith(line, '#');
 			if (!p0) {
 				p0 = new TextParagraph();
 			}
 
-			if (string_has_only(line, '=')) {
-				// title1 delimiter
+			if (sharps != 0) {
+				switch(sharps) {
+					case 1:
+						delete p0;
+						p0 = new Title1Paragraph();
+						break;
+					case 2:
+						delete p0;
+						p0 = new Title2Paragraph();
+						break;
+					default:
+						break;
+				}
+				e = new TextLineElement(string_clear_leading(line," \t#"));
+				p0->append_line_element(e);
+			} else if (string_has_only(line, '=')) { // title 1 delimiter
 				p1 = new Title1Paragraph(p0);
 				delete p0;
 				p0 = nullptr;
 				_document->append_paragraph(p1);
 				p1 = nullptr;
-			} else if (string_has_only(line, '-')) {
-				// title2 delimiter
+			} else if (string_has_only(line, '-')) { // title 2 delimiter
 				p1 = new Title2Paragraph(p0);
 				delete p0;
 				p0 = nullptr;
