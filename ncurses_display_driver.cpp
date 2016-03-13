@@ -52,12 +52,18 @@ void NcursesDisplayDriver::display(Document * doc) {
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
 				wattron(_display_window, A_UNDERLINE);
-			case Paragraph::Level::Title2:
 				wattron(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				if (!is_first) {
 					cursor_y+=2;
 				}
 				cursor_x=9;
+				break;
+			case Paragraph::Level::Title2:
+				wattron(_display_window, COLOR_PAIR(TITLE1_PAIR));
+				if (!is_first) {
+					cursor_y+=2;
+				}
+				cursor_x=5;
 				break;
 			default:
 				if (!is_first) {
