@@ -13,5 +13,9 @@ size_t Document::size(void) const {
 }
 
 Paragraph* Document::operator[](size_t index) const {
-	return _paragraph[index];
+	if (index < _paragraph.size()) {
+		return _paragraph[index];
+	} else {
+		return nullptr;
+	}
 }
