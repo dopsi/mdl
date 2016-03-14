@@ -42,7 +42,7 @@ add_executable(mdl
 	parser.cpp
 	md_parser.cpp) 
 
-set_property(TARGET mdl PROPERTY CXX_STANDARD 11)
+target_compile_features(mdl PRIVATE cxx_nullptr cxx_strong_enums)
 
 target_link_libraries(mdl 
 	${Boost_LIBRARIES}
