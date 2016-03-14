@@ -10,4 +10,5 @@ before_install:
 - sudo apt-get -y install libboost-all-dev
 
 script:
+- cmake --version
 - mkdir build && cd build && cmake .. && make
