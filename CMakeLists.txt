@@ -48,3 +48,5 @@ target_compile_features(mdl PRIVATE cxx_nullptr cxx_strong_enums)
 target_link_libraries(mdl 
 	${Boost_LIBRARIES}
 	ncurses)
+
+install(TARGETS mdl DESTINATION bin)
