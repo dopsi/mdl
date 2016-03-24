@@ -13,17 +13,27 @@
  **/
 class Document {
 	private:
+		std::string _filename; /**!< @brief Filename of the document **/
 		std::vector<Paragraph*> _paragraph; /**!< @brief List of paragraphs **/
 	public:
 		/**
 		 * @brief Constructor
+		 *
+		 * @param filename Name of the file represented by the Document object
 		 **/
-		Document();
+		Document(const std::string & filename);
 
 		/**
 		 * @brief Destructor
 		 **/
 		~Document();
+
+		/**
+		 * @brief Return the filename of the represented file
+		 *
+		 * @return The name of the represented file
+		 **/
+		std::string filename(void) const;
 
 		/**
 		 * @brief Append a newly parsed paragraph to the document

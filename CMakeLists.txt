@@ -39,6 +39,7 @@ add_executable(mdl
 	text_paragraph.cpp
 	title1_paragraph.cpp
 	title2_paragraph.cpp
+	ulist1_paragraph.cpp
 	parser.cpp
 	md_parser.cpp) 
 

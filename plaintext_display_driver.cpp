@@ -17,6 +17,9 @@ void PlainTextDisplayDriver::display(Document * doc) {
 			case Paragraph::Level::Title2:
 				cout << "  ";
 				break;
+			case Paragraph::Level::UList1:
+				cout << "* ";
+				break;
 			default:
 				cout << "    ";
 				break;

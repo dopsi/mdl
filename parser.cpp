@@ -1,6 +1,7 @@
 #include "parser.hpp"
 
 Parser::Parser(const std::string & filename) :
+	_filename(filename),
 	_input_file(filename),
 	_document(nullptr)
 {

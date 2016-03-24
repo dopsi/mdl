@@ -14,6 +14,7 @@
  **/
 class Parser {
 	protected:
+		std::string _filename; /**!< Input file name **/
 		std::ifstream _input_file; /**!< Input file stream, re-read on reload **/
 		Document * _document; /**!< Pointer to the Document object **/
 	public:

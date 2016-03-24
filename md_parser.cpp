@@ -3,12 +3,22 @@
 #include "text_paragraph.hpp"
 #include "title1_paragraph.hpp"
 #include "title2_paragraph.hpp"
+#include "ulist1_paragraph.hpp"
 
 using namespace std;
 
 namespace {
 	bool string_has_only(const std::string & s, const char & c) {
 		return (s.find_first_not_of(c) == std::string::npos);
+	}
+
+	template<class T>
+	T max(const T & a, const T & b) {
+		if (a > b) {
+			return a;
+		} else {
+			return b;
+		}
 	}
 
 	size_t string_startswith(const std::string & s, const char & c) {
@@ -18,6 +28,23 @@ namespace {
 		}
 
 		return i;
+	}
+
+	bool string_startswith(const std::string & s, const std::string & c) {
+		if (s.length() < c.length()) {
+			return false;
+		}
+
+		size_t i(0);
+		while (s[i] == c[i] and i < c.length() ){
+			++i;
+		}
+		
+		if (i != c.length()) {
+			return false;
+		}
+
+		return true;
 	}
 
 	std::string string_clear_leading(const std::string & s, const std::string & subset) {
@@ -36,7 +63,7 @@ MdParser::~MdParser() {
 
 void MdParser::parse() {
 	std::string line;
-	_document = new Document();
+	_document = new Document(_filename);
 	Paragraph *p0(nullptr), *p1(nullptr);
 	LineElement *e = nullptr, *last_e = nullptr;
 	size_t sharps(0);
@@ -80,6 +107,11 @@ void MdParser::parse() {
 				p0 = nullptr;
 				_document->append_paragraph(p1);
 				p1 = nullptr;
+			} else if (string_startswith(line, "* ")) { // level 1 list delimiter
+				delete p0;
+				p0 = new UList1Paragraph();
+				e = new TextLineElement(string_clear_leading(line,"* \t#"));
+				p0->append_line_element(e);
 			} else {
 				// other content
 				if (p0->size() && last_e && (last_e->content()).back() != ' ' && line.front() != ' ') {

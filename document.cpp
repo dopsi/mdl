@@ -1,8 +1,12 @@
 #include "document.hpp"
 
-Document::Document() {}
+Document::Document(const std::string & filename) : _filename(filename) {}
 
 Document::~Document() {}
+
+std::string Document::filename(void) const {
+	return _filename;
+}
 
 void Document::append_paragraph(Paragraph * p) {
 	_paragraph.push_back(p);

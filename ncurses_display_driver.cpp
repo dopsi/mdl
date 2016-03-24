@@ -6,11 +6,12 @@ using namespace std;
 
 #define WIN_TITLE_PAIR 1
 #define TITLE1_PAIR 2
+#define ULIST1_PAIR 3
 #define COLOR_NONE -1
 
 NcursesDisplayDriver::NcursesDisplayDriver() :
 	DisplayDriver(), _stdscr(initscr()),
-	_title_window(newwin(3,30,0,0)),
+	_title_window(newwin(3,COLS,0,0)),
 	_display_window(newwin(60,COLS,2,0)),
 	_display_offset(0) {
 	//Check if all windows have been initialized
@@ -28,6 +29,7 @@ NcursesDisplayDriver::NcursesDisplayDriver() :
 	use_default_colors();
 	init_pair(WIN_TITLE_PAIR, COLOR_YELLOW, COLOR_NONE);
 	init_pair(TITLE1_PAIR, COLOR_BLUE, COLOR_NONE);
+	init_pair(ULIST1_PAIR, COLOR_CYAN, COLOR_NONE);
 
 	// Refresh screen, to enable the windows
 	refresh();
@@ -39,15 +41,15 @@ NcursesDisplayDriver::~NcursesDisplayDriver() {
 
 void NcursesDisplayDriver::display(Document * doc) {
 	wattron(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
-	wprintw(_title_window, "document displayer - title");
+	wprintw(_title_window, string("document displayer - "+doc->filename()).c_str());
 	wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
 	wrefresh(_title_window);
-	render(doc, _display_window, 0);
+	render(doc, 0);
 	wrefresh(_display_window);
 	getch();
 }
 
-void NcursesDisplayDriver::render(Document* doc, WINDOW * win, const size_t & line_offset) const {
+void NcursesDisplayDriver::render(Document* doc, const size_t & line_offset) const {
 	Paragraph *p(nullptr);
 	LineElement *l(nullptr);
 	bool is_first(true);
@@ -71,6 +73,12 @@ void NcursesDisplayDriver::render(Document* doc, WINDOW * win, const size_t & li
 				}
 				cursor_x=5;
 				break;
+			case Paragraph::Level::UList1:
+				if (!is_first) {
+					cursor_y+=1;
+				}
+				cursor_x=0;
+				break;
 			default:
 				if (!is_first) {
 					cursor_y+=2;
@@ -82,6 +90,16 @@ void NcursesDisplayDriver::render(Document* doc, WINDOW * win, const size_t & li
 			is_first = false;
 		}
 		wmove(_display_window, cursor_y, cursor_x);
+		switch (p->level()) {
+			case Paragraph::Level::UList1:
+				wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
+				wprintw(_display_window, "*");
+				wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
+				wprintw(_display_window, " ");
+				break;
+			default:
+				break;
+		}
 		for (size_t j(0); j < p->size(); ++j) {
 			l = (*p)[j];
 			wprintw(_display_window, (l->content()).c_str());
