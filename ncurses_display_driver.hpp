@@ -14,6 +14,7 @@ class NcursesDisplayDriver : public DisplayDriver {
 		WINDOW* _display_window;
 		WINDOW* _footer_window;
 		size_t _display_offset;
+		void render(Document * doc, WINDOW * win, const size_t & line_offset) const;
 	public:
 		NcursesDisplayDriver();
 		virtual ~NcursesDisplayDriver();

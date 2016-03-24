@@ -42,6 +42,12 @@ void NcursesDisplayDriver::display(Document * doc) {
 	wprintw(_title_window, "document displayer - title");
 	wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
 	wrefresh(_title_window);
+	render(doc, _display_window, 0);
+	wrefresh(_display_window);
+	getch();
+}
+
+void NcursesDisplayDriver::render(Document* doc, WINDOW * win, const size_t & line_offset) const {
 	Paragraph *p(nullptr);
 	LineElement *l(nullptr);
 	bool is_first(true);
@@ -71,7 +77,6 @@ void NcursesDisplayDriver::display(Document * doc) {
 				}
 				cursor_x=0;
 				break;
-	
 		}
 		if (is_first) {
 			is_first = false;
@@ -91,6 +96,4 @@ void NcursesDisplayDriver::display(Document * doc) {
 	
 		}
 	}
-	wrefresh(_display_window);
-	getch();
 }
