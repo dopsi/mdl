@@ -111,7 +111,7 @@ void MdParser::parse() {
 			} else if (string_startswith(line, "* ")) { // level 1 list delimiter
 				if (p0 and p0->size()) {
 					_document->append_paragraph(p0);
-					delete p0;
+					p0=nullptr;
 				}
 				p0 = new UList1Paragraph();
 				e = new TextLineElement(string_clear_leading(line,"* \t#"));
