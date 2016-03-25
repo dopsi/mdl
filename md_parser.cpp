@@ -70,8 +70,9 @@ void MdParser::parse() {
 	while (getline(_input_file, line)) {
 		if (line.empty()) {
 			// end of line, change paragraph
-			if (p0) {
+			if (p0 and p0->size()) {
 				_document->append_paragraph(p0);
+				p0 = nullptr;
 			}
 			p0 = new TextParagraph();
 		} else {
@@ -108,7 +109,10 @@ void MdParser::parse() {
 				_document->append_paragraph(p1);
 				p1 = nullptr;
 			} else if (string_startswith(line, "* ")) { // level 1 list delimiter
-				delete p0;
+				if (p0 and p0->size()) {
+					_document->append_paragraph(p0);
+					delete p0;
+				}
 				p0 = new UList1Paragraph();
 				e = new TextLineElement(string_clear_leading(line,"* \t#"));
 				p0->append_line_element(e);
@@ -125,7 +129,7 @@ void MdParser::parse() {
 		}
 	}
 
-	if (p0) {
+	if (p0 and p0->size()) {
 		_document->append_paragraph(p0);
 	}
 }
