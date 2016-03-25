@@ -42,11 +42,15 @@ NcursesDisplayDriver::~NcursesDisplayDriver() {
 void NcursesDisplayDriver::display(Document * doc) {
 	bool go(true), update_title(true), update_body(true);
 	size_t offset(0);
+	string fullname, filename, path;
 
 	if (update_title) {
 		update_title = false;
+		fullname = doc->filename();
+		filename = fullname.substr(fullname.find_last_of('/')+1);
+		path = fullname.substr(0, fullname.find_last_of('/'));
 		wattron(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
-		wprintw(_title_window, string("mdl - "+doc->filename()).c_str());
+		wprintw(_title_window, string("mdl - "+filename+" ["+path+"]").c_str());
 		wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
 	}
 
