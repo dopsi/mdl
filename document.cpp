@@ -9,7 +9,9 @@ std::string Document::filename(void) const {
 }
 
 void Document::append_paragraph(Paragraph * p) {
-	_paragraph.push_back(p);
+	if (p and p->size()) {
+		_paragraph.push_back(p);
+	}
 }
 
 size_t Document::size(void) const {
