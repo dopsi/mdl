@@ -40,13 +40,24 @@ NcursesDisplayDriver::~NcursesDisplayDriver() {
 }
 
 void NcursesDisplayDriver::display(Document * doc) {
+	bool go(true);
+
 	wattron(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
-	wprintw(_title_window, string("document displayer - "+doc->filename()).c_str());
+	wprintw(_title_window, string("mdl - "+doc->filename()).c_str());
 	wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
 	wrefresh(_title_window);
 	render(doc, 0);
 	wrefresh(_display_window);
-	getch();
+	
+	while (go) {
+		switch(getch()) {
+			case 'q': // quit program
+				go = false;
+				break;
+			default:
+				break;
+		}
+	}
 }
 
 void NcursesDisplayDriver::render(Document* doc, const size_t & line_offset) const {
