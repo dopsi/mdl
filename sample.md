@@ -10,6 +10,7 @@ Supported features
 This list does summarize the supported functions :
 
 * titles (up to 2 levels at the moment)
+* unnumberred lists (up to 1 level at the moment)
 
 # Lorem ipsum text
 
