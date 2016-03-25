@@ -40,22 +40,44 @@ NcursesDisplayDriver::~NcursesDisplayDriver() {
 }
 
 void NcursesDisplayDriver::display(Document * doc) {
-	bool go(true);
+	bool go(true), update_title(true), update_body(true);
+	size_t offset(0);
 
-	wattron(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
-	wprintw(_title_window, string("mdl - "+doc->filename()).c_str());
-	wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
-	wrefresh(_title_window);
-	render(doc, 0);
-	wrefresh(_display_window);
-	
+	if (update_title) {
+		update_title = false;
+		wattron(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
+		wprintw(_title_window, string("mdl - "+doc->filename()).c_str());
+		wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
+	}
+
+	if (update_body) {
+		update_body = false;
+		wrefresh(_title_window);
+		render(doc, offset);
+		wrefresh(_display_window);
+	}
+
 	while (go) {
 		switch(getch()) {
 			case 'q': // quit program
 				go = false;
 				break;
+			case KEY_DOWN:
+				++offset;
+				update_body = true;
+				break;
+			case KEY_UP:
+				--offset;
+				update_body = true;
+				break;
 			default:
 				break;
+		}
+
+		if (offset < 0) {
+			offset = 0;
+		} else if (offset >= doc->size()) {
+			offset = doc->size() - 1;
 		}
 	}
 }
