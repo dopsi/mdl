@@ -11,8 +11,8 @@ class LineElement {
 		std::string _content;
 	public:
 		LineElement(const std::string & content);
-		~LineElement() {}
-		std::string content(void) const;
+		virtual ~LineElement() {}
+		virtual std::string content(void) const;
 };
 
 #endif // MDL_LINE_ELEMENT_HPP
