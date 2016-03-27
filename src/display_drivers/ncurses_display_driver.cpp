@@ -50,7 +50,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 		update_title = false;
 		fullname = doc->filename();
 		filename = fullname.substr(fullname.find_last_of('/')+1);
-		if (filename == fullname) {
+		if (!fullname.find("/")) {
 			path = fullname.substr(0, fullname.find_last_of('/'));
 		} else {
 			path = ".";
