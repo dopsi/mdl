@@ -4,6 +4,8 @@
 
 #include <cassert>
 
+#include <iostream>
+
 using namespace std;
 
 #define WIN_TITLE_PAIR 1
@@ -46,28 +48,28 @@ void NcursesDisplayDriver::display(Document * doc) {
 	size_t offset(0);
 	string fullname, filename, path;
 
-	if (update_title) {
-		update_title = false;
-		fullname = doc->filename();
-		filename = fullname.substr(fullname.find_last_of('/')+1);
-		if (!fullname.find("/")) {
-			path = fullname.substr(0, fullname.find_last_of('/'));
-		} else {
-			path = ".";
-		}
-		wattron(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
-		wprintw(_title_window, string("mdl - "+filename+" ["+path+"]").c_str());
-		wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
-	}
-
-	if (update_body) {
-		update_body = false;
-		wrefresh(_title_window);
-		render(doc, offset);
-		wrefresh(_display_window);
-	}
-
 	while (go) {
+		if (update_title) {
+			update_title = false;
+			fullname = doc->filename();
+			filename = fullname.substr(fullname.find_last_of('/')+1);
+			if (!fullname.find("/")) {
+				path = fullname.substr(0, fullname.find_last_of('/'));
+			} else {
+				path = ".";
+			}
+			wattron(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
+			wprintw(_title_window, string("mdl - "+filename+" ["+path+"]").c_str());
+			wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
+		}
+	
+		if (update_body) {
+			update_body = false;
+			wrefresh(_title_window);
+			render(doc, offset);
+			wrefresh(_display_window);
+		}
+
 		switch(getch()) {
 			case 'q': // quit program
 				go = false;
@@ -77,17 +79,13 @@ void NcursesDisplayDriver::display(Document * doc) {
 				update_body = true;
 				break;
 			case KEY_UP:
-				--offset;
+				if (offset > 0) {
+					--offset;
+				}
 				update_body = true;
 				break;
 			default:
 				break;
-		}
-
-		if (offset < 0) {
-			offset = 0;
-		} else if (offset >= doc->size()) {
-			offset = doc->size() - 1;
 		}
 	}
 }
@@ -145,14 +143,12 @@ void NcursesDisplayDriver::render(Document* doc, const size_t & line_offset) con
 		}
 		for (size_t j(0); j < p->size(); ++j) {
 			l = (*p)[j];
-			if (dynamic_cast<UrlLineElement*>(l)) {
-				// this is an UrlLineElement
+			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
 				wattron(_display_window, A_UNDERLINE);
 				wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
 			}
 			wprintw(_display_window, (l->content()).c_str());
-			if (dynamic_cast<UrlLineElement*>(l)) {
-				// this is an UrlLineElement
+			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
 				wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
 				wattroff(_display_window, A_UNDERLINE);
 			}
