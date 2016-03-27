@@ -10,26 +10,31 @@
  * @brief Generic parser interface
  *
  * This parser interface is meant to be specialized, to be able to return
- * a Document pointer for the type of document it parses.
+ * a Document pointer for the type of document it parses. For more information on 
+ * how to implement the Parser::parse() function, see the documentation for the
+ * default MdParser class and for the Document class.
  **/
 class Parser {
 	protected:
-		std::string _filename; /**!< Input file name **/
-		std::ifstream _input_file; /**!< Input file stream, re-read on reload **/
-		Document * _document; /**!< Pointer to the Document object **/
+		std::string _filename; /**< @brief Input file name **/
+		std::ifstream _input_file; /**< @brief Input file stream, re-read on reload **/
+		Document * _document; /**< @brief Pointer to the Document object **/
 	public:
 		/**
 		 * @brief Constructor
 		 *
 		 * @param filename Filename of the document to parse
 		 *
-		 * This constructor does open the file in read-only mode. No error checking
-		 * is done.
+		 * This constructor does open the file in read-only mode. It does check if the
+		 * file stream if ready for reading (using ios::good()).
 		 **/
 		Parser(const std::string & filename);
 
 		/**
 		 * @brief Destructor
+		 *
+		 * This desctructor does destroy the associatioed document and close the input
+		 * file.
 		 **/
 		virtual ~Parser();
 

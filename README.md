@@ -8,6 +8,9 @@ Build a functionnaly similar program to
 [visit1985's mdp](http://github.com/visit1985/mdp), at least for the parser,
 to display a Markdown file in the way *less(1)* does for text files.
 
+This program should be easy to extend using derivatives of the DisplayDriver
+class to have a new frontend and derivatives of the Parser class.
+
 Building
 --------
 
