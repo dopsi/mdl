@@ -1,9 +1,9 @@
 #include "md_parser.hpp"
-#include "text_line_element.hpp"
-#include "text_paragraph.hpp"
-#include "title1_paragraph.hpp"
-#include "title2_paragraph.hpp"
-#include "ulist1_paragraph.hpp"
+#include "../document/text_line_element.hpp"
+#include "../document/text_paragraph.hpp"
+#include "../document/title1_paragraph.hpp"
+#include "../document/title2_paragraph.hpp"
+#include "../document/ulist1_paragraph.hpp"
 
 using namespace std;
 

@@ -24,24 +24,24 @@ set(CURSES_NEED_NCURSES TRUE)
 find_package(Curses REQUIRED)
 
 configure_file(${PROJECT_SOURCE_DIR}/configure.hpp.in ${PROJECT_BINARY_DIR}/configure.hpp)
-include_directories(BEFORE ${PROJECT_BINARY_DIR})
+include_directories(BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/src)
 include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(mdl 
-	main.cpp
-	display_driver.cpp
-	ncurses_display_driver.cpp
-	plaintext_display_driver.cpp
-	document.cpp
-	line_element.cpp
-	text_line_element.cpp
-	paragraph.cpp
-	text_paragraph.cpp
-	title1_paragraph.cpp
-	title2_paragraph.cpp
-	ulist1_paragraph.cpp
-	parser.cpp
-	md_parser.cpp) 
+	src/main.cpp
+	src/display_drivers/display_driver.cpp
+	src/display_drivers/ncurses_display_driver.cpp
+	src/display_drivers/plaintext_display_driver.cpp
+	src/document/document.cpp
+	src/document/line_element.cpp
+	src/document/text_line_element.cpp
+	src/document/paragraph.cpp
+	src/document/text_paragraph.cpp
+	src/document/title1_paragraph.cpp
+	src/document/title2_paragraph.cpp
+	src/document/ulist1_paragraph.cpp
+	src/parsers/parser.cpp
+	src/parsers/md_parser.cpp) 
 
 target_compile_features(mdl PRIVATE cxx_nullptr cxx_strong_enums)
 

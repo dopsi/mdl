@@ -1,8 +1,7 @@
 #include <iostream>
 #include "configure.hpp"
-#include "md_parser.hpp"
-#include "plaintext_display_driver.hpp"
-#include "ncurses_display_driver.hpp"
+#include "parsers/md_parser.hpp"
+#include "display_drivers/ncurses_display_driver.hpp"
 
 using namespace std;
 

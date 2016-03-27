@@ -1,7 +1,7 @@
 #ifndef MDL_PARSER_HPP
 #define MDL_PARSER_HPP
 
-#include "document.hpp"
+#include "../document/document.hpp"
 
 #include <string>
 #include <fstream>

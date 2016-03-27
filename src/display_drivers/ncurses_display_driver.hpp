@@ -3,7 +3,7 @@
 
 #include "display_driver.hpp"
 
-#include "paragraph.hpp"
+#include "../document/paragraph.hpp"
 
 #include <ncurses.h>
 
