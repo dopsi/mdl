@@ -15,7 +15,7 @@ include(CheckFunctionExists)
 # Set project data
 project(mdl)
 set(mdl_VERSION_MAJOR 0)
-set(mdl_VERSION_MINOR 1)
+set(mdl_VERSION_MINOR 2)
 set(mdl_VERSION_REVISION 0)
 
 find_package(Boost REQUIRED)
