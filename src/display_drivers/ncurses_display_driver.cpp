@@ -1,5 +1,7 @@
 #include "ncurses_display_driver.hpp"
 
+#include "../document/url_line_element.hpp"
+
 #include <cassert>
 
 using namespace std;
@@ -143,7 +145,17 @@ void NcursesDisplayDriver::render(Document* doc, const size_t & line_offset) con
 		}
 		for (size_t j(0); j < p->size(); ++j) {
 			l = (*p)[j];
+			if (dynamic_cast<UrlLineElement*>(l)) {
+				// this is an UrlLineElement
+				wattron(_display_window, A_UNDERLINE);
+				wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
+			}
 			wprintw(_display_window, (l->content()).c_str());
+			if (dynamic_cast<UrlLineElement*>(l)) {
+				// this is an UrlLineElement
+				wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
+				wattroff(_display_window, A_UNDERLINE);
+			}
 		}
 		switch (p->level()) {
 			case Paragraph::Level::Title1:

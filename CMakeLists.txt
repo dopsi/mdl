@@ -35,6 +35,7 @@ add_executable(mdl
 	src/document/document.cpp
 	src/document/line_element.cpp
 	src/document/text_line_element.cpp
+	src/document/url_line_element.cpp
 	src/document/paragraph.cpp
 	src/document/text_paragraph.cpp
 	src/document/title1_paragraph.cpp

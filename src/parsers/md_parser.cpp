@@ -1,9 +1,12 @@
 #include "md_parser.hpp"
 #include "../document/text_line_element.hpp"
+#include "../document/url_line_element.hpp"
 #include "../document/text_paragraph.hpp"
 #include "../document/title1_paragraph.hpp"
 #include "../document/title2_paragraph.hpp"
 #include "../document/ulist1_paragraph.hpp"
+
+#include <regex>
 
 using namespace std;
 
@@ -50,6 +53,7 @@ namespace {
 	std::string string_clear_leading(const std::string & s, const std::string & subset) {
 		return s.substr(s.find_first_not_of(subset));
 	}
+
 };
 
 MdParser::MdParser(const std::string & filename) :
@@ -114,8 +118,7 @@ void MdParser::parse() {
 					p0=nullptr;
 				}
 				p0 = new UList1Paragraph();
-				e = new TextLineElement(string_clear_leading(line,"* \t#"));
-				p0->append_line_element(e);
+				parse_line(p0, line);
 			} else {
 				// other content
 				if (p0->size() && last_e && (last_e->content()).back() != ' ' && line.front() != ' ') {
@@ -132,4 +135,22 @@ void MdParser::parse() {
 	if (p0 and p0->size()) {
 		_document->append_paragraph(p0);
 	}
+}
+
+void MdParser::parse_line(Paragraph *p, const std::string & line) {
+	string s(string_clear_leading(line, " \t#"));
+	regex r("\\[.*\\]\\(.*\\)");
+	smatch m;
+	LineElement *e;
+
+	while (regex_search(s,m,r)) {
+		e = new TextLineElement(m.prefix());
+		p->append_line_element(e);
+		e = new UrlLineElement(m.str());
+		p->append_line_element(e);
+		s = m.suffix().str();
+	}
+
+	e = new TextLineElement(s);
+	p->append_line_element(e);
 }
