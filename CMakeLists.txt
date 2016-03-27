@@ -23,7 +23,7 @@ find_package(Boost REQUIRED)
 set(CURSES_NEED_NCURSES TRUE)
 find_package(Curses REQUIRED)
 
-configure_file(${PROJECT_SOURCE_DIR}/configure.hpp.in ${PROJECT_BINARY_DIR}/configure.hpp)
+configure_file(${PROJECT_SOURCE_DIR}/src/configure.hpp.in ${PROJECT_BINARY_DIR}/configure.hpp)
 include_directories(BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/src)
 include_directories(${Boost_INCLUDE_DIRS})
 
