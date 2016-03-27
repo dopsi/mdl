@@ -98,8 +98,7 @@ void MdParser::parse() {
 					default:
 						break;
 				}
-				e = new TextLineElement(string_clear_leading(line," \t#"));
-				p0->append_line_element(e);
+				parse_line(p0, line);
 			} else if (string_has_only(line, '=')) { // title 1 delimiter
 				p1 = new Title1Paragraph(p0);
 				delete p0;
@@ -118,16 +117,13 @@ void MdParser::parse() {
 					p0=nullptr;
 				}
 				p0 = new UList1Paragraph();
-				parse_line(p0, line);
+				parse_line(p0, line.substr(2));
 			} else {
 				// other content
 				if (p0->size() && last_e && (last_e->content()).back() != ' ' && line.front() != ' ') {
 					line = " "+line;
 				}
-				e = new TextLineElement(line);
-				p0->append_line_element(e);
-				last_e = e;
-				e = nullptr;
+				last_e = parse_line(p0, line);
 			}
 		}
 	}
@@ -137,7 +133,7 @@ void MdParser::parse() {
 	}
 }
 
-void MdParser::parse_line(Paragraph *p, const std::string & line) {
+LineElement* MdParser::parse_line(Paragraph *p, const std::string & line) {
 	string s(string_clear_leading(line, " \t#"));
 	regex r("\\[.*\\]\\(.*\\)");
 	smatch m;
@@ -153,4 +149,5 @@ void MdParser::parse_line(Paragraph *p, const std::string & line) {
 
 	e = new TextLineElement(s);
 	p->append_line_element(e);
+	return e;
 }

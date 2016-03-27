@@ -8,7 +8,7 @@
  **/
 class MdParser : public Parser {
 	private:
-		void parse_line(Paragraph *p, const std::string & line);
+		LineElement* parse_line(Paragraph *p, const std::string & line);
 	public:
 		MdParser(const std::string & filename);
 		~MdParser();
