@@ -51,7 +51,12 @@ namespace {
 	}
 
 	std::string string_clear_leading(const std::string & s, const std::string & subset) {
-		return s.substr(s.find_first_not_of(subset));
+		size_t found = s.find_first_not_of(subset);
+		if (found != string::npos) {
+			return s.substr();
+		} else {
+			return string("");
+		}
 	}
 
 };
