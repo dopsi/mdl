@@ -45,7 +45,7 @@ NcursesDisplayDriver::~NcursesDisplayDriver() {
 
 void NcursesDisplayDriver::display(Document * doc) {
 	bool go(true), update_title(true), update_body(true);
-	size_t offset(0);
+	int offset(0);
 	string fullname, filename, path;
 
 	while (go) {
@@ -90,14 +90,14 @@ void NcursesDisplayDriver::display(Document * doc) {
 	}
 }
 
-void NcursesDisplayDriver::render(Document* doc, const size_t & line_offset) const {
+void NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
+	werase(_display_window);
 	Paragraph *p(nullptr);
 	LineElement *l(nullptr);
 	bool is_first(true);
-	int cursor_x, cursor_y;
+	int cursor_x, cursor_y(-line_offset);
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
-		getyx(_display_window, cursor_y, cursor_x);
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
 				wattron(_display_window, A_UNDERLINE);
@@ -131,15 +131,17 @@ void NcursesDisplayDriver::render(Document* doc, const size_t & line_offset) con
 			is_first = false;
 		}
 		wmove(_display_window, cursor_y, cursor_x);
-		switch (p->level()) {
-			case Paragraph::Level::UList1:
-				wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
-				wprintw(_display_window, "*");
-				wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
-				wprintw(_display_window, " ");
-				break;
-			default:
-				break;
+		if (bounds_check(_display_window, cursor_y, cursor_x)) {
+			switch (p->level()) {
+				case Paragraph::Level::UList1:
+					wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
+					wprintw(_display_window, "*");
+					wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
+					wprintw(_display_window, " ");
+					break;
+				default:
+					break;
+			}
 		}
 		for (size_t j(0); j < p->size(); ++j) {
 			l = (*p)[j];
@@ -147,7 +149,9 @@ void NcursesDisplayDriver::render(Document* doc, const size_t & line_offset) con
 				wattron(_display_window, A_UNDERLINE);
 				wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
 			}
-			wprintw(_display_window, (l->content()).c_str());
+			if (bounds_check(_display_window, cursor_y, cursor_x)) {
+				wprintw(_display_window, (l->content()).c_str());
+			}
 			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
 				wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
 				wattroff(_display_window, A_UNDERLINE);
@@ -162,5 +166,16 @@ void NcursesDisplayDriver::render(Document* doc, const size_t & line_offset) con
 				break;
 	
 		}
+	}
+}
+
+bool NcursesDisplayDriver::bounds_check(WINDOW* w, int y, int x) const {
+	int win_x, win_y;
+	getmaxyx(w, win_y, win_x);
+
+	if (y > win_y or x > win_x or x < 0 or y < 0) {
+		return false;
+	} else {
+		return true;
 	}
 }
