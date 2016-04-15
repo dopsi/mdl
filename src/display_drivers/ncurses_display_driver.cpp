@@ -15,12 +15,14 @@ using namespace std;
 
 NcursesDisplayDriver::NcursesDisplayDriver() :
 	DisplayDriver(), _stdscr(initscr()),
-	_title_window(newwin(3,COLS,0,0)),
-	_display_window(newwin(60,COLS,2,0)),
+	_title_window(newwin(1,COLS,0,0)),
+	_display_window(newwin(LINES-4,COLS,2,0)),
+	_footer_window(newwin(1, COLS, LINES-1, 0)),
 	_display_offset(0) {
 	//Check if all windows have been initialized
 	assert(_title_window);
 	assert(_display_window);
+	assert(_footer_window);
 	assert(has_colors());
 
 	// Begin ncurses mode
@@ -44,13 +46,14 @@ NcursesDisplayDriver::~NcursesDisplayDriver() {
 }
 
 void NcursesDisplayDriver::display(Document * doc) {
-	bool go(true), update_title(true), update_body(true);
+	bool go(true), update_title(true), update_body(true), update_footer(true);
 	int offset(0);
 	string fullname, filename, path;
 
 	while (go) {
 		if (update_title) {
 			update_title = false;
+			werase(_title_window);
 			fullname = doc->filename();
 			filename = fullname.substr(fullname.find_last_of('/')+1);
 			if (!fullname.find("/")) {
@@ -61,13 +64,20 @@ void NcursesDisplayDriver::display(Document * doc) {
 			wattron(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
 			wprintw(_title_window, string("mdl - "+filename+" ["+path+"]").c_str());
 			wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
+			wrefresh(_title_window);
 		}
 	
 		if (update_body) {
 			update_body = false;
-			wrefresh(_title_window);
 			render(doc, offset);
 			wrefresh(_display_window);
+		}
+
+		if (update_footer) {
+			update_footer = false;
+			werase(_footer_window);
+			wprintw(_footer_window, "%d line(s) hidden on top", offset);
+			wrefresh(_footer_window);
 		}
 
 		switch(getch()) {
@@ -77,12 +87,14 @@ void NcursesDisplayDriver::display(Document * doc) {
 			case KEY_DOWN:
 				++offset;
 				update_body = true;
+				update_footer = true;
 				break;
 			case KEY_UP:
 				if (offset > 0) {
 					--offset;
+					update_footer = true;
+					update_body = true;
 				}
-				update_body = true;
 				break;
 			default:
 				break;
