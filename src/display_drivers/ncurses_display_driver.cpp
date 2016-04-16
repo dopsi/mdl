@@ -4,8 +4,6 @@
 
 #include <cassert>
 
-#include <iostream>
-
 using namespace std;
 
 #define WIN_TITLE_PAIR 1
@@ -21,9 +19,17 @@ NcursesDisplayDriver::NcursesDisplayDriver() :
 	_footer_window(newwin(1, _width, LINES-1, 0)),
 	_display_offset(0) {
 	//Check if all windows have been initialized
-	assert(_title_window);
-	assert(_display_window);
-	assert(_footer_window);
+	while(!_title_window) {
+		_title_window = newwin(1,_width,0,0);
+	}
+	
+	while(!_display_window) {
+		_display_window = newwin(LINES-4,_width,2,0);
+	}
+
+	while(!_footer_window) {
+		_footer_window = newwin(1, _width, LINES-1, 0);
+	}
 	assert(has_colors());
 
 	// Begin ncurses mode
