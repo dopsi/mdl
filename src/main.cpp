@@ -16,11 +16,10 @@ int main(int argc, char ** argv) {
 	setlocale(LC_ALL, "");
 
 	// Set Boost program options up
-	string help_topic;
 	const string usage("Usage: mdl [OPTIONS] <input-file>");
 	po::options_description desc(usage);
 	desc.add_options()
-		("help", po::value<string>()->default_value(""), "produce help message (can be followed by a topic, i.e. 'drivers', 'parsers'")
+		("help", po::value<string>(), "produce help message")
 		("display-driver,d", po::value<string>(), "set display driver")
 		("input-parser,p", po::value<string>(), "set input parser")
 		("input-file,i", po::value<string>(), "input file to be used");
@@ -36,17 +35,7 @@ int main(int argc, char ** argv) {
 	}
 	
 	if (vm.count("help")) {
-		string topic(vm["help"].as<string>());
-		if (topic == "parsers") {
-			cout << "Parser specific help" << endl;
-		} else if (topic == "drivers") {
-			cout << "Driver specific help" << endl;
-		} else if (topic.empty()) {
-			cout << desc;
-		} else {
-			cerr << "mdl: Unknown help topic '" << topic << "'" << endl;
-			return 1;
-		}
+		cout << desc;
 		return 0;
 	} else if (vm.empty() or vm.count("input-file") == 0) {
 		cout << usage << endl;
