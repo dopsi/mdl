@@ -50,6 +50,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 	bool go(true), update_title(true), update_body(true), update_footer(true);
 	int offset(0);
 	string fullname, filename, path;
+	int go_down(0);
 
 	while (go) {
 		if (update_title) {
@@ -70,7 +71,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 	
 		if (update_body) {
 			update_body = false;
-			render(doc, offset);
+			go_down = render(doc, offset);
 			wrefresh(_display_window);
 		}
 
@@ -86,9 +87,11 @@ void NcursesDisplayDriver::display(Document * doc) {
 				go = false;
 				break;
 			case KEY_DOWN:
-				++offset;
-				update_body = true;
-				update_footer = true;
+				if (go_down) {
+					++offset;
+					update_body = true;
+					update_footer = true;
+				}
 				break;
 			case KEY_UP:
 				if (offset > 0) {
@@ -103,7 +106,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 	}
 }
 
-void NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
+bool NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	werase(_display_window);
 	Paragraph *p(nullptr);
 	LineElement *l(nullptr);
@@ -195,6 +198,14 @@ void NcursesDisplayDriver::render(Document* doc, const int & line_offset) const 
 	
 		}
 	}
+
+	bool ret(0);
+
+	if (cursor_y > LINES - 4) {
+		ret = true;
+	}
+
+	return ret;
 }
 
 bool NcursesDisplayDriver::bounds_check(WINDOW* w, int y, int x) const {
