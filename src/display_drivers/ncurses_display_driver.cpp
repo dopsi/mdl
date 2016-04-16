@@ -56,7 +56,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 	bool go(true), update_title(true), update_body(true), update_footer(true);
 	int offset(0);
 	string fullname, filename, path;
-	int go_down(0);
+	int max_offset(0);
 
 	while (go) {
 		if (update_title) {
@@ -77,7 +77,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 	
 		if (update_body) {
 			update_body = false;
-			go_down = render(doc, offset);
+			max_offset = render(doc, offset);
 			wrefresh(_display_window);
 		}
 
@@ -93,7 +93,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 				go = false;
 				break;
 			case KEY_DOWN:
-				if (go_down) {
+				if (offset <= max_offset-(LINES-4)) {
 					++offset;
 					update_body = true;
 					update_footer = true;
@@ -106,13 +106,37 @@ void NcursesDisplayDriver::display(Document * doc) {
 					update_body = true;
 				}
 				break;
+			case KEY_PPAGE:
+				offset -= LINES-4;
+				update_body = true;
+				update_footer = true;
+				if (offset < 0) {
+					offset = 0;
+				}
+				break;
+			case KEY_NPAGE:
+				offset += LINES-4;
+				update_body = true;
+				update_footer = true;
+				if (offset >= max_offset-(LINES-4)) {
+					offset = max_offset-(LINES-4);
+				}
+				break;
+			case ' ':
+				offset += (LINES-4)/2;
+				update_body = true;
+				update_footer = true;
+				if (offset >= max_offset-(LINES-4)) {
+					offset = max_offset-(LINES-4);
+				}
+				break;
 			default:
 				break;
 		}
 	}
 }
 
-bool NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
+int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	werase(_display_window);
 	Paragraph *p(nullptr);
 	LineElement *l(nullptr);
@@ -205,13 +229,7 @@ bool NcursesDisplayDriver::render(Document* doc, const int & line_offset) const 
 		}
 	}
 
-	bool ret(0);
-
-	if (cursor_y > LINES - 4) {
-		ret = true;
-	}
-
-	return ret;
+	return cursor_y+line_offset;
 }
 
 bool NcursesDisplayDriver::bounds_check(WINDOW* w, int y, int x) const {
