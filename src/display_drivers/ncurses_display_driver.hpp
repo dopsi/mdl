@@ -14,6 +14,7 @@ class NcursesDisplayDriver : public DisplayDriver {
 		WINDOW* _display_window;
 		WINDOW* _footer_window;
 		int _display_offset;
+		int _width;
 		void render(Document * doc, const int & line_offset) const;
 		bool bounds_check(WINDOW* w, int y, int x) const;
 	public:

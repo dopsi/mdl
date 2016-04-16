@@ -15,9 +15,10 @@ using namespace std;
 
 NcursesDisplayDriver::NcursesDisplayDriver() :
 	DisplayDriver(), _stdscr(initscr()),
-	_title_window(newwin(1,COLS,0,0)),
-	_display_window(newwin(LINES-4,COLS,2,0)),
-	_footer_window(newwin(1, COLS, LINES-1, 0)),
+	_width(COLS),
+	_title_window(newwin(1,_width,0,0)),
+	_display_window(newwin(LINES-4,_width,2,0)),
+	_footer_window(newwin(1, _width, LINES-1, 0)),
 	_display_offset(0) {
 	//Check if all windows have been initialized
 	assert(_title_window);
@@ -108,6 +109,7 @@ void NcursesDisplayDriver::render(Document* doc, const int & line_offset) const 
 	LineElement *l(nullptr);
 	bool is_first(true);
 	int cursor_x, cursor_y(-line_offset);
+	string tmp_str;
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
 		switch (p->level()) {
@@ -157,12 +159,26 @@ void NcursesDisplayDriver::render(Document* doc, const int & line_offset) const 
 		}
 		for (size_t j(0); j < p->size(); ++j) {
 			l = (*p)[j];
+			tmp_str = l->content();
 			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
 				wattron(_display_window, A_UNDERLINE);
 				wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
 			}
-			if (bounds_check(_display_window, cursor_y, cursor_x)) {
-				wprintw(_display_window, (l->content()).c_str());
+			if (tmp_str.size() < _width - cursor_x) {
+				if (bounds_check(_display_window, cursor_y, cursor_x)) {
+					wprintw(_display_window, tmp_str.c_str());
+				}
+			} else {
+				for (size_t i(0); i < tmp_str.size(); i+=_width) {
+					if (i != 0) {
+						cursor_x = 0;
+						cursor_y += 1;
+						wmove(_display_window, cursor_y, cursor_x);
+					}
+					if (bounds_check(_display_window, cursor_y, cursor_x)) {
+						wprintw(_display_window, tmp_str.substr(i, _width).c_str());
+					}
+				}
 			}
 			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
 				wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
