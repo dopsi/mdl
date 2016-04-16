@@ -1,10 +1,14 @@
 #include "md_parser.hpp"
+
 #include "../document/text_line_element.hpp"
 #include "../document/url_line_element.hpp"
+#include "../document/code_line_element.hpp"
+
 #include "../document/text_paragraph.hpp"
 #include "../document/title1_paragraph.hpp"
 #include "../document/title2_paragraph.hpp"
 #include "../document/ulist1_paragraph.hpp"
+#include "../document/code_paragraph.hpp"
 
 #include <regex>
 
@@ -86,11 +90,20 @@ void MdParser::parse() {
 			p0 = new TextParagraph();
 		} else {
 			sharps = string_startswith(line, '#');
+
 			if (!p0) {
 				p0 = new TextParagraph();
 			}
 
-			if (sharps != 0) {
+			if (line.substr(0, 4) == "    " and (!p0 or !p0->size())) {
+				// This is a code paragraph
+				delete p0;
+				p0 = new CodeParagraph();
+				line = string_clear_leading(line, " ");
+				p0->append_line_element(new CodeLineElement(line));
+				_document->append_paragraph(p0);
+				p0 = new TextParagraph();
+			} else if (sharps != 0) {
 				switch(sharps) {
 					case 1:
 						delete p0;

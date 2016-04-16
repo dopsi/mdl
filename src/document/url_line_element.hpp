@@ -4,7 +4,7 @@
 #include "line_element.hpp"
 
 /**
- * @brief A text line element
+ * @brief An URL line element
  **/
 class UrlLineElement : public LineElement {
 	public:

@@ -1,6 +1,7 @@
 #include "ncurses_display_driver.hpp"
 
 #include "../document/url_line_element.hpp"
+#include "../document/code_line_element.hpp"
 
 #include <cassert>
 
@@ -167,6 +168,12 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				}
 				cursor_x=0;
 				break;
+			case Paragraph::Level::Code:
+				if (!is_first) {
+					cursor_y+=1;
+				}
+				cursor_x=0;
+				break;
 			default:
 				if (!is_first) {
 					cursor_y+=2;
@@ -196,6 +203,8 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
 				wattron(_display_window, A_UNDERLINE);
 				wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
+			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
+				wattron(_display_window, A_REVERSE);
 			}
 			if (tmp_str.size() < _width - cursor_x) {
 				if (bounds_check(_display_window, cursor_y, cursor_x)) {
@@ -216,13 +225,21 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
 				wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
 				wattroff(_display_window, A_UNDERLINE);
+			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
+				wattroff(_display_window, A_REVERSE);
 			}
+
 		}
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
 				wattroff(_display_window, A_UNDERLINE);
 			case Paragraph::Level::Title2:
 				wattroff(_display_window, COLOR_PAIR(TITLE1_PAIR));
+				break;
+			case Paragraph::Level::Code:
+				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, 0, NULL);
+				wmove(_display_window, cursor_y, cursor_x);
+				break;
 			default:
 				break;
 	

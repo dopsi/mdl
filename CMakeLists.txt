@@ -36,11 +36,13 @@ add_executable(mdl
 	src/document/line_element.cpp
 	src/document/text_line_element.cpp
 	src/document/url_line_element.cpp
+	src/document/code_line_element.cpp
 	src/document/paragraph.cpp
 	src/document/text_paragraph.cpp
 	src/document/title1_paragraph.cpp
 	src/document/title2_paragraph.cpp
 	src/document/ulist1_paragraph.cpp
+	src/document/code_paragraph.cpp
 	src/parsers/parser.cpp
 	src/parsers/md_parser.cpp) 
 

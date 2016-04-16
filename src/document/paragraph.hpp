@@ -27,7 +27,8 @@ class Paragraph {
 			Title4,
 			Title5,
 			Title6,
-			UList1
+			UList1,
+			Code
 		};
 		virtual Level level(void) const = 0;
 };
