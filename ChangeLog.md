@@ -20,3 +20,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * src/parsers/md_parser.cpp (MdParser::parse_line): function now recursive
 * src/display_drivers/ncurses_display_driver.cpp(N[...]::render): disable unused attributes
 for code paragraphs
+* src/display_drivers/ncurses_display_driver.cpp(N[...]::render): fix overlapping lines

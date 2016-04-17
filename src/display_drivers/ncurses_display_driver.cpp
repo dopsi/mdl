@@ -267,7 +267,7 @@ bool NcursesDisplayDriver::bounds_check(WINDOW* w, int y, int x) const {
 	int win_x, win_y;
 	getmaxyx(w, win_y, win_x);
 
-	if (y > win_y or x > win_x or x < 0 or y < 0) {
+	if (y > (win_y-1) or x > (win_x-1) or x < 0 or y < 0) {
 		return false;
 	} else {
 		return true;
