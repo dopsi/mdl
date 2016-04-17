@@ -144,6 +144,8 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	bool is_first(true);
 	int cursor_x, cursor_y(-line_offset);
 	string tmp_str;
+	attr_t current;
+	short current_color;
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
 		switch (p->level()) {
@@ -173,6 +175,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 					cursor_y+=1;
 				}
 				cursor_x=0;
+				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, 0, NULL);
 				break;
 			case Paragraph::Level::Quote:
 				wattron(_display_window, A_REVERSE);
@@ -181,6 +184,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 					cursor_y+=1;
 				}
 				cursor_x=0;
+				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, TITLE1_PAIR, NULL);
 				break;
 			default:
 				if (!is_first) {
@@ -209,10 +213,16 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 			l = (*p)[j];
 			tmp_str = l->content();
 			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
+				wattr_get(_display_window, &current, &current_color, nullptr);
 				wattron(_display_window, A_UNDERLINE);
 				wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
 			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
-				wattron(_display_window, A_REVERSE);
+				wattr_get(_display_window, &current, &current_color, nullptr);
+				if (current&A_REVERSE) {
+					wattroff(_display_window, A_REVERSE);
+				} else {
+					wattron(_display_window, A_REVERSE);
+				}
 			}
 			if (tmp_str.size() < _width - cursor_x) {
 				if (bounds_check(_display_window, cursor_y, cursor_x)) {
@@ -231,10 +241,13 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				}
 			}
 			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
-				wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
-				wattroff(_display_window, A_UNDERLINE);
+				wattr_set(_display_window, current, current_color, nullptr);
 			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
-				wattroff(_display_window, A_REVERSE);
+				if (current&A_REVERSE) {
+					wattron(_display_window, A_REVERSE);
+				} else {
+					wattroff(_display_window, A_REVERSE);
+				}
 			}
 
 		}
@@ -245,12 +258,10 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				wattroff(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				break;
 			case Paragraph::Level::Code:
-				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, 0, NULL);
 				wattroff(_display_window, A_REVERSE);
 				wmove(_display_window, cursor_y, cursor_x);
 				break;
 			case Paragraph::Level::Quote:
-				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, TITLE1_PAIR, NULL);
 				wattroff(_display_window, A_REVERSE);
 				wattroff(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				break;

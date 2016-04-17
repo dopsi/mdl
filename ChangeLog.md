@@ -23,3 +23,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * src/display_drivers/ncurses_display_driver.cpp(N[...]::render): disable unused attributes
 for code paragraphs
 * src/display_drivers/ncurses_display_driver.cpp(N[...]::render): fix overlapping lines
+* src/display_drivers/ncurses_display_driver.cpp(N[...]::render): save and recall attributes
+* src/display_drivers/ncurses_display_driver.cpp(N[...]::render): color code and quote boxes
+before writing on them
