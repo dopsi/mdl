@@ -19,10 +19,11 @@ int main(int argc, char ** argv) {
 	const string usage("Usage: mdl [OPTIONS] <input-file>");
 	po::options_description desc(usage);
 	desc.add_options()
-		("help", po::value<string>(), "produce help message")
+		("help", po::value<string>(), "produce help message and exit")
 		("display-driver,d", po::value<string>(), "set display driver")
 		("input-parser,p", po::value<string>(), "set input parser")
-		("input-file,i", po::value<string>(), "input file to be used");
+		("input-file,i", po::value<string>(), "input file to be used")
+		("version", "print the version information and exit");
 	po::positional_options_description p;
 	p.add("input-file", -1);
 	po::variables_map vm;
@@ -36,6 +37,9 @@ int main(int argc, char ** argv) {
 	
 	if (vm.count("help")) {
 		cout << desc;
+		return 0;
+	} else if (vm.count("version")) {
+		cout << "mdl (version: " << MDL_VERSION_STRING << ")" << endl;
 		return 0;
 	} else if (vm.empty() or vm.count("input-file") == 0) {
 		cout << usage << endl;
