@@ -96,7 +96,7 @@ void MdParser::parse() {
 				p0 = new TextParagraph();
 			}
 
-			if (line.substr(0, 4) == "    " and (!p0 or !p0->size())) {
+			if ( (line.substr(0, 4) == "    " or line[0] == '\t') and (!p0 or !p0->size()) ) {
 				// This is a code paragraph
 				delete p0;
 				p0 = new CodeParagraph();
