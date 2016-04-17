@@ -9,6 +9,7 @@
 #include "../document/title2_paragraph.hpp"
 #include "../document/ulist1_paragraph.hpp"
 #include "../document/code_paragraph.hpp"
+#include "../document/quote_paragraph.hpp"
 
 #include <regex>
 
@@ -117,6 +118,12 @@ void MdParser::parse() {
 						break;
 				}
 				parse_line(p0, line);
+			} else if (string_startswith(line, "> ") and (!p0 or !p0->size())) {
+				delete p0;
+				p0 = new QuoteParagraph();
+				parse_line(p0, line);
+				_document->append_paragraph(p0);
+				p0 = new TextParagraph();
 			} else if (string_has_only(line, '=')) { // title 1 delimiter
 				p1 = new Title1Paragraph(p0);
 				delete p0;

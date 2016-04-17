@@ -174,6 +174,14 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				}
 				cursor_x=0;
 				break;
+			case Paragraph::Level::Quote:
+				wattron(_display_window, A_REVERSE);
+				wattron(_display_window, COLOR_PAIR(TITLE1_PAIR));
+				if (!is_first) {
+					cursor_y+=1;
+				}
+				cursor_x=0;
+				break;
 			default:
 				if (!is_first) {
 					cursor_y+=2;
@@ -239,6 +247,11 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 			case Paragraph::Level::Code:
 				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, 0, NULL);
 				wmove(_display_window, cursor_y, cursor_x);
+				break;
+			case Paragraph::Level::Quote:
+				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, TITLE1_PAIR, NULL);
+				wattroff(_display_window, A_REVERSE);
+				wattroff(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				break;
 			default:
 				break;

@@ -8,6 +8,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### New features
 
 * src/parsers/md_parser.cpp (MdParser::parse_line): parse inline code snippets (using regex)
+* src/parsers/md_parser.cpp (MdParser::parse): detect quote paragraphs
+* src/documents/paragraph.cpp (class definition): add Paragraph::Level::Quote
+* src/display_drivers/ncurses_display_driver.cpp (N[...]::render): render QuoteParagaph
+* CMakeLists.txt (add_executable): add src/document/quote_paragraph.cpp
+* src/document/quote_paragraph.hpp: new file
+* src/document/quote_paragraph.cpp: new file
 
 ### Changed
 

@@ -43,6 +43,7 @@ add_executable(mdl
 	src/document/title2_paragraph.cpp
 	src/document/ulist1_paragraph.cpp
 	src/document/code_paragraph.cpp
+	src/document/quote_paragraph.cpp
 	src/parsers/parser.cpp
 	src/parsers/md_parser.cpp) 
 

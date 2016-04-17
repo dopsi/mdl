@@ -23,6 +23,10 @@ This list does summarize the supported functions :
     }
 
 * inline code snippets (like `int main()`)
+* quotations
+
+> Violence is the last refuge of the incompetent.
+> Salvor Hardin
 
 
 
