@@ -12,5 +12,3 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 * src/parsers/md_parser.cpp (MdParser::parse_line): function now recursive
-* src/document/code_line_element.cpp (CodeLineElement::CodeLineElement): use substring of 
-provided string (ignore separators)

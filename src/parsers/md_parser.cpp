@@ -165,7 +165,8 @@ LineElement* MdParser::parse_line(Paragraph *p, const std::string & line) {
 	}  else if (regex_search(clean_line, match, code_regex)) {
 		// Found a code snippet
 		parse_line(p, match.prefix());
-		p->append_line_element(new CodeLineElement(match.str()));
+		p->append_line_element(
+			new CodeLineElement(match.str().substr(1, match.str().length()-2)));
 		e = parse_line(p, match.suffix());
 	} else {
 		e = new TextLineElement(clean_line);
