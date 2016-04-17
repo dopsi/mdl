@@ -160,7 +160,7 @@ void MdParser::parse() {
 
 LineElement* MdParser::parse_line(Paragraph *p, const std::string & line) {
 	string clean_line(string_clear_leading(line, " \t#"));
-	regex url_regex("\\[.*\\]\\(.*\\)"), code_regex("`[a-zA-Z0-9\\.\\*\\(\\) ]*`");
+	regex url_regex("\\[.*\\]\\(.*\\)"), code_regex("`[^`]*`");
 	smatch match;
 	LineElement *e;
 
