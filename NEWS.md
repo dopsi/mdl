@@ -5,6 +5,7 @@
 ### New features
 
 * Add a `--version` option to display the version number of the program
+* Handle inline code snippets
 
 ### Changed
 

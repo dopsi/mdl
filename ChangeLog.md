@@ -7,8 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### New features
 
-* TBD
+* src/parsers/md_parser.cpp (MdParser::parse_line): parse inline code snippets (using regex)
 
 ### Changed
 
-* TBD
+* src/parsers/md_parser.cpp (MdParser::parse_line): function now recursive
+* src/document/code_line_element.cpp (CodeLineElement::CodeLineElement): use substring of 
+provided string (ignore separators)

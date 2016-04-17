@@ -22,6 +22,8 @@ This list does summarize the supported functions :
        return EXIT_SUCCESS;
     }
 
+* inline code snippets (like `int main()`)
+
 
 
 # Lorem ipsum text

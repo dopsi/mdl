@@ -152,20 +152,25 @@ void MdParser::parse() {
 }
 
 LineElement* MdParser::parse_line(Paragraph *p, const std::string & line) {
-	string s(string_clear_leading(line, " \t#"));
-	regex r("\\[.*\\]\\(.*\\)");
-	smatch m;
+	string clean_line(string_clear_leading(line, " \t#"));
+	regex url_regex("\\[.*\\]\\(.*\\)"), code_regex("`[a-zA-Z0-9\\.\\*\\(\\) ]*`");
+	smatch match;
 	LineElement *e;
 
-	while (regex_search(s,m,r)) {
-		e = new TextLineElement(m.prefix());
+	if (regex_search(clean_line,match,url_regex)) {
+		// Found a url
+		parse_line(p, match.prefix());
+		p->append_line_element(new UrlLineElement(match.str()));
+		e = parse_line(p, match.suffix());
+	}  else if (regex_search(clean_line, match, code_regex)) {
+		// Found a code snippet
+		parse_line(p, match.prefix());
+		p->append_line_element(new CodeLineElement(match.str()));
+		e = parse_line(p, match.suffix());
+	} else {
+		e = new TextLineElement(clean_line);
 		p->append_line_element(e);
-		e = new UrlLineElement(m.str());
-		p->append_line_element(e);
-		s = m.suffix().str();
 	}
 
-	e = new TextLineElement(s);
-	p->append_line_element(e);
 	return e;
 }
