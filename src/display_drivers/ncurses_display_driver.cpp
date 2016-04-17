@@ -246,6 +246,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				break;
 			case Paragraph::Level::Code:
 				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, 0, NULL);
+				wattroff(_display_window, A_REVERSE);
 				wmove(_display_window, cursor_y, cursor_x);
 				break;
 			case Paragraph::Level::Quote:
