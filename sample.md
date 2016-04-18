@@ -28,7 +28,7 @@ This list does summarize the supported functions :
 > Violence is the last refuge of the incompetent.
 > Salvor Hardin
 
-
+* **Bold** elements (with __underlines__ and **stars**)
 
 # Lorem ipsum text
 

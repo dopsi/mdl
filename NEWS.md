@@ -6,6 +6,7 @@
 
 * Add a `--version` option to display the version number of the program
 * Handle inline code snippets
+* Handle bold line elements
 * Handle quotations
 
 ### Changed
