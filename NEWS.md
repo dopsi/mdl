@@ -8,6 +8,7 @@
 * Handle inline code snippets
 * Handle bold and italic line elements
 * Handle quotations
+* Detech italics capability (does not work on all terminal emulators)
 
 ### Changed
 

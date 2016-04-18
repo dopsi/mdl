@@ -7,11 +7,14 @@
 
 #include <cassert>
 
+#include <unistd.h>
+
 using namespace std;
 
 #define WIN_TITLE_PAIR 1
 #define TITLE1_PAIR 2
 #define ULIST1_PAIR 3
+#define RED_PAIR 4
 #define COLOR_NONE -1
 
 NcursesDisplayDriver::NcursesDisplayDriver() :
@@ -46,6 +49,7 @@ NcursesDisplayDriver::NcursesDisplayDriver() :
 	init_pair(WIN_TITLE_PAIR, COLOR_YELLOW, COLOR_NONE);
 	init_pair(TITLE1_PAIR, COLOR_BLUE, COLOR_NONE);
 	init_pair(ULIST1_PAIR, COLOR_CYAN, COLOR_NONE);
+	init_pair(RED_PAIR, COLOR_RED, COLOR_NONE);
 
 	// Refresh screen, to enable the windows
 	refresh();
@@ -56,6 +60,7 @@ NcursesDisplayDriver::~NcursesDisplayDriver() {
 }
 
 void NcursesDisplayDriver::display(Document * doc) {
+	check_capabilities();
 	bool go(true), update_title(true), update_body(true), update_footer(true);
 	int offset(0);
 	string fullname, filename, path;
@@ -291,5 +296,20 @@ bool NcursesDisplayDriver::bounds_check(WINDOW* w, int y, int x) const {
 		return false;
 	} else {
 		return true;
+	}
+}
+
+void NcursesDisplayDriver::check_capabilities(void) const {
+	if (!tigetstr("sitm") or !tigetstr("ritm")) {
+		werase(_display_window);
+		wattr_set(_display_window, A_NORMAL, RED_PAIR, nullptr);
+		wprintw(_display_window, "Italics capability not detected for this terminal");
+		int y, x;
+		getyx(_display_window, y, x);
+		wmove(_display_window, y+1, 0);
+		wprintw(_display_window, "Press any key to continue");
+		wrefresh(_display_window);
+		sleep(1);
+		getch();
 	}
 }
