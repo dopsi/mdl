@@ -102,11 +102,12 @@ void MdParser::parse() {
 				// This is a code paragraph
 				delete p0;
 				p0 = new CodeParagraph();
-				line = string_clear_leading(line, " ");
+				line = string_clear_leading(line, " \t");
 				p0->append_line_element(new CodeLineElement(line));
 				_document->append_paragraph(p0);
 				p0 = new TextParagraph();
 			} else if (sharps != 0) {
+				line = string_clear_leading(line, "\t #");
 				switch(sharps) {
 					case 1:
 						delete p0;
@@ -161,7 +162,6 @@ void MdParser::parse() {
 }
 
 LineElement* MdParser::parse_line(Paragraph *p, const std::string & line) {
-	string clean_line(string_clear_leading(line, " \t#"));
 	regex url_regex("\\[.*\\]\\([^)]*\\)"),
 	      code_regex("`[^`]*`"),
 	      bold_regex("(\\*\\*|__)[^\\*_]+(\\*\\*|__)"),
@@ -169,31 +169,31 @@ LineElement* MdParser::parse_line(Paragraph *p, const std::string & line) {
 	smatch match;
 	LineElement *e;
 
-	if (regex_search(clean_line,match,url_regex)) {
+	if (regex_search(line,match,url_regex)) {
 		// Found a url
 		parse_line(p, match.prefix());
 		p->append_line_element(new UrlLineElement(match.str()));
 		e = parse_line(p, match.suffix());
-	}  else if (regex_search(clean_line, match, code_regex)) {
+	}  else if (regex_search(line, match, code_regex)) {
 		// Found a code snippet
 		parse_line(p, match.prefix());
 		p->append_line_element(
 			new CodeLineElement(match.str().substr(1, match.str().length()-2)));
 		e = parse_line(p, match.suffix());
-	} else if (regex_search(clean_line, match, bold_regex)) {
+	} else if (regex_search(line, match, bold_regex)) {
 		// Bold element
 		parse_line(p, match.prefix());
 		p->append_line_element(
 			new BoldLineElement(match.str().substr(2, match.str().length()-4)));
 		e = parse_line(p, match.suffix());
-	} else if (regex_search(clean_line, match, italic_regex)) {
+	} else if (regex_search(line, match, italic_regex)) {
 		// Italic element
 		parse_line(p, match.prefix());
 		p->append_line_element(
 			new ItalicLineElement(match.str().substr(1, match.str().length()-2)));
 		e = parse_line(p, match.suffix());
 	} else {
-		e = new TextLineElement(clean_line);
+		e = new TextLineElement(line);
 		p->append_line_element(e);
 	}
 
