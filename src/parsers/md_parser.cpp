@@ -123,7 +123,7 @@ void MdParser::parse() {
 			} else if (string_startswith(line, "> ") and (!p0 or !p0->size())) {
 				delete p0;
 				p0 = new QuoteParagraph();
-				parse_line(p0, line);
+				parse_line(p0, line.substr(2));
 				_document->append_paragraph(p0);
 				p0 = new TextParagraph();
 			} else if (string_has_only(line, '=')) { // title 1 delimiter
