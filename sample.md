@@ -29,6 +29,7 @@ This list does summarize the supported functions :
 > Salvor Hardin
 
 * **Bold** elements (with __underlines__ and **stars**)
+* *Italic* elements (with _underlines_ and *stars*)
 
 # Lorem ipsum text
 

@@ -3,6 +3,7 @@
 #include "../document/url_line_element.hpp"
 #include "../document/code_line_element.hpp"
 #include "../document/bold_line_element.hpp"
+#include "../document/italic_line_element.hpp"
 
 #include <cassert>
 
@@ -226,6 +227,8 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				}
 			} else if (dynamic_cast<BoldLineElement*>(l)) { // Bold element
 				wattron(_display_window, A_BOLD);
+			} else if (dynamic_cast<ItalicLineElement*>(l)) { // Italic element
+				wattron(_display_window, A_ITALIC);
 			}
 			if (tmp_str.size() < _width - cursor_x) {
 				if (bounds_check(_display_window, cursor_y, cursor_x)) {
@@ -253,6 +256,8 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				}
 			} else if (dynamic_cast<BoldLineElement*>(l)) { // Bold element
 				wattroff(_display_window, A_BOLD);
+			} else if (dynamic_cast<ItalicLineElement*>(l)) { // Italic element
+				wattroff(_display_window, A_ITALIC);
 			}
 		}
 		switch (p->level()) {

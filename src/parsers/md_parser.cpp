@@ -4,6 +4,7 @@
 #include "../document/url_line_element.hpp"
 #include "../document/code_line_element.hpp"
 #include "../document/bold_line_element.hpp"
+#include "../document/italic_line_element.hpp"
 
 #include "../document/text_paragraph.hpp"
 #include "../document/title1_paragraph.hpp"
@@ -163,7 +164,8 @@ LineElement* MdParser::parse_line(Paragraph *p, const std::string & line) {
 	string clean_line(string_clear_leading(line, " \t#"));
 	regex url_regex("\\[.*\\]\\([^)]*\\)"),
 	      code_regex("`[^`]*`"),
-	      bold_regex("(\\*\\*|__)[^\\*_]+(\\*\\*|__)");
+	      bold_regex("(\\*\\*|__)[^\\*_]+(\\*\\*|__)"),
+	      italic_regex("(\\*|_)[^\\*_]+(\\*|_)");
 	smatch match;
 	LineElement *e;
 
@@ -183,6 +185,12 @@ LineElement* MdParser::parse_line(Paragraph *p, const std::string & line) {
 		parse_line(p, match.prefix());
 		p->append_line_element(
 			new BoldLineElement(match.str().substr(2, match.str().length()-4)));
+		e = parse_line(p, match.suffix());
+	} else if (regex_search(clean_line, match, italic_regex)) {
+		// Italic element
+		parse_line(p, match.prefix());
+		p->append_line_element(
+			new ItalicLineElement(match.str().substr(1, match.str().length()-2)));
 		e = parse_line(p, match.suffix());
 	} else {
 		e = new TextLineElement(clean_line);
