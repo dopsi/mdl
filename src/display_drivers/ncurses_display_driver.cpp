@@ -176,7 +176,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				if (!is_first) {
 					cursor_y+=1;
 				}
-				cursor_x=0;
+				cursor_x=4;
 				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, 0, NULL);
 				break;
 			case Paragraph::Level::Quote:

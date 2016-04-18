@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * src/parsers/md_parser.cpp (MdParser::parse_line): parse inline code snippets (using regex)
 * src/parsers/md_parser.cpp (MdParser::parse): detect quote paragraphs
 * src/parsers/md_parser.cpp (MdParser::parse_line): parse bold and italic elements
+* src/parsers/md_parser.cpp (namespace::string_clear_leading): fix bug in string::substr usage
 * src/documents/paragraph.cpp (class definition): add Paragraph::Level::Quote
 * src/display_drivers/ncurses_display_driver.cpp (N[...]::render): render QuoteParagaph
 * src/display_drivers/ncurses_display_driver.cpp (N[...]::render): render BoldLineElement
