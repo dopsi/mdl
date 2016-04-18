@@ -8,7 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### New features
 
 * src/parsers/md_parser.cpp (MdParser::parse_line): parse inline code snippets (using regex)
-* src/parsers/md_parser.cpp (MdParser::parse): detect quote paragraphs
+* src/parsers/md_parser.cpp (MdParser::parse): detect quote paragraphs and take in account
+empty quoted lines
 * src/parsers/md_parser.cpp (MdParser::parse_line): parse bold and italic elements
 * src/parsers/md_parser.cpp (MdParser::parse_line): do not clear the line
 * src/parsers/md_parser.cpp (namespace::string_clear_leading): fix bug in string::substr usage

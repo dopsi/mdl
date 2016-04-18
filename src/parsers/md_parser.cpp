@@ -121,10 +121,14 @@ void MdParser::parse() {
 						break;
 				}
 				parse_line(p0, line);
-			} else if (string_startswith(line, "> ") and (!p0 or !p0->size())) {
+			} else if (string_startswith(line, ">") and (!p0 or !p0->size())) {
 				delete p0;
 				p0 = new QuoteParagraph();
-				parse_line(p0, line.substr(2));
+				if (line.substr(1).find_first_not_of("\t ") == string::npos) {
+					parse_line(p0, " ");
+				} else {
+					parse_line(p0, line.substr(2));
+				}
 				_document->append_paragraph(p0);
 				p0 = new TextParagraph();
 			} else if (string_has_only(line, '=')) { // title 1 delimiter
