@@ -3,6 +3,11 @@
 
 #include "display_driver.hpp"
 
+/**
+ * @brief Plaintext display driver
+ *
+ * This class does output a space padded document
+ **/
 class PlainTextDisplayDriver : public DisplayDriver {
 	public:
 		PlainTextDisplayDriver() : DisplayDriver() {}

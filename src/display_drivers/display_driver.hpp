@@ -8,6 +8,8 @@
  *
  * The DisplayDriver::display() function does need to be reimplemented to 
  * do the actual displaying.
+ *
+ * @see NcursesDisplayDriver and PlaintextDisplayDriver for default implementations
  **/
 class DisplayDriver {
 	public:

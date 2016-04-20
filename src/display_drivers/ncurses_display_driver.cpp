@@ -288,7 +288,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	return cursor_y+line_offset;
 }
 
-bool NcursesDisplayDriver::bounds_check(WINDOW* w, int y, int x) const {
+bool NcursesDisplayDriver::bounds_check(WINDOW* w, int y, int x) {
 	int win_x, win_y;
 	getmaxyx(w, win_y, win_x);
 
