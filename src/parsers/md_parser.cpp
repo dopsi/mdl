@@ -143,7 +143,7 @@ void MdParser::parse() {
 				p0 = nullptr;
 				_document->append_paragraph(p1);
 				p1 = nullptr;
-			} else if (string_startswith(line, "* ")) { // level 1 list delimiter
+			} else if (string_startswith(line, "* ") or string_startswith(line, "- ")) { // level 1 list delimiter
 				if (p0 and p0->size()) {
 					_document->append_paragraph(p0);
 					p0=nullptr;
