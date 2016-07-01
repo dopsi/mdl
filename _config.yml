@@ -1,0 +1,10 @@
+name: MDL
+baseurl: /mdl
+url: http://dopsi.github.io
+description: The official MDL website
+
+permalink: /:year/:month/:day/:title/
+paginate: 10
+
+gems: [jekyll-paginate]
+exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
