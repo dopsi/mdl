@@ -23,6 +23,7 @@ NcursesDisplayDriver::NcursesDisplayDriver() :
 	_title_window(newwin(1,_width,0,0)),
 	_display_window(newwin(LINES-4,_width,2,0)),
 	_footer_window(newwin(1, _width, LINES-1, 0)),
+	_url_window(newwin(1, _width, 2, 0)),
 	_display_offset(0) {
 	//Check if all windows have been initialized
 	while(!_title_window) {
@@ -61,7 +62,11 @@ NcursesDisplayDriver::~NcursesDisplayDriver() {
 
 void NcursesDisplayDriver::display(Document * doc) {
 	check_capabilities();
-	bool go(true), update_title(true), update_body(true), update_footer(true);
+	bool go(true),
+	     update_title(true),
+	     update_body(true),
+	     update_footer(true),
+	     display_urls(false);
 	int offset(0);
 	string fullname, filename, path;
 	int max_offset(0);
@@ -82,13 +87,17 @@ void NcursesDisplayDriver::display(Document * doc) {
 			wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
 			wrefresh(_title_window);
 		}
-	
-		if (update_body) {
+
+		if (update_body or !display_urls) {
 			update_body = false;
 			max_offset = render(doc, offset);
 			wrefresh(_display_window);
 		}
 
+		if (display_urls) {
+			wrefresh(_url_window);
+		}
+	
 		if (update_footer) {
 			update_footer = false;
 			werase(_footer_window);
@@ -99,6 +108,9 @@ void NcursesDisplayDriver::display(Document * doc) {
 		switch(getch()) {
 			case 'q': // quit program
 				go = false;
+				break;
+			case 'u':
+				display_urls = !display_urls;
 				break;
 			case KEY_DOWN:
 				if (offset <= max_offset-(LINES-4)) {
@@ -148,11 +160,21 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	werase(_display_window);
 	Paragraph *p(nullptr);
 	LineElement *l(nullptr);
+	UrlLineElement *u(nullptr);
 	bool is_first(true);
 	int cursor_x, cursor_y(-line_offset);
 	string tmp_str;
 	attr_t current;
 	short current_color;
+	int url_count(0);
+	int displayed_url_count(0);
+
+	mvwin(_url_window, 2, 0);
+	wresize(_url_window, 1, COLS);
+	wattron(_url_window, A_UNDERLINE);
+	mvwprintw(_url_window, 0, 0, "Url list");
+	wattroff(_url_window, A_UNDERLINE);
+
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
 		switch (p->level()) {
@@ -219,10 +241,16 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 		for (size_t j(0); j < p->size(); ++j) {
 			l = (*p)[j];
 			tmp_str = l->content();
-			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
+			if ( (u=dynamic_cast<UrlLineElement*>(l)) ) { // this is an UrlLineElement
 				wattr_get(_display_window, &current, &current_color, nullptr);
 				wattron(_display_window, A_UNDERLINE);
 				wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
+				++url_count;
+				if (bounds_check(_display_window, cursor_y, cursor_x)) {
+					++displayed_url_count;
+					wresize(_url_window, displayed_url_count+1, COLS);
+					mvwprintw(_url_window, displayed_url_count, 0, "[%d] %s", url_count, u->url().c_str());
+				}
 			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
 				wattr_get(_display_window, &current, &current_color, nullptr);
 				if (current&A_REVERSE) {

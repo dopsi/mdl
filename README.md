@@ -11,6 +11,17 @@ to display a Markdown file in the way *less(1)* does for text files.
 This program should be easy to extend using derivatives of the DisplayDriver
 class to have a new frontend and derivatives of the Parser class.
 
+Usage
+-----
+
+* `Up`: go up
+* `Down`: go down
+* `Space`: go down half page
+* `PgUp`: go up one page
+* `PgDown`: go down one page
+* `u`: display URL links
+* `q`: quit program
+
 Building
 --------
 

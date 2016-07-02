@@ -16,8 +16,10 @@ class NcursesDisplayDriver : public DisplayDriver {
 		WINDOW* _title_window; /**< @brief The title window **/
 		WINDOW* _display_window; /**< @brief The display window **/
 		WINDOW* _footer_window; /**< @brief The footer window **/
+		WINDOW* _url_window; /**< @brief The url display window **/
 		int _display_offset; /**< @brief The display_offset **/
 		int _width; /**< @brief The screen width **/
+		int _url_count; /**< @brief The number of urls to display **/
 
 		/**
 		 * @brief Actually render the document on the _display_window
