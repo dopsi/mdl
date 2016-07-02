@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [No version] No date
+## [v0.4.1] 2016-07-02
 
 ### New features
 
@@ -15,6 +15,7 @@ empty quoted lines
 * src/parsers/md_parser.cpp (namespace::string_clear_leading): fix bug in string::substr usage
 * src/documents/paragraph.cpp (class definition): add Paragraph::Level::Quote
 * src/display_drivers/ncurses_display_driver.hpp (class definition): add check_capabilities()
+* src/display_drivers/ncurses_display_driver.hpp (class definition): add _url_window
 * src/display_drivers/ncurses_display_driver.cpp (N[...]::render): render QuoteParagaph
 * src/display_drivers/ncurses_display_driver.cpp (N[...]::render): render BoldLineElement
 * src/display_drivers/ncurses_display_driver.cpp (N[...]::render): render ItalicLineElement
@@ -27,6 +28,8 @@ empty quoted lines
 * src/document/bold_line_element.cpp: new file
 * src/document/italic_line_element.hpp: new file
 * src/document/italic_line_element.cpp: new file
+* src/document/url_line_element.hpp: add _url member
+* src/document/url_line_element.cpp: extract url from link content
 
 ### Changed
 

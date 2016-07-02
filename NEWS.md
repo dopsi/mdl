@@ -1,6 +1,6 @@
 # News
 
-## [No version] No date
+## [v0.4.1] 2016-07-02
 
 ### New features
 
@@ -9,10 +9,7 @@
 * Handle bold and italic line elements
 * Handle quotations
 * Detech italics capability (does not work on all terminal emulators)
-
-### Changed
-
-* TBD
+* Display URLs in windows (press `u`)
 
 ## [v0.4.0] 2016-04-16
 
