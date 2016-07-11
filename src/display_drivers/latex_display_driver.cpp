@@ -2,6 +2,8 @@
 
 #include "../document/bold_line_element.hpp"
 #include "../document/italic_line_element.hpp"
+#include "../document/code_line_element.hpp"
+#include "../document/url_line_element.hpp"
 
 #include <iostream>
 using namespace std;
@@ -12,6 +14,10 @@ void LaTeXDisplayDriver::display(Document * doc) {
 
 	BoldLineElement *bold_le(nullptr);
 	ItalicLineElement *italic_le(nullptr);
+	CodeLineElement *code_le(nullptr);
+	UrlLineElement *url_le(nullptr);
+
+	char delim('|');
 
 	bool is_verbatim(false), 
 		 is_quotation(false),
@@ -21,6 +27,7 @@ void LaTeXDisplayDriver::display(Document * doc) {
 	cout << "\\usepackage[english]{babel}" << endl;
 	cout << "\\usepackage[utf8]{inputenc}" << endl;
 	cout << "\\usepackage[T1]{fontenc}" << endl;
+	cout << "\\usepackage{hyperref}" << endl;
 	cout << "\\begin{document}" << endl;
 
 	for (size_t i(0); i < doc->size(); ++i) {
@@ -84,16 +91,25 @@ void LaTeXDisplayDriver::display(Document * doc) {
 
 			bold_le = dynamic_cast<BoldLineElement*>(l);
 			italic_le = dynamic_cast<ItalicLineElement*>(l);
+			code_le = dynamic_cast<CodeLineElement*>(l);
+			url_le = dynamic_cast<UrlLineElement*>(l);
 
 			if (italic_le) {
 				cout << "\\textit{";
 			} else if (bold_le) {
 				cout << "\\textbf{";
+			} else if (code_le and p->level() != Paragraph::Level::Code) {
+				cout << "\\verb" << delim;
+			} else if (url_le) {
+				cout << "\\href{" << url_le->url() << "}{";
 			}
+
 			cout << l->content();
 
-			if (italic_le or bold_le) {
+			if (italic_le or bold_le or url_le) {
 				cout << "}";
+			} else if (code_le and p->level() != Paragraph::Level::Code) {
+				cout << delim;
 			}
 		}
 		
