@@ -2,6 +2,7 @@
 #include "parsers/md_parser.hpp"
 #include "display_drivers/ncurses_display_driver.hpp"
 #include "display_drivers/plaintext_display_driver.hpp"
+#include "display_drivers/latex_display_driver.hpp"
 
 #include <iostream>
 #include <locale.h>
@@ -57,6 +58,8 @@ int main(int argc, char ** argv) {
 			driver = new PlainTextDisplayDriver();
 		} else if (driver_string == "ncurses") {
 			driver = new NcursesDisplayDriver();
+		} else if (driver_string == "latex") {
+			driver = new LaTeXDisplayDriver();
 		} else {
 			cerr << "mdl: Unknown driver name '" << driver_string << "'" << endl;
 			delete parser;

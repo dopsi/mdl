@@ -1,5 +1,15 @@
 # News
 
+## [No version] No date
+
+### New features
+
+* Add a LaTeXDisplayDriver class
+
+### Changed
+
+* TBD
+
 ## [v0.4.1] 2016-07-02
 
 ### New features

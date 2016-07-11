@@ -29,9 +29,12 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(mdl 
 	src/main.cpp
+
 	src/display_drivers/display_driver.cpp
 	src/display_drivers/ncurses_display_driver.cpp
 	src/display_drivers/plaintext_display_driver.cpp
+	src/display_drivers/latex_display_driver.cpp
+
 	src/document/document.cpp
 	src/document/line_element.cpp
 	src/document/text_line_element.cpp
@@ -46,6 +49,7 @@ add_executable(mdl
 	src/document/ulist1_paragraph.cpp
 	src/document/code_paragraph.cpp
 	src/document/quote_paragraph.cpp
+
 	src/parsers/parser.cpp
 	src/parsers/md_parser.cpp) 
 
