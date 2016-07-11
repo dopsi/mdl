@@ -9,7 +9,8 @@ Build a functionnaly similar program to
 to display a Markdown file in the way *less(1)* does for text files.
 
 This program should be easy to extend using derivatives of the DisplayDriver
-class to have a new frontend and derivatives of the Parser class.
+class to have a new frontend and derivatives of the Parser class (see the 
+status.md file for more information).
 
 Usage
 -----

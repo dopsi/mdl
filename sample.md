@@ -7,6 +7,8 @@ Markdown previewer.
 Supported features
 ------------------
 
+For a detailed features status, see status.md.
+
 This list does summarize the supported functions :
 
 * titles (up to 2 levels at the moment)
