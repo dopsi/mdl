@@ -3,6 +3,9 @@
 
 #include "paragraph.hpp"
 
+/**
+ * @brief Quote paragraph
+ **/
 class QuoteParagraph : public Paragraph {
 	public:
 		QuoteParagraph() : Paragraph() {}

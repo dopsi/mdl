@@ -3,6 +3,9 @@
 
 #include "paragraph.hpp"
 
+/**
+ * @brief A basic text paragraph
+ **/
 class TextParagraph : public Paragraph {
 	public:
 		virtual Level level(void) const;

@@ -3,6 +3,9 @@
 
 #include "paragraph.hpp"
 
+/**
+ * @brief Title1 paragraph
+ **/
 class Title1Paragraph : public Paragraph {
 	public:
 		Title1Paragraph() : Paragraph() {}

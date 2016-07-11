@@ -3,6 +3,9 @@
 
 #include "paragraph.hpp"
 
+/**
+ * @brief Unordered list paragraph (level 1)
+ **/
 class UList1Paragraph : public Paragraph {
 	public:
 		UList1Paragraph() : Paragraph() {}
