@@ -17,6 +17,7 @@ void LaTeXDisplayDriver::display(Document * doc) {
 	CodeLineElement *code_le(nullptr);
 	UrlLineElement *url_le(nullptr);
 
+	string delim_list("|@,;:_");
 	char delim('|');
 
 	bool is_verbatim(false), 
@@ -99,6 +100,7 @@ void LaTeXDisplayDriver::display(Document * doc) {
 			} else if (bold_le) {
 				cout << "\\textbf{";
 			} else if (code_le and p->level() != Paragraph::Level::Code) {
+				delim = delim_list.find_first_not_of(l->content());
 				cout << "\\verb" << delim;
 			} else if (url_le) {
 				cout << "\\href{" << url_le->url() << "}{";
