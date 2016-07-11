@@ -4,11 +4,17 @@
 
 ### New features
 
-* Add a LaTeXDisplayDriver class
+* TBD
 
 ### Changed
 
 * TBD
+
+## [v0.5.0] 2016-07-12
+
+### New features
+
+* Add a LaTeXDisplayDriver class
 
 ## [v0.4.1] 2016-07-02
 

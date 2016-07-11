@@ -7,12 +7,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### New features
 
-* src/display_drivers/latex_display_driver.hpp: new file
-* src/display_drivers/latex_display_driver.cpp: new file
+* TBD
 
 ### Changed
 
 * TBD
+
+## [v0.5.0] 2016-07-12
+
+### New features
+
+* src/display_drivers/latex_display_driver.hpp: new file
+* src/display_drivers/latex_display_driver.cpp: new file
 
 ## [v0.4.1] 2016-07-02
 
