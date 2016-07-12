@@ -4,12 +4,6 @@ title: About
 permalink: /about/
 ---
 
-This is a fork of {% include icon-github.html username="mytbk" %}/
-[console-tdm](https://github.com/mytbk/console-tdm).
-
-*Console TDM* aims to reproduce the functionnality of a traditionnal 
-display manager using only console tools.
-
 Versioning
 -----------
 
