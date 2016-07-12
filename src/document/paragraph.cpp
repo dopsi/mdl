@@ -1,6 +1,6 @@
 #include "paragraph.hpp"
 
-Paragraph::Paragraph() {
+Paragraph::Paragraph() : _last(false) {
 }
 
 Paragraph::Paragraph(Paragraph * p) : _elements(p->_elements) {
@@ -22,4 +22,12 @@ LineElement * Paragraph::element(size_t index) const {
 
 LineElement * Paragraph::operator[](size_t index) const {
 	return element(index);
+}
+
+void Paragraph::last(const bool & last) {
+	_last = last;
+}
+
+bool Paragraph::last(void) const {
+	return _last;
 }

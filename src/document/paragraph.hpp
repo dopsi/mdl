@@ -12,6 +12,8 @@
  **/
 class Paragraph {
 	protected:
+		/** @brief Indicate if the paragraph is the last of its type **/
+		bool _last;
 		/** @brief List of LineElement in this Paragraph **/
 		std::vector<LineElement*> _elements;
 	public:
@@ -86,6 +88,16 @@ class Paragraph {
 		 * @return The level of the Paragraph
 		 **/
 		virtual Level level(void) const = 0;
+		
+		/**
+		 * @brief Setter for _last
+		 **/
+		void last(const bool & last);
+		
+		/**
+		 * @brief Getter for _last
+		 **/
+		bool last(void) const;
 };
 
 #endif // MDL_PARAGRAPH_HPP
