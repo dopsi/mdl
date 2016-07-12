@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classParagraph.html" title="Base class for paragraphs. " alt="" coords="5,132,87,159"/>
+<area shape="rect" id="node2" href="$classCodeParagraph.html" title="Code paragraph. " alt="" coords="139,5,249,32"/>
+<area shape="rect" id="node3" href="$classQuoteParagraph.html" title="Quote paragraph. " alt="" coords="136,56,252,83"/>
+<area shape="rect" id="node4" href="$classTextParagraph.html" title="A basic text paragraph. " alt="" coords="141,107,247,133"/>
+<area shape="rect" id="node5" href="$classTitle1Paragraph.html" title="Title1 paragraph. " alt="" coords="138,157,250,184"/>
+<area shape="rect" id="node6" href="$classTitle2Paragraph.html" title="Title2 paragraph. " alt="" coords="138,208,250,235"/>
+<area shape="rect" id="node7" href="$classUList1Paragraph.html" title="Unordered list paragraph (level 1) " alt="" coords="135,259,253,285"/>
+</map>

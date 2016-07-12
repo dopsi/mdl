@@ -1,0 +1,7 @@
+<map id="LineElement" name="LineElement">
+<area shape="rect" id="node2" href="$classBoldLineElement.html" title="A bold line element. " alt="" coords="5,219,153,340"/>
+<area shape="rect" id="node3" href="$classCodeLineElement.html" title="A code line element. " alt="" coords="178,219,330,340"/>
+<area shape="rect" id="node4" href="$classItalicLineElement.html" title="A bold line element. " alt="" coords="354,219,503,340"/>
+<area shape="rect" id="node5" href="$classTextLineElement.html" title="A text line element. " alt="" coords="527,219,674,340"/>
+<area shape="rect" id="node6" href="$classUrlLineElement.html" title="An URL line element. " alt="" coords="698,204,837,355"/>
+</map>
