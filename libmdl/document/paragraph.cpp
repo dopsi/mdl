@@ -1,4 +1,4 @@
-#include "paragraph.hpp"
+#include "../../includes/document/paragraph.hpp"
 
 Paragraph::Paragraph() : _last(false) {
 }

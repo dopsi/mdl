@@ -1,7 +1,7 @@
 #ifndef MDL_MD_PARSER_HPP
 #define MDL_MD_PARSER_HPP
 
-#include "parser.hpp"
+#include "../../includes/parser.hpp"
 
 /**
  * @brief Markdown parser

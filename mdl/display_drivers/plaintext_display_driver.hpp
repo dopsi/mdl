@@ -1,7 +1,7 @@
 #ifndef MDL_PLAINTEXT_DISPLAY_DRIVER_HPP
 #define MDL_PLAINTEXT_DISPLAY_DRIVER_HPP
 
-#include "display_driver.hpp"
+#include "../../includes/display_driver.hpp"
 
 /**
  * @brief Plaintext display driver

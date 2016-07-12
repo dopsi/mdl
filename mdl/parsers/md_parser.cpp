@@ -1,17 +1,17 @@
 #include "md_parser.hpp"
 
-#include "../document/text_line_element.hpp"
-#include "../document/url_line_element.hpp"
-#include "../document/code_line_element.hpp"
-#include "../document/bold_line_element.hpp"
-#include "../document/italic_line_element.hpp"
+#include "document/text_line_element.hpp"
+#include "document/url_line_element.hpp"
+#include "document/code_line_element.hpp"
+#include "document/bold_line_element.hpp"
+#include "document/italic_line_element.hpp"
 
-#include "../document/text_paragraph.hpp"
-#include "../document/title1_paragraph.hpp"
-#include "../document/title2_paragraph.hpp"
-#include "../document/ulist1_paragraph.hpp"
-#include "../document/code_paragraph.hpp"
-#include "../document/quote_paragraph.hpp"
+#include "document/text_paragraph.hpp"
+#include "document/title1_paragraph.hpp"
+#include "document/title2_paragraph.hpp"
+#include "document/ulist1_paragraph.hpp"
+#include "document/code_paragraph.hpp"
+#include "document/quote_paragraph.hpp"
 
 #include <regex>
 

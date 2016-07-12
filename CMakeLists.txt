@@ -23,40 +23,43 @@ find_package(Boost COMPONENTS program_options REQUIRED)
 set(CURSES_NEED_NCURSES TRUE)
 find_package(Curses REQUIRED)
 
-configure_file(${PROJECT_SOURCE_DIR}/src/configure.hpp.in ${PROJECT_BINARY_DIR}/configure.hpp)
-include_directories(BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/src)
+configure_file(${PROJECT_SOURCE_DIR}/includes/configure.hpp.in ${PROJECT_BINARY_DIR}/configure.hpp)
+include_directories(BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/includes)
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(mdl 
-	src/main.cpp
+add_library(mdl SHARED
+	libmdl/document/document.cpp
+	libmdl/document/line_element.cpp
+	libmdl/document/text_line_element.cpp
+	libmdl/document/url_line_element.cpp
+	libmdl/document/code_line_element.cpp
+	libmdl/document/bold_line_element.cpp
+	libmdl/document/italic_line_element.cpp
+	libmdl/document/paragraph.cpp
+	libmdl/document/text_paragraph.cpp
+	libmdl/document/title1_paragraph.cpp
+	libmdl/document/title2_paragraph.cpp
+	libmdl/document/ulist1_paragraph.cpp
+	libmdl/document/code_paragraph.cpp
+	libmdl/document/quote_paragraph.cpp
+	libmdl/display_driver.cpp
+	libmdl/parser.cpp
+	)
 
-	src/display_drivers/display_driver.cpp
-	src/display_drivers/ncurses_display_driver.cpp
-	src/display_drivers/plaintext_display_driver.cpp
-	src/display_drivers/latex_display_driver.cpp
-
-	src/document/document.cpp
-	src/document/line_element.cpp
-	src/document/text_line_element.cpp
-	src/document/url_line_element.cpp
-	src/document/code_line_element.cpp
-	src/document/bold_line_element.cpp
-	src/document/italic_line_element.cpp
-	src/document/paragraph.cpp
-	src/document/text_paragraph.cpp
-	src/document/title1_paragraph.cpp
-	src/document/title2_paragraph.cpp
-	src/document/ulist1_paragraph.cpp
-	src/document/code_paragraph.cpp
-	src/document/quote_paragraph.cpp
-
-	src/parsers/parser.cpp
-	src/parsers/md_parser.cpp) 
+add_executable(mdless 
+	mdl/main.cpp
+	mdl/display_drivers/ncurses_display_driver.cpp
+	mdl/display_drivers/plaintext_display_driver.cpp
+	mdl/display_drivers/latex_display_driver.cpp
+	mdl/parsers/md_parser.cpp) 
 
 target_compile_features(mdl PRIVATE cxx_nullptr cxx_strong_enums)
+target_compile_features(mdless PRIVATE cxx_nullptr cxx_strong_enums)
 
-target_link_libraries(mdl 
+target_link_libraries(mdless 
 	${Boost_LIBRARIES}
-	ncurses)
+	ncurses
+	mdl)
 
-install(TARGETS mdl DESTINATION bin)
+install(TARGETS mdl DESTINATION lib)
+install(TARGETS mdless DESTINATION bin)

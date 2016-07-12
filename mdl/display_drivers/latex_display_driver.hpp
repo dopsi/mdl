@@ -1,7 +1,7 @@
 #ifndef MDL_LATEX_DISPLAY_DRIVER_HPP
 #define MDL_LATEX_DISPLAY_DRIVER_HPP
 
-#include "display_driver.hpp"
+#include "../../includes/display_driver.hpp"
 
 /**
  * @brief LaTeX implementation of the displaydriver class
