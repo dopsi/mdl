@@ -1,4 +1,4 @@
-#include "../../includes/document/document.hpp"
+#include "../includes/document/document.hpp"
 
 Document::Document(const std::string & filename) : _filename(filename) {}
 

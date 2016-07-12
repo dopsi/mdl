@@ -1,4 +1,4 @@
-#include "../../includes/document/line_element.hpp"
+#include "../includes/document/line_element.hpp"
 LineElement::LineElement(const std::string & content) :
 	_content(content) {
 	// Nothing
