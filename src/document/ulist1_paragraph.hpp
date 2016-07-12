@@ -5,6 +5,8 @@
 
 /**
  * @brief Unordered list paragraph (level 1)
+ *
+ * Every list element is represented by one instance of UList1Paragraph.
  **/
 class UList1Paragraph : public Paragraph {
 	public:

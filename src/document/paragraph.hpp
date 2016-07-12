@@ -7,6 +7,8 @@
 
 /**
  * @brief Base class for paragraphs
+ *
+ * Every paragraph is meant to be followed by a newline.
  **/
 class Paragraph {
 	protected:

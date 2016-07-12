@@ -5,6 +5,8 @@
 
 /**
  * @brief Quote paragraph
+ *
+ * Every line of the quote is represented by one instance of QuoteParagraph.
  **/
 class QuoteParagraph : public Paragraph {
 	public:

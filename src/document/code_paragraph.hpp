@@ -5,6 +5,8 @@
 
 /**
  * @brief Code paragraph
+ *
+ * Every line of code is represented by one instance CodeParagraph.
  **/
 class CodeParagraph : public Paragraph {
 	public:
