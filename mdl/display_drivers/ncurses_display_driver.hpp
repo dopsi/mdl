@@ -1,9 +1,9 @@
 #ifndef MDL_NCURSES_DISPLAY_DRIVER_HPP
 #define MDL_NCURSES_DISPLAY_DRIVER_HPP
 
-#include "display_driver.hpp"
+#include "../../libmdl/includes/display_driver.hpp"
 
-#include "document/paragraph.hpp"
+#include "../../libmdl/includes/document/paragraph.hpp"
 
 #include <ncurses.h>
 
