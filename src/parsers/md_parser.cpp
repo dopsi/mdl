@@ -80,88 +80,88 @@ MdParser::~MdParser() {
 void MdParser::parse() {
 	std::string line;
 	_document = new Document(_filename);
-	Paragraph *p0(nullptr), *p1(nullptr);
+	Paragraph *current_p(nullptr), *temp_p(nullptr), *last_p(nullptr);
 	LineElement *e = nullptr, *last_e = nullptr;
 	size_t sharps(0);
 	while (getline(_input_file, line)) {
 		if (line.empty()) {
 			// end of line, change paragraph
-			if (p0 and p0->size()) {
-				_document->append_paragraph(p0);
-				p0 = nullptr;
+			if (current_p and current_p->size()) {
+				_document->append_paragraph(current_p);
+				current_p = nullptr;
 			}
-			p0 = new TextParagraph();
+			current_p = new TextParagraph();
 		} else {
 			sharps = string_startswith(line, '#');
 
-			if (!p0) {
-				p0 = new TextParagraph();
+			if (!current_p) {
+				current_p = new TextParagraph();
 			}
 
-			if ( (line.substr(0, 4) == "    " or line[0] == '\t') and (!p0 or !p0->size()) ) {
+			if ( (line.substr(0, 4) == "    " or line[0] == '\t') and (!current_p or !current_p->size()) ) {
 				// This is a code paragraph
-				delete p0;
-				p0 = new CodeParagraph();
+				delete current_p;
+				current_p = new CodeParagraph();
 				line = string_clear_leading(line, " \t");
-				p0->append_line_element(new CodeLineElement(line));
-				_document->append_paragraph(p0);
-				p0 = new TextParagraph();
+				current_p->append_line_element(new CodeLineElement(line));
+				_document->append_paragraph(current_p);
+				current_p = new TextParagraph();
 			} else if (sharps != 0) {
 				line = string_clear_leading(line, "\t #");
 				switch(sharps) {
 					case 1:
-						delete p0;
-						p0 = new Title1Paragraph();
+						delete current_p;
+						current_p = new Title1Paragraph();
 						break;
 					case 2:
-						delete p0;
-						p0 = new Title2Paragraph();
+						delete current_p;
+						current_p = new Title2Paragraph();
 						break;
 					default:
 						break;
 				}
-				parse_line(p0, line);
-			} else if (string_startswith(line, ">") and (!p0 or !p0->size())) {
-				delete p0;
-				p0 = new QuoteParagraph();
+				parse_line(current_p, line);
+			} else if (string_startswith(line, ">") and (!current_p or !current_p->size())) {
+				delete current_p;
+				current_p = new QuoteParagraph();
 				if (line.substr(1).find_first_not_of("\t ") == string::npos) {
-					parse_line(p0, " ");
+					parse_line(current_p, " ");
 				} else {
-					parse_line(p0, line.substr(2));
+					parse_line(current_p, line.substr(2));
 				}
-				_document->append_paragraph(p0);
-				p0 = new TextParagraph();
+				_document->append_paragraph(current_p);
+				current_p = new TextParagraph();
 			} else if (string_has_only(line, '=')) { // title 1 delimiter
-				p1 = new Title1Paragraph(p0);
-				delete p0;
-				p0 = nullptr;
-				_document->append_paragraph(p1);
-				p1 = nullptr;
+				temp_p = new Title1Paragraph(current_p);
+				delete current_p;
+				current_p = nullptr;
+				_document->append_paragraph(temp_p);
+				temp_p = nullptr;
 			} else if (string_has_only(line, '-')) { // title 2 delimiter
-				p1 = new Title2Paragraph(p0);
-				delete p0;
-				p0 = nullptr;
-				_document->append_paragraph(p1);
-				p1 = nullptr;
+				temp_p = new Title2Paragraph(current_p);
+				delete current_p;
+				current_p = nullptr;
+				_document->append_paragraph(temp_p);
+				temp_p = nullptr;
 			} else if (string_startswith(line, "* ") or string_startswith(line, "- ")) { // level 1 list delimiter
-				if (p0 and p0->size()) {
-					_document->append_paragraph(p0);
-					p0=nullptr;
+				if (current_p and current_p->size()) {
+					_document->append_paragraph(current_p);
+					current_p=nullptr;
 				}
-				p0 = new UList1Paragraph();
-				parse_line(p0, line.substr(2));
+				current_p = new UList1Paragraph();
+				parse_line(current_p, line.substr(2));
 			} else {
 				// other content
-				if (p0->size() && last_e && (last_e->content()).back() != ' ' && line.front() != ' ') {
+				if (current_p->size() && last_e && (last_e->content()).back() != ' ' && line.front() != ' ') {
 					line = " "+line;
 				}
-				last_e = parse_line(p0, line);
+				last_e = parse_line(current_p, line);
 			}
 		}
 	}
 
-	if (p0 and p0->size()) {
-		_document->append_paragraph(p0);
+	if (current_p and current_p->size()) {
+		_document->append_paragraph(current_p);
 	}
 }
 
