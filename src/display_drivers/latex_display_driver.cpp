@@ -18,6 +18,7 @@ void LaTeXDisplayDriver::display(Document * doc) {
 	UrlLineElement *url_le(nullptr);
 
 	string delim_list("|@,;:_");
+	size_t delim_pos(0);
 	char delim('|');
 
 	bool is_verbatim(false), 
@@ -33,28 +34,6 @@ void LaTeXDisplayDriver::display(Document * doc) {
 
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
-
-		if (is_verbatim
-			and p->level() != Paragraph::Level::Code) {
-			is_verbatim = false;
-			cout << "\\end{verbatim}" << endl;
-		}
-
-		if (is_quotation 
-			and !is_ulist
-			and !is_verbatim
-			and p->level() != Paragraph::Level::Quote) {
-			is_quotation = false;
-			cout << "\\end{quotation}" << endl;
-		}
-
-		if (is_ulist 
-			and !is_quotation
-			and !is_verbatim
-			and p->level() != Paragraph::Level::UList1) {
-			is_ulist = false;
-			cout << "\\end{itemize}" << endl;
-		}
 
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
@@ -84,7 +63,6 @@ void LaTeXDisplayDriver::display(Document * doc) {
 				break;
 			default:
 				break;
-
 		}
 
 		for (size_t j(0); j < p->size(); ++j) {
@@ -100,7 +78,8 @@ void LaTeXDisplayDriver::display(Document * doc) {
 			} else if (bold_le) {
 				cout << "\\textbf{";
 			} else if (code_le and p->level() != Paragraph::Level::Code) {
-				delim = delim_list.find_first_not_of(l->content());
+				delim_pos = delim_list.find_first_not_of(l->content());
+				delim = delim_list[delim_pos];
 				cout << "\\verb" << delim;
 			} else if (url_le) {
 				cout << "\\href{" << url_le->url() << "}{";
@@ -118,6 +97,24 @@ void LaTeXDisplayDriver::display(Document * doc) {
 		switch (p->level()) {
 			case Paragraph::Level::Code:
 				cout << endl;
+				if (p->last()) {
+					cout << "\\end{verbatim}" << endl << endl;
+					is_verbatim = false;
+				}
+				break;
+			case Paragraph::Level::Quote:
+				cout << endl;
+				if (p->last()) {
+					cout << "\\end{quotation}" << endl << endl;
+					is_quotation = false;
+				}
+				break;
+			case Paragraph::Level::UList1:
+				cout << endl;
+				if (p->last()) {
+					cout << "\\end{itemize}" << endl << endl;
+					is_ulist = false;
+				}
 				break;
 			case Paragraph::Level::Title1:
 			case Paragraph::Level::Title2:
@@ -125,7 +122,6 @@ void LaTeXDisplayDriver::display(Document * doc) {
 			default:
 				cout << endl << endl;
 				break;
-
 		}
 	}
 	cout << "\\end{document}" << endl;
