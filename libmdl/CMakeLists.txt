@@ -26,7 +26,7 @@ find_package(Curses REQUIRED)
 configure_file(${PROJECT_SOURCE_DIR}/includes/configure.hpp.in ${PROJECT_BINARY_DIR}/configure.hpp)
 include_directories(BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR})
 
-add_library(mdl SHARED
+add_library(libmdl SHARED
 	document/document.cpp
 	document/line_element.cpp
 	document/text_line_element.cpp
@@ -45,6 +45,9 @@ add_library(mdl SHARED
 	parser.cpp
 	)
 
-target_compile_features(mdl PRIVATE cxx_nullptr cxx_strong_enums)
+target_compile_features(libmdl PRIVATE cxx_nullptr cxx_strong_enums)
 
-install(TARGETS mdl DESTINATION lib)
+install(TARGETS libmdl DESTINATION lib)
+
+set(${PROJECT_NAME}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
+	CACHE INTERNAL "${PROJECT_NAME}: Include Directories" FORCE)

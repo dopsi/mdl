@@ -14,3 +14,4 @@ set(CMAKE_BUILD_TYPE Debug)
 project(mdl)
 
 add_subdirectory(libmdl)
+add_subdirectory(mdl)
