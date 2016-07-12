@@ -10,6 +10,18 @@
 
 * TBD
 
+## [v0.5.1] 2016-07-13
+
+### New features
+
+* Add Paragraph::_last feature (to detect the change of paragraph type)
+* New UrlLineElement constructor (for two arguments)
+
+### Changed
+
+* Detection of valid delimtor for LaTeX
+* Documentation
+
 ## [v0.5.0] 2016-07-12
 
 ### New features

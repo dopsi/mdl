@@ -11,8 +11,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+* TBD
+
+## [No version] No date
+
+### New features
+
+* src/document/document.cpp: detect when paragraph type changes
+* src/document/paragraph.hpp: add last variable (+setter +getter)
+* src/document/paragraph.cpp: implement last variable (+setter +getter)
+
+### Changed
+
 * src/document/url_line_element.hpp: add two-arguments constructor
 * src/document/url_line_element.cpp: implement two-arguments constructor
+* various files: documentation
 
 ## [v0.5.0] 2016-07-12
 
