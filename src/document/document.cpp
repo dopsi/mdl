@@ -9,6 +9,16 @@ std::string Document::filename(void) const {
 }
 
 void Document::append_paragraph(Paragraph * p) {
+	Paragraph *last_p(nullptr);
+
+	if (_paragraph.size()) {
+		last_p = _paragraph.back();
+	}
+
+	if (last_p and p->level() < last_p->level()) {
+		last_p->last(true);
+	}
+
 	if (p and p->size()) {
 		_paragraph.push_back(p);
 	}
