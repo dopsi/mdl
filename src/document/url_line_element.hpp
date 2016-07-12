@@ -5,13 +5,44 @@
 
 /**
  * @brief An URL line element
+ *
+ * The link name will be returned by a call of LineElement::content(),
+ * while the link's url will be returned by UrlLineElement::url().
  **/
 class UrlLineElement : public LineElement {
 	protected:
 		std::string _url;
 	public:
+		/**
+		 * @brief Pandoc-like constructor
+		 *
+		 * This constructor accepts a Pandoc-style url
+		 * (\[link name\](url))
+		 *
+		 * @param content The Pandoc-style url
+		 **/
 		UrlLineElement(const std::string & content);
+		
+		/**
+		 * @brief Standart constructor
+		 *
+		 * This constructor takes two arguments, for maximum
+		 * compatibility for all parsers.
+		 *
+		 * @param content Link name
+		 * @param url Link url
+		 **/
+		UrlLineElement(const std::string & content,
+				const std::string & url);
+
+		/**
+		 * @brief Destructor
+		 **/
 		~UrlLineElement() {}
+
+		/**
+		 * @brief Return the link's url
+		 **/
 		std::string url(void) const;
 };
 

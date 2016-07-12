@@ -11,7 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-* TBD
+* src/document/url_line_element.hpp: add two-arguments constructor
+* src/document/url_line_element.cpp: implement two-arguments constructor
 
 ## [v0.5.0] 2016-07-12
 
