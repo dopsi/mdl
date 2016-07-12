@@ -1,4 +1,4 @@
-#include "../includes/parser.hpp"
+#include "includes/parser.hpp"
 
 #include <stdexcept>
 
