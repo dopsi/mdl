@@ -80,7 +80,7 @@ MdParser::~MdParser() {
 void MdParser::parse() {
 	std::string line;
 	_document = new Document(_filename);
-	Paragraph *current_p(nullptr), *temp_p(nullptr), *last_p(nullptr);
+	Paragraph *current_p(nullptr), *temp_p(nullptr);
 	LineElement *e = nullptr, *last_e = nullptr;
 	size_t sharps(0);
 	while (getline(_input_file, line)) {
