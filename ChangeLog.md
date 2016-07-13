@@ -7,11 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### New features
 
-* TBD
+* src/display_drivers/html_display_driver.hpp: new file
+* src/display_drivers/html_display_driver.cpp: new file
 
 ### Changed
 
-* TBD
+* src/main.cpp: add HtmlDisplayDriver
 
 ## [No version] No date
 

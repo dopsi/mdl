@@ -3,6 +3,7 @@
 #include "display_drivers/ncurses_display_driver.hpp"
 #include "display_drivers/plaintext_display_driver.hpp"
 #include "display_drivers/latex_display_driver.hpp"
+#include "display_drivers/html_display_driver.hpp"
 
 #include <iostream>
 #include <locale.h>
@@ -60,6 +61,8 @@ int main(int argc, char ** argv) {
 			driver = new NcursesDisplayDriver();
 		} else if (driver_string == "latex") {
 			driver = new LaTeXDisplayDriver();
+		} else if (driver_string == "html") {
+			driver = new HtmlDisplayDriver();
 		} else {
 			cerr << "mdl: Unknown driver name '" << driver_string << "'" << endl;
 			delete parser;

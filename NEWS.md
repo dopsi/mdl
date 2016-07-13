@@ -4,7 +4,7 @@
 
 ### New features
 
-* TBD
+* Add HtmlDisplayDriver
 
 ### Changed
 

@@ -34,6 +34,7 @@ add_executable(mdl
 	src/display_drivers/ncurses_display_driver.cpp
 	src/display_drivers/plaintext_display_driver.cpp
 	src/display_drivers/latex_display_driver.cpp
+	src/display_drivers/html_display_driver.cpp
 
 	src/document/document.cpp
 	src/document/line_element.cpp
