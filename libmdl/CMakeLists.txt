@@ -44,8 +44,12 @@ add_library(libmdl SHARED
 	display_driver.cpp
 	parser.cpp
 	)
+
 set_target_properties(libmdl
 	PROPERTIES OUTPUT_NAME mdl)
+set_target_properties(libmdl
+	PROPERTIES SOVERSION 
+	${libmdl_VERSION_MAJOR}.${libmdl_VERSION_MINOR}.${libmdl_VERSION_REVISION})
 
 target_compile_features(libmdl PRIVATE cxx_nullptr cxx_strong_enums)
 
