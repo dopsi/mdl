@@ -72,7 +72,6 @@ void TroffDisplayDriver::display(Document * doc) {
 			case Paragraph::Level::Quote:
 				break;
 			case Paragraph::Level::UList1:
-				break;
 			case Paragraph::Level::Title1:
 			case Paragraph::Level::Title2:
 			default:
