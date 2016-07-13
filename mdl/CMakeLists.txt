@@ -35,6 +35,7 @@ add_executable(mdl
 	display_drivers/ncurses_display_driver.cpp
 	display_drivers/plaintext_display_driver.cpp
 	display_drivers/latex_display_driver.cpp
+	display_drivers/html_display_driver.cpp
 	parsers/md_parser.cpp) 
 
 target_compile_features(mdl PRIVATE cxx_nullptr cxx_strong_enums)
