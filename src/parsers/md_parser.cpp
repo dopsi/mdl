@@ -171,12 +171,19 @@ LineElement* MdParser::parse_line(Paragraph *p, const std::string & line) {
 	      bold_regex("(\\*\\*|__)[^\\*_]+(\\*\\*|__)"),
 	      italic_regex("(\\*|_)[^\\*_]+(\\*|_)");
 	smatch match;
+	string link_name, link_url;
+	size_t link_limit(0);
 	LineElement *e;
 
 	if (regex_search(line,match,url_regex)) {
 		// Found a url
 		parse_line(p, match.prefix());
-		p->append_line_element(new UrlLineElement(match.str()));
+
+		link_limit = match.str().find_first_of("](");
+		link_name = match.str().substr(1, link_limit-1);
+		link_url = match.str().substr(link_limit+2, match.str().length()-(link_limit+3));
+		
+		p->append_line_element(new UrlLineElement(link_name, link_url));
 		e = parse_line(p, match.suffix());
 	}  else if (regex_search(line, match, code_regex)) {
 		// Found a code snippet
