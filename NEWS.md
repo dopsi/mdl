@@ -8,7 +8,7 @@
 
 ### Changed
 
-* TBD
+* Fix URL reading in MdParser (do not include the last parenthesis)
 
 ## [v0.5.1] 2016-07-13
 
