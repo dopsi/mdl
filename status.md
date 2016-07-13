@@ -48,3 +48,14 @@ Status
 * [x] quotations
 * [x] bold elements
 * [x] italic elements
+
+### HTML driver: HtmlDisplayDriver
+
+* [x] Titles (level 1 & 2)
+* [x] Unordered lists
+* [x] URL's in Pandoc style
+* [x] indented code blocks
+* [x] inline code snippets
+* [x] quotations
+* [x] bold elements
+* [x] italic elements
