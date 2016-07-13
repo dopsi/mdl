@@ -1,11 +1,11 @@
 #include "html_display_driver.hpp"
 
-#include "../document/paragraph.hpp"
+#include "document/paragraph.hpp"
 
-#include "../document/bold_line_element.hpp"
-#include "../document/italic_line_element.hpp"
-#include "../document/code_line_element.hpp"
-#include "../document/url_line_element.hpp"
+#include "document/bold_line_element.hpp"
+#include "document/italic_line_element.hpp"
+#include "document/code_line_element.hpp"
+#include "document/url_line_element.hpp"
 
 #include <iostream>
 using namespace std;
