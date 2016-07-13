@@ -28,6 +28,7 @@ find_package(Curses REQUIRED)
 configure_file(${PROJECT_SOURCE_DIR}/configure.hpp.in ${PROJECT_BINARY_DIR}/configure.hpp)
 include_directories(BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/includes)
 include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${libmdl_INCLUDE_DIRS})
 
 add_executable(mdl 
 	main.cpp
@@ -43,4 +44,4 @@ target_link_libraries(mdl
 	ncurses
 	libmdl)
 
-install(TARGETS mdl DESTINATION lib)
+install(TARGETS mdl DESTINATION bin)

@@ -44,10 +44,16 @@ add_library(libmdl SHARED
 	display_driver.cpp
 	parser.cpp
 	)
+set_target_properties(libmdl
+	PROPERTIES OUTPUT_NAME mdl)
 
 target_compile_features(libmdl PRIVATE cxx_nullptr cxx_strong_enums)
 
 install(TARGETS libmdl DESTINATION lib)
 
-set(${PROJECT_NAME}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
-	CACHE INTERNAL "${PROJECT_NAME}: Include Directories" FORCE)
+set(${PROJECT_NAME}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/includes
+	PARENT_SCOPE)
+
+file(GLOB include_files "${PROJECT_SOURCE_DIR}/includes/*.hpp")
+install(FILES ${include_files} DESTINATION include)
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/includes/document DESTINATION include)
