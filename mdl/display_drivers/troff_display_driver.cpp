@@ -35,6 +35,7 @@ void TroffDisplayDriver::display(Document * doc) {
 			case Paragraph::Level::UList1:
 			case Paragraph::Level::Quote:
 			default:
+				cout << ".PP" << endl;
 				break;
 		}
 
@@ -51,10 +52,13 @@ void TroffDisplayDriver::display(Document * doc) {
 			} else if (bold_le) {
 				cout << "\\fB";
 			} else if (code_le and p->level() != Paragraph::Level::Code) {
-			} else if (url_le) {
 			}
-
-			cout << l->content();
+			
+			if (url_le) {
+				cout << endl << ".IR " << url_le->url() << endl;
+			} else {
+				cout << l->content();
+			}
 
 			if (italic_le or bold_le) {
 				cout << "\\fR";
