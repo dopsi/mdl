@@ -2,21 +2,51 @@
 
 ## NAME
 
-__corrupt__ - modify files by randomly changing bits
+__mdl__ - display and convert MarkDown files
 
 ## SYNOPSIS
 
-**corrupt** [**-n** *BITS*] [**--bits** *BITS*] *file*...
+**mdl** [**-d** *DRIVER*] [**-p** *PARSER*] [**-i**] *FILE*
+
+**mdl** --version
+
+**mdl** --help
 
 ## DESCRIPTION
 
-**corrupt** modifies files by toggling a randomly chosen bit.
+**mdl** is a display and conversion program for MarkDown files.
 
 ## OPTIONS
 
-**-n**, **--bits**=*BITS*
+**-d**, **--display-driver**=*DRIVER*
 
-Set the number of bits to modify. Default is one bit.
+Select a display driver, default is *ncurses*.
+
+The available the display drivers are :
+
+* *ncurses* : a interface based on nCurses, similar to **less(1)**
+* *latex* : a LaTeX output
+* *html* : a HTML output
+* *troff* : a Troff output for **man(1)**
+* *plaintext* : a plaintext display
+
+**-p**, **--input-parser**=*PARSER*
+
+Set the parser for the input file. This switch is not yet active since there is 
+only one single parser available yet for MarkDown files.
+
+**-i**, **--input-file**=*FILE*
+
+Name of the input file. The option switch can be ommited if the the filename is 
+the last argument.
+
+**--version**
+
+Write the program version to standart output.
+
+**--help**
+
+Display a quick help.
 
 ## AUTHOR
 
