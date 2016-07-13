@@ -5,6 +5,8 @@
 ### New features
 
 * Add HtmlDisplayDriver
+* Add TroffDisplayDriver
+* Add manpage (assets/mdl.1.md)
 
 ### Changed
 

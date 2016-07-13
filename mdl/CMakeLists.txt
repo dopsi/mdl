@@ -36,6 +36,7 @@ add_executable(mdlbin
 	display_drivers/plaintext_display_driver.cpp
 	display_drivers/latex_display_driver.cpp
 	display_drivers/html_display_driver.cpp
+	display_drivers/troff_display_driver.cpp
 	parsers/md_parser.cpp) 
 
 set_target_properties(mdlbin
