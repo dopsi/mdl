@@ -4,7 +4,7 @@
 #include "display_driver.hpp"
 
 /**
- * @brief LaTeX implementation of the displaydriver class
+ * @brief LaTeX implementation of the DisplayDriver class
  **/
 class LaTeXDisplayDriver : public DisplayDriver {
 	public:
