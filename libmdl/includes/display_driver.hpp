@@ -1,7 +1,7 @@
 #ifndef MDL_DISPLAY_DRIVER_HPP
 #define MDL_DISPLAY_DRIVER_HPP
 
-#include "../document/document.hpp"
+#include "document/document.hpp"
 
 /**
  * @brief Generic display driver interface

@@ -1,4 +1,4 @@
-#include "url_line_element.hpp"
+#include "../includes/document/url_line_element.hpp"
 
 UrlLineElement::UrlLineElement(const std::string & content, const std::string & url) :
 	LineElement(content),
