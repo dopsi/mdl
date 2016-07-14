@@ -1,6 +1,6 @@
 # News
 
-## [No version] No date
+## [v1.0.0] 2016-07-15
 
 This program has now reached a sufficiently mature state. It has been reordered
 and split into `mdl` and `libmdl`.
