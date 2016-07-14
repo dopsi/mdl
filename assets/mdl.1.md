@@ -24,6 +24,8 @@ Select a display driver, default is *ncurses*.
 
 The available the display drivers are :
 
+### Available drivers
+
 * *ncurses* : a interface based on nCurses, similar to **less(1)**
 * *latex* : a LaTeX output
 * *html* : a HTML output
