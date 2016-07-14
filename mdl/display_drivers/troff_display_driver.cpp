@@ -9,6 +9,10 @@
 using namespace std;
 
 void TroffDisplayDriver::display(Document * doc) {
+	display(doc, cout);
+}
+
+void TroffDisplayDriver::display(Document * doc, ostream & output) {
 	Paragraph *p = nullptr;
 	LineElement *l = nullptr;
 
@@ -26,19 +30,19 @@ void TroffDisplayDriver::display(Document * doc) {
 
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
-				cout << ".TH ";
+				output << ".TH ";
 				break;
 			case Paragraph::Level::Title2:
-				cout << ".SH ";
+				output << ".SH ";
 				break;
 			case Paragraph::Level::Title3:
-				cout << ".SS ";
+				output << ".SS ";
 				break;
 			case Paragraph::Level::Code:
 			case Paragraph::Level::UList1:
 			case Paragraph::Level::Quote:
 			default:
-				cout << ".PP" << endl;
+				output << ".PP" << endl;
 				break;
 		}
 
@@ -51,20 +55,20 @@ void TroffDisplayDriver::display(Document * doc) {
 			url_le = dynamic_cast<UrlLineElement*>(l);
 
 			if (italic_le) {
-				cout << "\\fI";
+				output << "\\fI";
 			} else if (bold_le) {
-				cout << "\\fB";
+				output << "\\fB";
 			} else if (code_le and p->level() != Paragraph::Level::Code) {
 			}
 			
 			if (url_le) {
-				cout << endl << ".IR " << url_le->url() << endl;
+				output << endl << ".IR " << url_le->url() << endl;
 			} else {
-				cout << l->content();
+				output << l->content();
 			}
 
 			if (italic_le or bold_le) {
-				cout << "\\fR";
+				output << "\\fR";
 			} else if (code_le and p->level() != Paragraph::Level::Code) {
 			}
 		}
@@ -78,7 +82,7 @@ void TroffDisplayDriver::display(Document * doc) {
 			case Paragraph::Level::Title1:
 			case Paragraph::Level::Title2:
 			default:
-				cout << endl;
+				output << endl;
 				break;
 		}
 	}

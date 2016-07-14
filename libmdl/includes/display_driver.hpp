@@ -36,9 +36,26 @@ class DisplayDriver {
 		 * the main loop for the display system. It need to be 
 		 * implemented.
 		 *
+		 * The output of this function should be sent to STDOUT.
+		 *
 		 * @param doc A pointer to the Document object to be displayed.
 		 **/
 		virtual void display(Document * doc) = 0;
+
+		/**
+		 * @brief The actual display function to be reimplemented.
+		 *
+		 * This function will be called by the program to be used as 
+		 * the main loop for the display system. It need to be 
+		 * implemented.
+		 *
+		 * The output of this function should be sent to the given 
+		 * output file.
+		 *
+		 * @param doc A pointer to the Document object to be displayed.
+		 * @param output The output file
+		 **/
+		virtual void display(Document * doc, std::ostream & output) = 0;
 };
 
 #endif // MDL_DISPLAY_DRIVER_HPP

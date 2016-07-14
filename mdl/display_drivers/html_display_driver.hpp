@@ -11,6 +11,7 @@ class HtmlDisplayDriver : public DisplayDriver {
 		HtmlDisplayDriver() {};
 		virtual ~HtmlDisplayDriver() {};
 		virtual void display(Document *doc);
+		virtual void display(Document *doc, std::ostream & output);
 };
 
 #endif // MDL_HTML_DISPLAY_DRIVER_HPP

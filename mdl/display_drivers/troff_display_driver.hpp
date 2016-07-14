@@ -8,6 +8,7 @@ class TroffDisplayDriver : public DisplayDriver {
 		TroffDisplayDriver() {};
 		~TroffDisplayDriver() {};
 		virtual void display(Document * doc);
+		virtual void display(Document * doc, std::ostream & output);
 };
 
 #endif // MDL_TROFF_DISPLAY_DRIVER_HPP

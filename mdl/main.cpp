@@ -26,6 +26,7 @@ int main(int argc, char ** argv) {
 		("display-driver,d", po::value<string>(), "set display driver")
 		("input-parser,p", po::value<string>(), "set input parser")
 		("input-file,i", po::value<string>(), "input file to be used")
+		("output-file,o", po::value<string>(), "output file")
 		("version", "print the version information and exit");
 	po::positional_options_description p;
 	p.add("input-file", -1);
@@ -52,6 +53,7 @@ int main(int argc, char ** argv) {
 
 	Parser *parser(new MdParser(vm["input-file"].as<string>()));
 	DisplayDriver *driver;
+	ofstream output_file;
 
 	if (vm.count("display-driver")) {
 		// Select driver
@@ -84,7 +86,13 @@ int main(int argc, char ** argv) {
 		// Default: MD
 	}*/
 
-	driver->display(parser->get_document());
+	if (vm.count("output-file")) {
+		output_file.open(vm["output-file"].as<string>());
+		driver->display(parser->get_document(), output_file);
+		output_file.close();
+	} else {
+		driver->display(parser->get_document());
+	}
 
 	delete driver;
 	delete parser;

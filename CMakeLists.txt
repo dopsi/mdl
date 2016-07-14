@@ -18,3 +18,18 @@ set(mdl_VERSION_REVISION 1)
 
 add_subdirectory(libmdl)
 add_subdirectory(mdl)
+
+add_custom_command(OUTPUT mdl.1
+	COMMAND ${PROJECT_BINARY_DIR}/mdl/mdl
+	ARGS -d troff -o ${PROJECT_BINARY_DIR}/mdl.1
+		${PROJECT_SOURCE_DIR}/assets/mdl.1.md
+	DEPENDS ${PROJECT_SOURCE_DIR}/assets/mdl.1.md
+	COMMENT Generate manpage
+	VERBATIM)
+
+add_custom_target(
+	man ALL
+	DEPENDS ${PROJECT_BINARY_DIR}/mdl.1 mdlbin
+	)
+
+install(FILES ${PROJECT_BINARY_DIR}/mdl.1 DESTINATION man/man1)
