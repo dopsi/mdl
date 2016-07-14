@@ -38,6 +38,9 @@ class DisplayDriver {
 		 *
 		 * The output of this function should be sent to STDOUT.
 		 *
+		 * This function can often simply be a wrapper around
+		 * DisplayDriver::display(doc, std::cout).
+		 *
 		 * @param doc A pointer to the Document object to be displayed.
 		 **/
 		virtual void display(Document * doc) = 0;
@@ -53,7 +56,8 @@ class DisplayDriver {
 		 * output file.
 		 *
 		 * @param doc A pointer to the Document object to be displayed.
-		 * @param output The output file
+		 * @param output The output file, which must already be open, 
+		 * and will not be closed.
 		 **/
 		virtual void display(Document * doc, std::ostream & output) = 0;
 };
