@@ -5,7 +5,9 @@ Status
 
 ### MarkDown: MdParser
 
-* [x] Titles (level 1 & 2)
+* [x] Title 1
+* [x] Title 2
+* [x] Title 3
 * [x] Unordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
@@ -18,7 +20,9 @@ Status
 
 ### Plaintext driver: PlaintextDisplayDriver
 
-* [x] Titles (level 1 & 2)
+* [x] Title 1
+* [x] Title 2
+* [ ] Title 3
 * [x] Unordered lists
 * [ ] URL's in Pandoc style
 * [ ] indented code blocks
@@ -29,7 +33,9 @@ Status
 
 ### Ncurses driver: NcursesDisplayDriver
 
-* [x] Titles (level 1 & 2)
+* [x] Title 1
+* [x] Title 2
+* [ ] Title 3
 * [x] Unordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
@@ -40,7 +46,9 @@ Status
 
 ### LaTeX driver: LaTeXDisplayDriver
 
-* [x] Titles (level 1 & 2)
+* [x] Title 1
+* [x] Title 2
+* [ ] Title 3
 * [x] Unordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
@@ -51,11 +59,39 @@ Status
 
 ### HTML driver: HtmlDisplayDriver
 
-* [x] Titles (level 1 & 2)
+* [x] Title 1
+* [x] Title 2
+* [ ] Title 3
 * [x] Unordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
 * [x] inline code snippets
 * [x] quotations
+* [x] bold elements
+* [x] italic elements
+
+### HTML driver: HtmlDisplayDriver
+
+* [x] Title 1
+* [x] Title 2
+* [ ] Title 3
+* [ ] Unordered lists
+* [ ] URL's in Pandoc style
+* [ ] indented code blocks
+* [ ] inline code snippets
+* [ ] quotations
+* [x] bold elements
+* [x] italic elements
+
+### Troff driver: TroffDisplayDriver
+
+* [x] Title 1
+* [x] Title 2
+* [x] Title 3
+* [x] Unordered lists
+* [ ] URL's in Pandoc style
+* [ ] indented code blocks
+* [ ] inline code snippets
+* [ ] quotations
 * [x] bold elements
 * [x] italic elements

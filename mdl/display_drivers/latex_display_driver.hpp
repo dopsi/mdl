@@ -11,6 +11,7 @@ class LaTeXDisplayDriver : public DisplayDriver {
 		LaTeXDisplayDriver() {};
 		virtual ~LaTeXDisplayDriver() {};
 		virtual void display(Document *doc);
+		virtual void display(Document *doc, std::ostream & output);
 };
 
 #endif // MDL_LATEX_DISPLAY_DRIVER_HPP

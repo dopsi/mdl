@@ -9,6 +9,10 @@
 using namespace std;
 
 void LaTeXDisplayDriver::display(Document * doc) {
+	display(doc, cout);
+}
+
+void LaTeXDisplayDriver::display(Document * doc, ostream & output) {
 	Paragraph *p = nullptr;
 	LineElement *l = nullptr;
 
@@ -25,39 +29,39 @@ void LaTeXDisplayDriver::display(Document * doc) {
 		 is_quotation(false),
 		 is_ulist(false);
 
-	cout << "\\documentclass{article}" << endl;
-	cout << "\\usepackage[english]{babel}" << endl;
-	cout << "\\usepackage[utf8]{inputenc}" << endl;
-	cout << "\\usepackage[T1]{fontenc}" << endl;
-	cout << "\\usepackage{hyperref}" << endl;
-	cout << "\\begin{document}" << endl;
+	output << "\\documentclass{article}" << endl;
+	output << "\\usepackage[english]{babel}" << endl;
+	output << "\\usepackage[utf8]{inputenc}" << endl;
+	output << "\\usepackage[T1]{fontenc}" << endl;
+	output << "\\usepackage{hyperref}" << endl;
+	output << "\\begin{document}" << endl;
 
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
 
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
-				cout << "\\section{";
+				output << "\\section{";
 				break;
 			case Paragraph::Level::Title2:
-				cout << "\\subsection{";
+				output << "\\subsection{";
 				break;
 			case Paragraph::Level::Code:
 				if (!is_verbatim) {
-					cout << "\\begin{verbatim}" << endl;
+					output << "\\begin{verbatim}" << endl;
 					is_verbatim = true;
 				}
 				break;
 			case Paragraph::Level::UList1:
 				if (!is_ulist) {
-					cout << "\\begin{itemize}" << endl;
+					output << "\\begin{itemize}" << endl;
 					is_ulist = true;
 				}
-				cout << "\\item ";
+				output << "\\item ";
 				break;
 			case Paragraph::Level::Quote:
 				if (!is_quotation) {
-					cout << "\\begin{quotation}" << endl;
+					output << "\\begin{quotation}" << endl;
 					is_quotation = true;
 				}
 				break;
@@ -74,57 +78,57 @@ void LaTeXDisplayDriver::display(Document * doc) {
 			url_le = dynamic_cast<UrlLineElement*>(l);
 
 			if (italic_le) {
-				cout << "\\textit{";
+				output << "\\textit{";
 			} else if (bold_le) {
-				cout << "\\textbf{";
+				output << "\\textbf{";
 			} else if (code_le and p->level() != Paragraph::Level::Code) {
 				delim_pos = delim_list.find_first_not_of(l->content());
 				delim = delim_list[delim_pos];
-				cout << "\\verb" << delim;
+				output << "\\verb" << delim;
 			} else if (url_le) {
-				cout << "\\href{" << url_le->url() << "}{";
+				output << "\\href{" << url_le->url() << "}{";
 			}
 
-			cout << l->content();
+			output << l->content();
 
 			if (italic_le or bold_le or url_le) {
-				cout << "}";
+				output << "}";
 			} else if (code_le and p->level() != Paragraph::Level::Code) {
-				cout << delim;
+				output << delim;
 			}
 		}
 		
 		switch (p->level()) {
 			case Paragraph::Level::Code:
-				cout << endl;
+				output << endl;
 				if (p->last()) {
-					cout << "\\end{verbatim}" << endl << endl;
+					output << "\\end{verbatim}" << endl << endl;
 					is_verbatim = false;
 				}
 				break;
 			case Paragraph::Level::Quote:
-				cout << endl;
+				output << endl;
 				if (p->last()) {
-					cout << "\\end{quotation}" << endl << endl;
+					output << "\\end{quotation}" << endl << endl;
 					is_quotation = false;
 				}
 				break;
 			case Paragraph::Level::UList1:
-				cout << endl;
+				output << endl;
 				if (p->last()) {
-					cout << "\\end{itemize}" << endl << endl;
+					output << "\\end{itemize}" << endl << endl;
 					is_ulist = false;
 				}
 				break;
 			case Paragraph::Level::Title1:
 			case Paragraph::Level::Title2:
-				cout << "}";
+				output << "}";
 			default:
-				cout << endl << endl;
+				output << endl << endl;
 				break;
 		}
 	}
-	cout << "\\end{document}" << endl;
+	output << "\\end{document}" << endl;
 }
 
 /* vim: set ts=4 sw=4: */

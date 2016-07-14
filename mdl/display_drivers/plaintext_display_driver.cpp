@@ -4,33 +4,37 @@
 using namespace std;
 
 void PlainTextDisplayDriver::display(Document * doc) {
+	display(doc, cout);
+}
+
+void PlainTextDisplayDriver::display(Document * doc, ostream & output) {
 	Paragraph *p = nullptr;
 	LineElement *l = nullptr;
 
-	cout << "Document contains : " << doc->size() << " paragraphs" << endl;
-	cout << "=== BEGIN ===" << endl;
+	output << "Document contains : " << doc->size() << " paragraphs" << endl;
+	output << "=== BEGIN ===" << endl;
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
 				break;
 			case Paragraph::Level::Title2:
-				cout << "  ";
+				output << "  ";
 				break;
 			case Paragraph::Level::UList1:
-				cout << "* ";
+				output << "* ";
 				break;
 			default:
-				cout << "    ";
+				output << "    ";
 				break;
 
 		}
 		for (size_t j(0); j < p->size(); ++j) {
 			l = (*p)[j];
-			cout << l->content();
+			output << l->content();
 		}
-		cout << endl;
+		output << endl;
 	}
-	cout << "=== END OF PROGRAM ===" << endl;
+	output << "=== END OF PROGRAM ===" << endl;
 }
 

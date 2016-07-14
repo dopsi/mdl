@@ -11,6 +11,10 @@
 using namespace std;
 
 void HtmlDisplayDriver::display(Document *doc) {
+	display(doc, cout);
+}
+
+void HtmlDisplayDriver::display(Document *doc, ostream & output) {
 	Paragraph *p = nullptr;
 	LineElement *l = nullptr;
 
@@ -23,45 +27,45 @@ void HtmlDisplayDriver::display(Document *doc) {
 		 is_quotation(false),
 		 is_ulist(false);
 
-	cout << "" << endl;
-	cout << "<!doctype html>" << endl;
-	cout << "<html lang=\"fr\">" << endl;
-	cout << "<head>" << endl;
-	cout << "<meta charset=\"utf-8\">" << endl;
-	cout << "<title>mdl generated HTML page</title>" << endl;
-	cout << "</head>" << endl;
-	cout << "<body>" << endl;
+	output << "" << endl;
+	output << "<!doctype html>" << endl;
+	output << "<html lang=\"fr\">" << endl;
+	output << "<head>" << endl;
+	output << "<meta charset=\"utf-8\">" << endl;
+	output << "<title>mdl generated HTML page</title>" << endl;
+	output << "</head>" << endl;
+	output << "<body>" << endl;
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
 
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
-				cout << "<h1>";
+				output << "<h1>";
 				break;
 			case Paragraph::Level::Title2:
-				cout << "<h2>";
+				output << "<h2>";
 				break;
 			case Paragraph::Level::Code:
 				if (!is_verbatim) {
-					cout << "<code>" << endl;
+					output << "<code>" << endl;
 					is_verbatim = true;
 				}
 				break;
 			case Paragraph::Level::UList1:
 				if (!is_ulist) {
-					cout << "<ul>" << endl;
+					output << "<ul>" << endl;
 					is_ulist = true;
 				}
-				cout << "<li>";
+				output << "<li>";
 				break;
 			case Paragraph::Level::Quote:
 				if (!is_quotation) {
-					cout << "<blockquote>" << endl;
+					output << "<blockquote>" << endl;
 					is_quotation = true;
 				}
 				break;
 			default:
-				cout << "<p>" << endl;
+				output << "<p>" << endl;
 				break;
 		}
 
@@ -74,63 +78,63 @@ void HtmlDisplayDriver::display(Document *doc) {
 			url_le = dynamic_cast<UrlLineElement*>(l);
 
 			if (italic_le) {
-				cout << "<i>";
+				output << "<i>";
 			} else if (bold_le) {
-				cout << "<b>";
+				output << "<b>";
 			} else if (code_le and p->level() != Paragraph::Level::Code) {
-				cout << "<code>";
+				output << "<code>";
 			} else if (url_le) {
-				cout << "<a href=\"" << url_le->url() << "\">";
+				output << "<a href=\"" << url_le->url() << "\">";
 			}
 
-			cout << l->content();
+			output << l->content();
 
 			if (url_le) {
-				cout << "</a>";
+				output << "</a>";
 			} else if (bold_le) {
-				cout << "</b>";
+				output << "</b>";
 			} else if (italic_le) {
-				cout << "</i>";
+				output << "</i>";
 			} else if (code_le and p->level() != Paragraph::Level::Code) {
-				cout << "</code>";
+				output << "</code>";
 			}
 		}
 		
 		switch (p->level()) {
 			case Paragraph::Level::Code:
-				cout << endl;
+				output << endl;
 				if (p->last()) {
-					cout << "</code>" << endl << endl;
+					output << "</code>" << endl << endl;
 					is_verbatim = false;
 				}
 				break;
 			case Paragraph::Level::Quote:
-				cout << endl;
+				output << endl;
 				if (p->last()) {
-					cout << "</blockquote>" << endl << endl;
+					output << "</blockquote>" << endl << endl;
 					is_quotation = false;
 				}
 				break;
 			case Paragraph::Level::UList1:
-				cout << "</li>" << endl;
+				output << "</li>" << endl;
 				if (p->last()) {
-					cout << "</ul>" << endl << endl;
+					output << "</ul>" << endl << endl;
 					is_ulist = false;
 				}
 				break;
 			case Paragraph::Level::Title1:
-				cout << "</h1>" << endl;
+				output << "</h1>" << endl;
 				break;
 			case Paragraph::Level::Title2:
-				cout << "</h2>" << endl;
+				output << "</h2>" << endl;
 				break;
 			default:
-				cout << "</p>" << endl;
+				output << "</p>" << endl;
 				break;
 		}
 	}
-	cout << "</body>" << endl;
-	cout << "</html>" << endl;
+	output << "</body>" << endl;
+	output << "</html>" << endl;
 }
 
 /* vim: set ts=4 sw=4: */

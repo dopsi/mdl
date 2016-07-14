@@ -52,6 +52,7 @@ class NcursesDisplayDriver : public DisplayDriver {
 		NcursesDisplayDriver();
 		virtual ~NcursesDisplayDriver();
 		virtual void display(Document *doc);
+		virtual void display(Document *doc, std::ostream & output);
 };
 
 #endif // MDL_NCURSES_DISPLAY_DRIVER_HPP

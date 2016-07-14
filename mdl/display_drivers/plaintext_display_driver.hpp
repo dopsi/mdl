@@ -13,6 +13,7 @@ class PlainTextDisplayDriver : public DisplayDriver {
 		PlainTextDisplayDriver() : DisplayDriver() {}
 		virtual ~PlainTextDisplayDriver() {}
 		virtual void display(Document * doc);
+		virtual void display(Document * doc, std::ostream & output);
 };
 
 #endif // MDL_PLAINTEXT_DISPLAY_DRIVER_HPP

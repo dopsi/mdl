@@ -18,7 +18,7 @@ include_directories(${LIBMDL_INCLUDE_DIRS})
 project(mdlbin)
 set(mdlbin_VERSION_MAJOR 0)
 set(mdlbin_VERSION_MINOR 5)
-set(mdlbin_VERSION_REVISION 1)
+set(mdlbin_VERSION_REVISION 2)
 
 find_package(Boost COMPONENTS program_options REQUIRED)
 
@@ -36,6 +36,7 @@ add_executable(mdlbin
 	display_drivers/plaintext_display_driver.cpp
 	display_drivers/latex_display_driver.cpp
 	display_drivers/html_display_driver.cpp
+	display_drivers/troff_display_driver.cpp
 	parsers/md_parser.cpp) 
 
 set_target_properties(mdlbin

@@ -9,6 +9,7 @@
 
 #include <unistd.h>
 
+#include <iostream>
 using namespace std;
 
 #define WIN_TITLE_PAIR 1
@@ -340,4 +341,8 @@ void NcursesDisplayDriver::check_capabilities(void) const {
 		sleep(1);
 		getch();
 	}
+}
+
+void NcursesDisplayDriver::display(Document * doc, ostream & output) {
+	output << string("Error: NcursesDisplayDriver is not suited for output to a file") << endl;
 }
