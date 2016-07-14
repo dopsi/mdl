@@ -9,6 +9,7 @@
 #include "document/text_paragraph.hpp"
 #include "document/title1_paragraph.hpp"
 #include "document/title2_paragraph.hpp"
+#include "document/title3_paragraph.hpp"
 #include "document/ulist1_paragraph.hpp"
 #include "document/code_paragraph.hpp"
 #include "document/quote_paragraph.hpp"
@@ -116,6 +117,10 @@ void MdParser::parse() {
 					case 2:
 						delete current_p;
 						current_p = new Title2Paragraph();
+						break;
+					case 3:
+						delete current_p;
+						current_p = new Title3Paragraph();
 						break;
 					default:
 						break;
