@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * src/main.cpp: add HtmlDisplayDriver
 * src/parsers/md_parser.cpp: fix URL parsing
 
-## [No version] No date
+## [v0.5.1] 2016-07-13
 
 ### New features
 
