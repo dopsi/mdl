@@ -32,4 +32,4 @@ add_custom_target(
 	DEPENDS ${PROJECT_BINARY_DIR}/mdl.1 mdlbin
 	)
 
-install(FILES ${PROJECT_BINARY_DIR}/mdl.1 DESTINATION man/man1)
+install(FILES ${PROJECT_BINARY_DIR}/mdl.1 DESTINATION share/man/man1)
