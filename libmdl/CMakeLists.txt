@@ -16,7 +16,7 @@ include(CheckFunctionExists)
 project(libmdl)
 set(libmdl_VERSION_MAJOR 0)
 set(libmdl_VERSION_MINOR 5)
-set(libmdl_VERSION_REVISION 1)
+set(libmdl_VERSION_REVISION 2)
 
 find_package(Boost COMPONENTS program_options REQUIRED)
 
@@ -38,6 +38,7 @@ add_library(libmdl SHARED
 	document/text_paragraph.cpp
 	document/title1_paragraph.cpp
 	document/title2_paragraph.cpp
+	document/title3_paragraph.cpp
 	document/ulist1_paragraph.cpp
 	document/code_paragraph.cpp
 	document/quote_paragraph.cpp

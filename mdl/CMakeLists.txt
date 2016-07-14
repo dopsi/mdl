@@ -18,7 +18,7 @@ include_directories(${LIBMDL_INCLUDE_DIRS})
 project(mdlbin)
 set(mdlbin_VERSION_MAJOR 0)
 set(mdlbin_VERSION_MINOR 5)
-set(mdlbin_VERSION_REVISION 1)
+set(mdlbin_VERSION_REVISION 2)
 
 find_package(Boost COMPONENTS program_options REQUIRED)
 

@@ -14,7 +14,7 @@ set(CMAKE_BUILD_TYPE Debug)
 project(mdl)
 set(mdl_VERSION_MAJOR 0)
 set(mdl_VERSION_MINOR 5)
-set(mdl_VERSION_REVISION 1)
+set(mdl_VERSION_REVISION 2)
 
 add_subdirectory(libmdl)
 add_subdirectory(mdl)
@@ -23,7 +23,7 @@ add_custom_command(OUTPUT mdl.1
 	COMMAND ${PROJECT_BINARY_DIR}/mdl/mdl
 	ARGS -d troff -o ${PROJECT_BINARY_DIR}/mdl.1
 		${PROJECT_SOURCE_DIR}/assets/mdl.1.md
-	DEPENDS ${PROJECT_SOURCE_DIR}/assets/mdl.1.md
+	DEPENDS ${PROJECT_SOURCE_DIR}/assets/mdl.1.md mdlbin
 	COMMENT "Generate manpage for mdl"
 	VERBATIM)
 
