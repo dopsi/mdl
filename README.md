@@ -67,4 +67,4 @@ MIT licence (see `LICENCE` file for more informations).
 Author
 ======
 
-Copyright 2016 Simon Doppler <dopsi.dev@gmail.com>
+Copyright 2016 Simon Doppler <dopsi@member.fsf.org>
