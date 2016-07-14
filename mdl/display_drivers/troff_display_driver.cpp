@@ -31,6 +31,9 @@ void TroffDisplayDriver::display(Document * doc) {
 			case Paragraph::Level::Title2:
 				cout << ".SH ";
 				break;
+			case Paragraph::Level::Title3:
+				cout << ".SS ";
+				break;
 			case Paragraph::Level::Code:
 			case Paragraph::Level::UList1:
 			case Paragraph::Level::Quote:
