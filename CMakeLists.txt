@@ -24,7 +24,7 @@ add_custom_command(OUTPUT mdl.1
 	ARGS -d troff -o ${PROJECT_BINARY_DIR}/mdl.1
 		${PROJECT_SOURCE_DIR}/assets/mdl.1.md
 	DEPENDS ${PROJECT_SOURCE_DIR}/assets/mdl.1.md
-	COMMENT Generate manpage
+	COMMENT "Generate manpage for mdl"
 	VERBATIM)
 
 add_custom_target(
