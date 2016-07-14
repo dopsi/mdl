@@ -14,9 +14,9 @@ include(CheckFunctionExists)
 
 # Set project data
 project(libmdl)
-set(libmdl_VERSION_MAJOR 0)
-set(libmdl_VERSION_MINOR 5)
-set(libmdl_VERSION_REVISION 2)
+set(libmdl_VERSION_MAJOR 1)
+set(libmdl_VERSION_MINOR 0)
+set(libmdl_VERSION_REVISION 0)
 
 find_package(Boost COMPONENTS program_options REQUIRED)
 

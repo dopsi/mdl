@@ -12,9 +12,9 @@ set(CMAKE_BUILD_TYPE Debug)
 
 # Set project data
 project(mdl)
-set(mdl_VERSION_MAJOR 0)
-set(mdl_VERSION_MINOR 5)
-set(mdl_VERSION_REVISION 2)
+set(mdl_VERSION_MAJOR 1)
+set(mdl_VERSION_MINOR 0)
+set(mdl_VERSION_REVISION 0)
 
 add_subdirectory(libmdl)
 add_subdirectory(mdl)

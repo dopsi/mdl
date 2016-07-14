@@ -2,11 +2,15 @@
 
 ## [No version] No date
 
+This program has now reached a sufficiently mature state. It has been reordered
+and split into `mdl` and `libmdl`.
+
 ### New features
 
 * Add HtmlDisplayDriver
 * Add TroffDisplayDriver
-* Add manpage (assets/mdl.1.md)
+* Implement Title3Paragraph (also in MdParser)
+* Add manpage (assets/mdl.1.md) and manpage generation
 
 ### Changed
 

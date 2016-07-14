@@ -5,13 +5,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [No version] No date
 
+This update is a major update to 1.0.0
+
 ### New features
 
-* src/display_drivers/html_display_driver.hpp: new file
-* src/display_drivers/html_display_driver.cpp: new file
+* mdl/display_drivers/html_display_driver.hpp: new file
+* mdl/display_drivers/html_display_driver.cpp: new file
+* mdl/display_drivers/troff_display_driver.hpp: new file
+* mdl/display_drivers/troff_display_driver.cpp: new file
+* mdl/parsers/md_parser.cpp: introduce Title3Paragraph
+* libmdl/includes/document/title3_paragraph.hpp: new file
+* libmdl/document/title3_paragraph.cpp: new file
+* assets/mdl.1.md: create the manpage
 
 ### Changed
 
+* whole project: reorder and split between program and library
 * src/main.cpp: add HtmlDisplayDriver
 * src/parsers/md_parser.cpp: fix URL parsing
 
