@@ -1,5 +1,15 @@
 # News
 
+## [No version] No date
+
+### New features
+
+* TBD
+
+### Changed
+
+* [libmdl] Change include directory from `$PREFIX/include` to `$PREFIX/include/mdl`
+
 ## [v1.0.0] 2016-07-15
 
 This program has now reached a sufficiently mature state. It has been reordered

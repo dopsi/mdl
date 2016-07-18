@@ -60,5 +60,5 @@ set(${PROJECT_NAME}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/includes
 	PARENT_SCOPE)
 
 file(GLOB include_files "${PROJECT_SOURCE_DIR}/includes/*.hpp")
-install(FILES ${include_files} DESTINATION include)
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/includes/document DESTINATION include)
+install(FILES ${include_files} DESTINATION include/mdl)
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/includes/document DESTINATION include/mdl)
