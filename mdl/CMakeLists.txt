@@ -29,6 +29,7 @@ configure_file(${PROJECT_SOURCE_DIR}/configure.hpp.in ${PROJECT_BINARY_DIR}/conf
 include_directories(BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/includes)
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${libmdl_INCLUDE_DIRS})
+include_directories(${libmdl_tools_INCLUDE_DIRS})
 
 add_executable(mdlbin 
 	main.cpp
@@ -37,6 +38,7 @@ add_executable(mdlbin
 	display_drivers/latex_display_driver.cpp
 	display_drivers/html_display_driver.cpp
 	display_drivers/troff_display_driver.cpp
+	display_drivers/ansi_display_driver.cpp
 	parsers/md_parser.cpp) 
 
 set_target_properties(mdlbin
@@ -47,6 +49,7 @@ target_compile_features(mdlbin PRIVATE cxx_nullptr cxx_strong_enums)
 target_link_libraries(mdlbin 
 	${Boost_LIBRARIES}
 	ncurses
-	libmdl)
+	libmdl
+	libmdl_tools)
 
 install(TARGETS mdlbin DESTINATION bin)

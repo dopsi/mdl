@@ -5,6 +5,7 @@
 #include "display_drivers/latex_display_driver.hpp"
 #include "display_drivers/html_display_driver.hpp"
 #include "display_drivers/troff_display_driver.hpp"
+#include "display_drivers/ansi_display_driver.hpp"
 
 #include <iostream>
 #include <locale.h>
@@ -68,6 +69,8 @@ int main(int argc, char ** argv) {
 			driver = new HtmlDisplayDriver();
 		} else if (driver_string == "troff") {
 			driver = new TroffDisplayDriver();
+		} else if (driver_string == "ansi") {
+			driver = new AnsiDisplayDriver();
 		} else {
 			cerr << "mdl: Unknown driver name '" << driver_string << "'" << endl;
 			delete parser;
