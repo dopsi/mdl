@@ -17,6 +17,7 @@ set(mdl_VERSION_MINOR 0)
 set(mdl_VERSION_REVISION 0)
 
 add_subdirectory(libmdl)
+add_subdirectory(libmdl_tools)
 add_subdirectory(mdl)
 
 add_custom_command(OUTPUT mdl.1
