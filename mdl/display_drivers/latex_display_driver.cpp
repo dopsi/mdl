@@ -84,10 +84,21 @@ void LaTeXDisplayDriver::display(Document * doc, ostream & output) {
 				output << "\\textit{";
 			} else if (bold_le) {
 				output << "\\textbf{";
-			} else if (code_le and p->level() != Paragraph::Level::Code) {
-				delim_pos = delim_list.find_first_not_of(l->content());
-				delim = delim_list[delim_pos];
-				output << "\\verb" << delim;
+			} else if (code_le) {
+				switch (p->level()) {
+					case Paragraph::Level::Title1:
+					case Paragraph::Level::Title2:
+					case Paragraph::Level::Title3:
+						output << "\\texttt{";
+						break;
+					case Paragraph::Level::Code:
+						break;
+					default:
+						delim_pos = delim_list.find_first_not_of(l->content());
+						delim = delim_list[delim_pos];
+						output << "\\verb" << delim;
+						break;
+				}
 			} else if (url_le) {
 				output << "\\href{" << url_le->url() << "}{";
 			}
@@ -96,8 +107,19 @@ void LaTeXDisplayDriver::display(Document * doc, ostream & output) {
 
 			if (italic_le or bold_le or url_le) {
 				output << "}";
-			} else if (code_le and p->level() != Paragraph::Level::Code) {
-				output << delim;
+			} else if (code_le) {
+				switch (p->level()) {
+					case Paragraph::Level::Title1:
+					case Paragraph::Level::Title2:
+					case Paragraph::Level::Title3:
+						output << "}";
+						break;
+					case Paragraph::Level::Code:
+						break;
+					default:
+						output << delim;
+						break;
+				}
 			}
 		}
 		
