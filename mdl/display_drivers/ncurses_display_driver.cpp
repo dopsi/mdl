@@ -305,6 +305,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 			case Paragraph::Level::Title1:
 				wattroff(_display_window, A_UNDERLINE);
 			case Paragraph::Level::Title2:
+			case Paragraph::Level::Title3:
 				wattroff(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				break;
 			case Paragraph::Level::Code:
