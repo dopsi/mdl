@@ -35,7 +35,7 @@ Status
 
 * [x] Title 1
 * [x] Title 2
-* [ ] Title 3
+* [x] Title 3
 * [x] Unordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
@@ -48,7 +48,7 @@ Status
 
 * [x] Title 1
 * [x] Title 2
-* [ ] Title 3
+* [x] Title 3
 * [x] Unordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
@@ -61,25 +61,12 @@ Status
 
 * [x] Title 1
 * [x] Title 2
-* [ ] Title 3
+* [x] Title 3
 * [x] Unordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
 * [x] inline code snippets
 * [x] quotations
-* [x] bold elements
-* [x] italic elements
-
-### HTML driver: HtmlDisplayDriver
-
-* [x] Title 1
-* [x] Title 2
-* [ ] Title 3
-* [ ] Unordered lists
-* [ ] URL's in Pandoc style
-* [ ] indented code blocks
-* [ ] inline code snippets
-* [ ] quotations
 * [x] bold elements
 * [x] italic elements
 

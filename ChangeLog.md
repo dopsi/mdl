@@ -13,6 +13,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 * libmdl/CMakeLists.txt: fix install directory for includes
 * mdl/display_drivers/ncurses_display_driver.cpp: add Title3 to render()
+* mdl/display_drivers/html_display_driver.cpp: add Title3 to display()
+* mdl/display_drivers/latex_display_driver.cpp: add Title3 to display()
 
 ## [v1.0.0] 2016-07-15
 

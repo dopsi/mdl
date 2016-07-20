@@ -45,6 +45,9 @@ void HtmlDisplayDriver::display(Document *doc, ostream & output) {
 			case Paragraph::Level::Title2:
 				output << "<h2>";
 				break;
+			case Paragraph::Level::Title3:
+				output << "<h3>";
+				break;
 			case Paragraph::Level::Code:
 				if (!is_verbatim) {
 					output << "<code>" << endl;
@@ -127,6 +130,9 @@ void HtmlDisplayDriver::display(Document *doc, ostream & output) {
 				break;
 			case Paragraph::Level::Title2:
 				output << "</h2>" << endl;
+				break;
+			case Paragraph::Level::Title3:
+				output << "</h3>" << endl;
 				break;
 			default:
 				output << "</p>" << endl;

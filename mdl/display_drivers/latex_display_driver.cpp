@@ -46,6 +46,9 @@ void LaTeXDisplayDriver::display(Document * doc, ostream & output) {
 			case Paragraph::Level::Title2:
 				output << "\\subsection{";
 				break;
+			case Paragraph::Level::Title3:
+				output << "\\subsubsection{";
+				break;
 			case Paragraph::Level::Code:
 				if (!is_verbatim) {
 					output << "\\begin{verbatim}" << endl;
@@ -122,6 +125,7 @@ void LaTeXDisplayDriver::display(Document * doc, ostream & output) {
 				break;
 			case Paragraph::Level::Title1:
 			case Paragraph::Level::Title2:
+			case Paragraph::Level::Title3:
 				output << "}";
 			default:
 				output << endl << endl;
