@@ -9,6 +9,7 @@
 ### Changed
 
 * [libmdl] Change include directory from `$PREFIX/include` to `$PREFIX/include/mdl`
+* [mdl] Implement Title3 for `NcursesDisplayDriver`
 
 ## [v1.0.0] 2016-07-15
 

@@ -194,6 +194,13 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				}
 				cursor_x=5;
 				break;
+			case Paragraph::Level::Title3:
+				wattron(_display_window, COLOR_PAIR(TITLE1_PAIR));
+				if (!is_first) {
+					cursor_y+=2;
+				}
+				cursor_x=3;
+				break;
 			case Paragraph::Level::UList1:
 				if (!is_first) {
 					cursor_y+=1;
