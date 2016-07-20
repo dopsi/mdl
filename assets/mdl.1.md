@@ -32,6 +32,7 @@ The available the display drivers are :
 * *troff* : a Troff output for **man(1)**
 * *plaintext* : a plaintext display
 * *ansi* : a ANSI escape code enabled output
+* *md* : a MarkDown output
 
 **-p**, **--input-parser**=*PARSER*
 
