@@ -31,6 +31,7 @@ The available the display drivers are :
 * *html* : a HTML output
 * *troff* : a Troff output for **man(1)**
 * *plaintext* : a plaintext display
+* *ansi* : a ANSI escape code enabled output
 
 **-p**, **--input-parser**=*PARSER*
 

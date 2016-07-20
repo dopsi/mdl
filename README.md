@@ -38,7 +38,9 @@ To build the program, follow these steps :
 * run `cmake $source_directory`
 * run `make`
 
-This program cannot be installed as of now.
+To install the program, run `make install`.
+
+See `cmake(1)` documentation for additionnal configuration options.
 
 To build the documentation, run `doxygen` in the source directory
 
