@@ -39,7 +39,7 @@ void TroffDisplayDriver::display(Document * doc, ostream & output) {
 				output << ".SS ";
 				break;
 			case Paragraph::Level::UList1:
-				output << ".BR";
+				output << ".TP" << endl << ".BR " << endl;
 				break;
 			case Paragraph::Level::Code:
 			case Paragraph::Level::Quote:
