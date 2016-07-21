@@ -3,7 +3,7 @@
 Paragraph::Paragraph() : _last(false) {
 }
 
-Paragraph::Paragraph(Paragraph * p) : _elements(p->_elements) {
+Paragraph::Paragraph(Paragraph * p) : _last(false), _elements(p->_elements) {
 }
 
 Paragraph::~Paragraph() {}
