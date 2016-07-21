@@ -9,6 +9,7 @@ Status
 * [x] Title 2
 * [x] Title 3
 * [x] Unordered lists
+* [ ] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
 * [x] inline code snippets
@@ -24,6 +25,7 @@ Status
 * [x] Title 2
 * [ ] Title 3
 * [x] Unordered lists
+* [ ] Ordered lists
 * [ ] URL's in Pandoc style
 * [ ] indented code blocks
 * [ ] inline code snippets
@@ -37,6 +39,7 @@ Status
 * [x] Title 2
 * [x] Title 3
 * [x] Unordered lists
+* [ ] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
 * [x] inline code snippets
@@ -50,6 +53,7 @@ Status
 * [x] Title 2
 * [x] Title 3
 * [x] Unordered lists
+* [ ] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
 * [x] inline code snippets
@@ -63,6 +67,7 @@ Status
 * [x] Title 2
 * [x] Title 3
 * [x] Unordered lists
+* [ ] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
 * [x] inline code snippets
@@ -76,6 +81,7 @@ Status
 * [x] Title 2
 * [x] Title 3
 * [x] Unordered lists
+* [ ] Ordered lists
 * [ ] URL's in Pandoc style
 * [ ] indented code blocks
 * [ ] inline code snippets
@@ -89,6 +95,7 @@ Status
 * [x] Title 2
 * [x] Title 3
 * [x] Unordered lists
+* [ ] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
 * [x] inline code snippets

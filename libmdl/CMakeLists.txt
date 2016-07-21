@@ -39,6 +39,7 @@ add_library(libmdl SHARED
 	document/title1_paragraph.cpp
 	document/title2_paragraph.cpp
 	document/title3_paragraph.cpp
+	document/olist1_paragraph.cpp
 	document/ulist1_paragraph.cpp
 	document/code_paragraph.cpp
 	document/quote_paragraph.cpp
