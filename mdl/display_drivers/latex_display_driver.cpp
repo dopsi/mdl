@@ -27,7 +27,8 @@ void LaTeXDisplayDriver::display(Document * doc, ostream & output) {
 
 	bool is_verbatim(false), 
 		 is_quotation(false),
-		 is_ulist(false);
+		 is_ulist(false),
+		 is_olist(false);
 
 	output << "\\documentclass{article}" << endl;
 	output << "\\usepackage[english]{babel}" << endl;
@@ -59,6 +60,13 @@ void LaTeXDisplayDriver::display(Document * doc, ostream & output) {
 				if (!is_ulist) {
 					output << "\\begin{itemize}" << endl;
 					is_ulist = true;
+				}
+				output << "\\item ";
+				break;
+			case Paragraph::Level::OList1:
+				if (!is_olist) {
+					output << "\\begin{enumerate}" << endl;
+					is_olist = true;
 				}
 				output << "\\item ";
 				break;
@@ -143,6 +151,13 @@ void LaTeXDisplayDriver::display(Document * doc, ostream & output) {
 				if (p->last()) {
 					output << "\\end{itemize}" << endl << endl;
 					is_ulist = false;
+				}
+				break;
+			case Paragraph::Level::OList1:
+				output << endl;
+				if (p->last()) {
+					output << "\\end{enumerate}" << endl << endl;
+					is_olist = false;
 				}
 				break;
 			case Paragraph::Level::Title1:

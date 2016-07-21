@@ -32,6 +32,11 @@ This list does summarize the supported functions :
 
 * **Bold** elements (with __underlines__ and **stars**)
 * *Italic* elements (with _underlines_ and *stars*)
+* ordered lists
+1) First element
+1) Second element
+1) Third element
+11) Fourth element
 
 # Lorem ipsum text
 

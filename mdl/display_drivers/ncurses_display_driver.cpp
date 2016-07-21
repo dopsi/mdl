@@ -162,6 +162,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	Paragraph *p(nullptr);
 	LineElement *l(nullptr);
 	UrlLineElement *u(nullptr);
+
 	bool is_first(true);
 	int cursor_x, cursor_y(-line_offset);
 	string tmp_str;
@@ -169,6 +170,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	short current_color;
 	int url_count(0);
 	int displayed_url_count(0);
+	int olist1_index(1);
 
 	mvwin(_url_window, 2, 0);
 	wresize(_url_window, 1, COLS);
@@ -202,6 +204,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				cursor_x=3;
 				break;
 			case Paragraph::Level::UList1:
+			case Paragraph::Level::OList1:
 				if (!is_first) {
 					cursor_y+=1;
 				}
@@ -241,6 +244,13 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 					wprintw(_display_window, "*");
 					wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
 					wprintw(_display_window, " ");
+					break;
+				case Paragraph::Level::OList1:
+					wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
+					wprintw(_display_window, "%d)", olist1_index);
+					wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
+					wprintw(_display_window, " ");
+					++olist1_index;
 					break;
 				default:
 					break;
@@ -319,6 +329,9 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 			default:
 				break;
 	
+		}
+		if (p->level() != Paragraph::Level::OList1) {
+			olist1_index = 1;
 		}
 	}
 

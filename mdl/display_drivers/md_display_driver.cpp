@@ -20,6 +20,8 @@ void MdDisplayDriver::display(Document * doc, ostream & output) {
 	BoldLineElement *bold_le(nullptr);
 	UrlLineElement *url_le(nullptr);
 
+	int olist1_index(1);
+
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
 
@@ -35,6 +37,10 @@ void MdDisplayDriver::display(Document * doc, ostream & output) {
 				break;
 			case Paragraph::Level::UList1:
 				output << "* ";
+				break;
+			case Paragraph::Level::OList1:
+				output << olist1_index << ") ";
+				++olist1_index;
 				break;
 			case Paragraph::Level::Quote:
 				output << "> ";
@@ -75,6 +81,10 @@ void MdDisplayDriver::display(Document * doc, ostream & output) {
 			} else if (italic_le) {
 				output << "*";
 			}
+		}
+
+		if (p->level() != Paragraph::Level::OList1) {
+			olist1_index = 1;
 		}
 
 		output << endl << endl;

@@ -7,14 +7,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### New features
 
-* TBD
+* mdl/display_drivers/md_display_driver.hpp: introduce MdDisplayDriver
+* mdl/display_drivers/md_display_driver.cpp: introduce MdDisplayDriver
+* libmdl/includes/document/olist1_paragraph.hpp: introduce OList1Paragraph
+* libmdl/document/olist1_paragraph.cpp: introduce OList1Paragraph
 
 ### Changed
 
 * libmdl/CMakeLists.txt: fix install directory for includes
+* libmdl/document/paragraph.cpp: fix Paragraph constructor
 * mdl/display_drivers/ncurses_display_driver.cpp: add Title3 to render()
+* mdl/display_drivers/ncurses_display_driver.cpp: add OList1 to display()
 * mdl/display_drivers/html_display_driver.cpp: add Title3 to display()
+* mdl/display_drivers/html_display_driver.cpp: add OList1 to display()
 * mdl/display_drivers/latex_display_driver.cpp: add Title3 to display()
+* mdl/display_drivers/latex_display_driver.cpp: add OList1 to display()
+* mdl/display_drivers/latex_display_driver.cpp: do not put \verb in sections
+* mdl/display_drivers/troff_display_driver.cpp: fix UList1 display (new paragraph per item)
+* mdl/parsers/md_parser.cpp: implement OList1 support
 
 ## [v1.0.0] 2016-07-15
 

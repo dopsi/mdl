@@ -25,7 +25,8 @@ void HtmlDisplayDriver::display(Document *doc, ostream & output) {
 
 	bool is_verbatim(false), 
 		 is_quotation(false),
-		 is_ulist(false);
+		 is_ulist(false),
+		 is_olist(false);
 
 	output << "" << endl;
 	output << "<!doctype html>" << endl;
@@ -58,6 +59,13 @@ void HtmlDisplayDriver::display(Document *doc, ostream & output) {
 				if (!is_ulist) {
 					output << "<ul>" << endl;
 					is_ulist = true;
+				}
+				output << "<li>";
+				break;
+			case Paragraph::Level::OList1:
+				if (!is_olist) {
+					output << "<ol>" << endl;
+					is_olist = true;
 				}
 				output << "<li>";
 				break;
@@ -123,6 +131,13 @@ void HtmlDisplayDriver::display(Document *doc, ostream & output) {
 				if (p->last()) {
 					output << "</ul>" << endl << endl;
 					is_ulist = false;
+				}
+				break;
+			case Paragraph::Level::OList1:
+				output << "</li>" << endl;
+				if (p->last()) {
+					output << "</ol>" << endl << endl;
+					is_olist = false;
 				}
 				break;
 			case Paragraph::Level::Title1:

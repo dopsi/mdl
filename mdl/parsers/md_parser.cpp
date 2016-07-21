@@ -11,6 +11,7 @@
 #include "document/title2_paragraph.hpp"
 #include "document/title3_paragraph.hpp"
 #include "document/ulist1_paragraph.hpp"
+#include "document/olist1_paragraph.hpp"
 #include "document/code_paragraph.hpp"
 #include "document/quote_paragraph.hpp"
 
@@ -84,6 +85,10 @@ void MdParser::parse() {
 	Paragraph *current_p(nullptr), *temp_p(nullptr);
 	LineElement *e = nullptr, *last_e = nullptr;
 	size_t sharps(0);
+
+	smatch match;
+	regex olist1_regex("^[0-9]+\\) ");
+
 	while (getline(_input_file, line)) {
 		if (line.empty()) {
 			// end of line, change paragraph
@@ -155,6 +160,13 @@ void MdParser::parse() {
 				}
 				current_p = new UList1Paragraph();
 				parse_line(current_p, line.substr(2));
+			} else if (regex_search(line, match, olist1_regex)) { // ordered list level 1
+				if (current_p and current_p->size()) {
+					_document->append_paragraph(current_p);
+					current_p=nullptr;
+				}
+				current_p = new OList1Paragraph();
+				parse_line(current_p, line.substr(line.find_first_not_of("0123456789)")+1));
 			} else {
 				// other content
 				if (current_p->size() && last_e && (last_e->content()).back() != ' ' && line.front() != ' ') {
