@@ -77,8 +77,8 @@ class Paragraph {
 			Title4 /** Fourth title **/,
 			Title5 /** Fifth title **/,
 			Title6 /** Sixth title **/,
-			UList1 /** Unordered list **/,
 			OList1 /** Ordered list **/,
+			UList1 /** Unordered list **/,
 			Quote /** Quote paragraph **/,
 			Code /** Code paragraph **/
 		};
