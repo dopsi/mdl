@@ -5,7 +5,6 @@
 * Add RstParser for reStructuredText
 * Add PdfDisplayDriver using [libharu](https://github.com/libharu/libharu)
 * Add OdtDisplayDriver (see [this document](http://books.evc-cit.info/odbook/book.html))
-* Add MdDisplayDriver
 * Add RstDisplayDriver
 
 ## Other changes
