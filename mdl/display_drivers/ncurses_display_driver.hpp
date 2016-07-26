@@ -10,7 +10,7 @@
 /**
  * @brief Ncurses implementation of the DisplayDriver class
  **/
-class NcursesDisplayDriver : public DisplayDriver {
+class NcursesDisplayDriver : protected DisplayDriver {
 	private:
 		WINDOW* _stdscr; /**< @brief The screen **/
 		WINDOW* _title_window; /**< @brief The title window **/

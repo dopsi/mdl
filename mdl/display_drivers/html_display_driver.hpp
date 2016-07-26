@@ -6,7 +6,7 @@
 /**
  * @brief HTML implementation of the DisplayDriver class
  **/
-class HtmlDisplayDriver : public DisplayDriver {
+class HtmlDisplayDriver : protected DisplayDriver {
 	public:
 		HtmlDisplayDriver() {};
 		virtual ~HtmlDisplayDriver() {};

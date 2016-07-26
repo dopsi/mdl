@@ -8,7 +8,7 @@
  *
  * This class does output a space padded document
  **/
-class PlainTextDisplayDriver : public DisplayDriver {
+class PlainTextDisplayDriver : protected DisplayDriver {
 	public:
 		PlainTextDisplayDriver() : DisplayDriver() {}
 		virtual ~PlainTextDisplayDriver() {}

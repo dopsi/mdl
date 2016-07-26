@@ -6,7 +6,7 @@
 /**
  * @brief LaTeX implementation of the DisplayDriver class
  **/
-class LaTeXDisplayDriver : public DisplayDriver {
+class LaTeXDisplayDriver : protected DisplayDriver {
 	public:
 		LaTeXDisplayDriver(bool standalone);
 		virtual ~LaTeXDisplayDriver();
