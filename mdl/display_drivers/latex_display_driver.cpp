@@ -8,6 +8,23 @@
 #include <iostream>
 using namespace std;
 
+LaTeXDisplayDriver::LaTeXDisplayDriver(bool standalone) :
+	DisplayDriver(standalone) {
+	if (_standalone) {
+	output << "\\documentclass{article}" << endl;
+	output << "\\usepackage[english]{babel}" << endl;
+	output << "\\usepackage[utf8]{inputenc}" << endl;
+	output << "\\usepackage[T1]{fontenc}" << endl;
+	output << "\\usepackage{hyperref}" << endl;
+	output << "\\begin{document}" << endl;
+	}
+}
+
+LaTeXDisplayDriver::~LaTeXDisplayDriver() {
+	if (_standalone) {
+		output << "\\end{document}" << endl;
+	}
+}
 void LaTeXDisplayDriver::display(Document * doc) {
 	display(doc, cout);
 }
@@ -29,13 +46,6 @@ void LaTeXDisplayDriver::display(Document * doc, ostream & output) {
 		 is_quotation(false),
 		 is_ulist(false),
 		 is_olist(false);
-
-	output << "\\documentclass{article}" << endl;
-	output << "\\usepackage[english]{babel}" << endl;
-	output << "\\usepackage[utf8]{inputenc}" << endl;
-	output << "\\usepackage[T1]{fontenc}" << endl;
-	output << "\\usepackage{hyperref}" << endl;
-	output << "\\begin{document}" << endl;
 
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
@@ -169,7 +179,6 @@ void LaTeXDisplayDriver::display(Document * doc, ostream & output) {
 				break;
 		}
 	}
-	output << "\\end{document}" << endl;
 }
 
 /* vim: set ts=4 sw=4: */
