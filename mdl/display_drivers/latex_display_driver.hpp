@@ -8,8 +8,8 @@
  **/
 class LaTeXDisplayDriver : public DisplayDriver {
 	public:
-		LaTeXDisplayDriver() {};
-		virtual ~LaTeXDisplayDriver() {};
+		LaTeXDisplayDriver(bool standalone);
+		virtual ~LaTeXDisplayDriver();
 		virtual void display(Document *doc);
 		virtual void display(Document *doc, std::ostream & output);
 };
