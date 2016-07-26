@@ -10,7 +10,7 @@
  **/
 class AnsiDisplayDriver : public DisplayDriver {
 	public:
-		AnsiDisplayDriver() : DisplayDriver() {}
+		AnsiDisplayDriver() : DisplayDriver(true) {}
 		virtual ~AnsiDisplayDriver() {}
 		virtual void display(Document * doc);
 		virtual void display(Document * doc, std::ostream & output);

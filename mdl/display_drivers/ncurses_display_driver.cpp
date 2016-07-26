@@ -19,7 +19,7 @@ using namespace std;
 #define COLOR_NONE -1
 
 NcursesDisplayDriver::NcursesDisplayDriver() :
-	DisplayDriver(), _stdscr(initscr()),
+	DisplayDriver(true), _stdscr(initscr()),
 	_width(COLS),
 	_title_window(newwin(1,_width,0,0)),
 	_display_window(newwin(LINES-4,_width,2,0)),

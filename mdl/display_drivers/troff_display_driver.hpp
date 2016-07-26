@@ -5,7 +5,8 @@
 
 class TroffDisplayDriver : public DisplayDriver {
 	public:
-		TroffDisplayDriver() {};
+		TroffDisplayDriver(bool standalone) :
+			DisplayDriver(standalone) {};
 		~TroffDisplayDriver() {};
 		virtual void display(Document * doc);
 		virtual void display(Document * doc, std::ostream & output);
