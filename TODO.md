@@ -12,8 +12,9 @@ the document (for example, if `false`, only display the inside of the
 `body` tag in HTML)
 2) `--width`, `-w` and `--height`, `-h`: to limit the maximum width and height
 of the display window
-* New MarkDown dialects (GitHub Flavored, with tables support)
+* New MarkDown dialects (GitHub Flavored, with tables support, `mdl`)
 * Add `stdin` reading
+* Add a configuration file
 
 ### Other changes
 
