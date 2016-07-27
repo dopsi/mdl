@@ -33,6 +33,7 @@ include_directories(${libmdl_tools_INCLUDE_DIRS})
 
 add_executable(mdlbin 
 	main.cpp
+	options.cpp
 	display_drivers/ncurses_display_driver.cpp
 	display_drivers/plaintext_display_driver.cpp
 	display_drivers/latex_display_driver.cpp

@@ -8,81 +8,42 @@
 #include "display_drivers/ansi_display_driver.hpp"
 #include "display_drivers/md_display_driver.hpp"
 
+#include "options.hpp"
+
 #include <iostream>
 #include <locale.h>
-
-#include <boost/program_options.hpp>
+#include <cassert>
 
 using namespace std;
-
-namespace po = boost::program_options;
 
 int main(int argc, char ** argv) {
 	setlocale(LC_ALL, "");
 
-	// Set Boost program options up
-	const string usage("Usage: mdl [OPTIONS] <input-file>");
-	po::options_description desc(usage);
-	desc.add_options()
-		("help", po::value<string>(), "produce help message and exit")
-		("display-driver,d", po::value<string>(), "set display driver")
-		("input-parser,p", po::value<string>(), "set input parser")
-		("input-file,i", po::value<string>(), "input file to be used")
-		("output-file,o", po::value<string>(), "output file")
-		("version", "print the version information and exit");
-	po::positional_options_description p;
-	p.add("input-file", -1);
-	po::variables_map vm;
-	
-	try {
-		po::store(po::command_line_parser(argc, argv).options(desc).positional(p).run(), vm);
-	} catch (boost::exception_detail::clone_impl<boost::exception_detail::error_info_injector<boost::program_options::unknown_option> > e) {
-		cerr << "mdl: " << e.what() << endl;
-		return 1;
-	}
-	
-	if (vm.count("help")) {
-		cout << desc;
-		return 0;
-	} else if (vm.count("version")) {
-		cout << "mdl (version: " << MDL_VERSION_STRING << ")" << endl;
-		return 0;
-	} else if (vm.empty() or vm.count("input-file") == 0) {
-		cout << usage << endl;
-		cout << "mdl: Missing an input file" << endl;
-		return 0;
-	}
-
-	Parser *parser(new MdParser(vm["input-file"].as<string>()));
-	DisplayDriver *driver;
+	MdlOptions op(argc, argv);
+	Parser *parser(new MdParser(op.input_file()));
+	DisplayDriver *driver(nullptr);
 	ofstream output_file;
 
-	if (vm.count("display-driver")) {
-		// Select driver
-		string driver_string(vm["display-driver"].as<string>());
-		if (driver_string == "plain") {
-			driver = new PlainTextDisplayDriver();
-		} else if (driver_string == "ncurses") {
-			driver = new NcursesDisplayDriver();
-		} else if (driver_string == "latex") {
-			driver = new LaTeXDisplayDriver(true);
-		} else if (driver_string == "html") {
-			driver = new HtmlDisplayDriver(true);
-		} else if (driver_string == "troff") {
-			driver = new TroffDisplayDriver(true);
-		} else if (driver_string == "ansi") {
-			driver = new AnsiDisplayDriver();
-		} else if (driver_string == "md") {
-			driver = new MdDisplayDriver();
-		} else {
-			cerr << "mdl: Unknown driver name '" << driver_string << "'" << endl;
-			delete parser;
-		}
-	} else {
-		// Default: ncurses
+	string driver_string(op.display_driver());
+	if (driver_string == "plain") {
+		driver = new PlainTextDisplayDriver();
+	} else if (driver_string == "ncurses") {
 		driver = new NcursesDisplayDriver();
+	} else if (driver_string == "latex") {
+		driver = new LaTeXDisplayDriver(true);
+	} else if (driver_string == "html") {
+		driver = new HtmlDisplayDriver(true);
+	} else if (driver_string == "troff") {
+		driver = new TroffDisplayDriver(true);
+	} else if (driver_string == "ansi") {
+		driver = new AnsiDisplayDriver();
+	} else if (driver_string == "md") {
+		driver = new MdDisplayDriver();
 	}
 
+	assert(driver);
+	assert(parser);
+	
 	/*
 	 * This code section is not used since there is only one parser at the moment.
 	 *
@@ -92,8 +53,8 @@ int main(int argc, char ** argv) {
 		// Default: MD
 	}*/
 
-	if (vm.count("output-file")) {
-		output_file.open(vm["output-file"].as<string>());
+	if (!op.output_file().empty()) {
+		output_file.open(op.output_file());
 		driver->display(parser->get_document(), output_file);
 		output_file.close();
 	} else {
