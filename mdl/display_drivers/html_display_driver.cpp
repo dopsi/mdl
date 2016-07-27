@@ -10,6 +10,13 @@
 #include <iostream>
 using namespace std;
 
+HtmlDisplayDriver::HtmlDisplayDriver(bool standalone) :
+	DisplayDriver(standalone) {
+}
+
+HtmlDisplayDriver::~HtmlDisplayDriver() {
+}
+
 void HtmlDisplayDriver::display(Document *doc) {
 	display(doc, cout);
 }
@@ -28,14 +35,16 @@ void HtmlDisplayDriver::display(Document *doc, ostream & output) {
 		 is_ulist(false),
 		 is_olist(false);
 
-	output << "" << endl;
-	output << "<!doctype html>" << endl;
-	output << "<html lang=\"fr\">" << endl;
-	output << "<head>" << endl;
-	output << "<meta charset=\"utf-8\">" << endl;
-	output << "<title>mdl generated HTML page</title>" << endl;
-	output << "</head>" << endl;
-	output << "<body>" << endl;
+	if (_standalone) {
+		output << "<!doctype html>" << endl;
+		output << "<html lang=\"fr\">" << endl;
+		output << "<head>" << endl;
+		output << "<meta charset=\"utf-8\">" << endl;
+		output << "<title>mdl generated HTML page</title>" << endl;
+		output << "</head>" << endl;
+		output << "<body>" << endl;
+	}
+
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
 
@@ -154,8 +163,10 @@ void HtmlDisplayDriver::display(Document *doc, ostream & output) {
 				break;
 		}
 	}
-	output << "</body>" << endl;
-	output << "</html>" << endl;
+	if (_standalone) {
+		output << "</body>" << endl;
+		output << "</html>" << endl;
+	}
 }
 
 /* vim: set ts=4 sw=4: */

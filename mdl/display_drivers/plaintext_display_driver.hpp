@@ -8,9 +8,9 @@
  *
  * This class does output a space padded document
  **/
-class PlainTextDisplayDriver : protected DisplayDriver {
+class PlainTextDisplayDriver : public DisplayDriver {
 	public:
-		PlainTextDisplayDriver() : DisplayDriver() {}
+		PlainTextDisplayDriver() : DisplayDriver(true) {}
 		virtual ~PlainTextDisplayDriver() {}
 		virtual void display(Document * doc);
 		virtual void display(Document * doc, std::ostream & output);

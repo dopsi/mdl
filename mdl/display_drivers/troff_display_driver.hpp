@@ -3,7 +3,7 @@
 
 #include "display_driver.hpp"
 
-class TroffDisplayDriver : protected DisplayDriver {
+class TroffDisplayDriver : public DisplayDriver {
 	public:
 		TroffDisplayDriver(bool standalone) :
 			DisplayDriver(standalone) {};

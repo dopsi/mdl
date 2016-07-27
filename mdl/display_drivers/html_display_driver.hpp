@@ -6,10 +6,10 @@
 /**
  * @brief HTML implementation of the DisplayDriver class
  **/
-class HtmlDisplayDriver : protected DisplayDriver {
+class HtmlDisplayDriver : public DisplayDriver {
 	public:
-		HtmlDisplayDriver() {};
-		virtual ~HtmlDisplayDriver() {};
+		HtmlDisplayDriver(bool standalone);
+		virtual ~HtmlDisplayDriver();
 		virtual void display(Document *doc);
 		virtual void display(Document *doc, std::ostream & output);
 };

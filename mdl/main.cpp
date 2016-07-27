@@ -65,11 +65,11 @@ int main(int argc, char ** argv) {
 		} else if (driver_string == "ncurses") {
 			driver = new NcursesDisplayDriver();
 		} else if (driver_string == "latex") {
-			driver = new LaTeXDisplayDriver();
+			driver = new LaTeXDisplayDriver(true);
 		} else if (driver_string == "html") {
-			driver = new HtmlDisplayDriver();
+			driver = new HtmlDisplayDriver(true);
 		} else if (driver_string == "troff") {
-			driver = new TroffDisplayDriver();
+			driver = new TroffDisplayDriver(true);
 		} else if (driver_string == "ansi") {
 			driver = new AnsiDisplayDriver();
 		} else if (driver_string == "md") {

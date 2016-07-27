@@ -8,7 +8,7 @@
  *
  * This class does output a space padded document with ansi escape sequences
  **/
-class AnsiDisplayDriver : protected DisplayDriver {
+class AnsiDisplayDriver : public DisplayDriver {
 	public:
 		AnsiDisplayDriver() : DisplayDriver(true) {}
 		virtual ~AnsiDisplayDriver() {}
