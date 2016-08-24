@@ -5,7 +5,6 @@
 ### New features
 
 * Add RstParser for reStructuredText
-* Add RstDisplayDriver
 * Add new options
 1) `--wrap`, `-W`: boolean flag to enable or disable the *exterior* of 
 the document (for example, if `false`, only display the inside of the
