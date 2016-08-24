@@ -44,6 +44,7 @@ NcursesDisplayDriver::NcursesDisplayDriver() :
 	cbreak();
 	noecho();
 	keypad(stdscr, TRUE);
+	curs_set(0);
 
 	// Set up colors
 	start_color();
