@@ -30,6 +30,10 @@ void AnsiDisplayDriver::display(Document * doc, ostream & output) {
 				wrapper << "  ";
 				wrapper.fg(Color::Blue);
 				break;
+			case Paragraph::Level::Title3:
+				wrapper << "    ";
+				wrapper.fg(Color::Blue);
+				break;
 			case Paragraph::Level::Quote:
 				wrapper << "    ";
 				wrapper.fg(Color::Blue);
