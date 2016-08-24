@@ -33,6 +33,7 @@ The available the display drivers are :
 * *plaintext* : a plaintext display
 * *ansi* : a ANSI escape code enabled output
 * *md* : a MarkDown output
+* *rst* : a reStructuredText output
 
 **-p**, **--input-parser**=*PARSER*
 

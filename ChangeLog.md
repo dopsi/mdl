@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 * mdl/display_drivers/md_display_driver.hpp: introduce MdDisplayDriver
 * mdl/display_drivers/md_display_driver.cpp: introduce MdDisplayDriver
+* mdl/display_drivers/rst_display_driver.hpp: introduce RstDisplayDriver
+* mdl/display_drivers/rst_display_driver.cpp: introduce RstDisplayDriver
 * libmdl/includes/document/olist1_paragraph.hpp: introduce OList1Paragraph
 * libmdl/document/olist1_paragraph.cpp: introduce OList1Paragraph
 

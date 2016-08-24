@@ -7,6 +7,7 @@
 * [libmdl] Introduce ordered list (level 1) paragraph
 * [libmdl_tools] Introduce the library
 * [mdl] Introduce the MarkDown display driver
+* [mdl] Introduce the reStructuredText display driver
 * [mdl] Implement level 1 ordered lists
 
 ### Changed
