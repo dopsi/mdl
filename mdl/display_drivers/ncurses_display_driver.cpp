@@ -90,14 +90,24 @@ void NcursesDisplayDriver::display(Document * doc) {
 			wrefresh(_title_window);
 		}
 
+		int display_h, display_w;
+		getmaxyx(_display_window,display_h,display_w);
+		int url_h, url_w;
+		getmaxyx(_url_window,url_h,url_w);
+
 		if (update_body or !display_urls) {
 			update_body = false;
 			max_offset = render(doc, offset);
-			wrefresh(_display_window);
+			if (!display_urls) {
+				wresize(_display_window, LINES-4, COLS);
+				wrefresh(_display_window);
+			}
 		}
 
 		if (display_urls) {
 			wrefresh(_url_window);
+			wresize(_display_window, LINES-4-url_h, COLS);
+			wrefresh(_display_window);
 		}
 	
 		if (update_footer) {
@@ -115,7 +125,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 				display_urls = !display_urls;
 				break;
 			case KEY_DOWN:
-				if (offset <= max_offset-(LINES-4)) {
+				if (offset <= max_offset-display_h) {
 					++offset;
 					update_body = true;
 					update_footer = true;
@@ -129,7 +139,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 				}
 				break;
 			case KEY_PPAGE:
-				offset -= LINES-4;
+				offset -= display_h;
 				update_body = true;
 				update_footer = true;
 				if (offset < 0) {
@@ -137,19 +147,19 @@ void NcursesDisplayDriver::display(Document * doc) {
 				}
 				break;
 			case KEY_NPAGE:
-				offset += LINES-4;
+				offset += display_h;
 				update_body = true;
 				update_footer = true;
-				if (offset >= max_offset-(LINES-4)) {
-					offset = max_offset-(LINES-4);
+				if (offset >= max_offset-display_h) {
+					offset = max_offset-display_h;
 				}
 				break;
 			case ' ':
-				offset += (LINES-4)/2;
+				offset += display_h/2;
 				update_body = true;
 				update_footer = true;
-				if (offset >= max_offset-(LINES-4)) {
-					offset = max_offset-(LINES-4);
+				if (offset >= max_offset-display_h) {
+					offset = max_offset-display_h;
 				}
 				break;
 			default:
@@ -299,6 +309,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				}
 			}
 			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
+				wprintw(_display_window, "[%d]", url_count);
 				wattr_set(_display_window, current, current_color, nullptr);
 			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
 				if (current&A_REVERSE) {
@@ -335,6 +346,8 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 			olist1_index = 1;
 		}
 	}
+	
+	mvwin(_url_window, LINES-3-displayed_url_count, 0);
 
 	return cursor_y+line_offset;
 }
