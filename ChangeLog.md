@@ -18,6 +18,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * libmdl/document/paragraph.cpp: fix Paragraph constructor
 * mdl/display_drivers/ncurses_display_driver.cpp: add Title3 to render()
 * mdl/display_drivers/ncurses_display_driver.cpp: add OList1 to display()
+* mdl/display_drivers/ncurses_display_driver.cpp: resize _display_window when 
+displaying _url_window and move _url_window to the bottom
+* mdl/display_drivers/ncurses_display_driver.cpp: hide cursor 
 * mdl/display_drivers/html_display_driver.cpp: add Title3 to display()
 * mdl/display_drivers/html_display_driver.cpp: add OList1 to display()
 * mdl/display_drivers/latex_display_driver.cpp: add Title3 to display()

@@ -5,6 +5,7 @@
 ### New features
 
 * [libmdl] Introduce ordered list (level 1) paragraph
+* [libmdl_tools] Introduce the library
 * [mdl] Introduce the MarkDown display driver
 * [mdl] Implement level 1 ordered lists
 
@@ -12,9 +13,11 @@
 
 * [libmdl] Change include directory from `$PREFIX/include` to `$PREFIX/include/mdl`
 * [libmdl] Various bugfixes
+* [libmdl] Change to static library
 * [mdl] Implement Title3 for `NcursesDisplayDriver`
 * [mdl] Implement Title3 for `HtmlDisplayDriver`
 * [mdl] Implement Title3 for `LaTeXDisplayDriver`
+* [mdl] `NcursesDisplayDriver`: URLs are now displayed at bottom
 * [mdl] Various bugfixes
 
 ## [v1.0.0] 2016-07-15
