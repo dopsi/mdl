@@ -7,6 +7,7 @@
 #include "display_drivers/troff_display_driver.hpp"
 #include "display_drivers/ansi_display_driver.hpp"
 #include "display_drivers/md_display_driver.hpp"
+#include "display_drivers/rst_display_driver.hpp"
 
 #include "options.hpp"
 
@@ -39,6 +40,8 @@ int main(int argc, char ** argv) {
 		driver = new AnsiDisplayDriver();
 	} else if (driver_string == "md") {
 		driver = new MdDisplayDriver();
+	} else if (driver_string == "rst") {
+		driver = new RstDisplayDriver();
 	}
 
 	assert(driver);

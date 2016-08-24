@@ -41,6 +41,7 @@ add_executable(mdlbin
 	display_drivers/troff_display_driver.cpp
 	display_drivers/ansi_display_driver.cpp
 	display_drivers/md_display_driver.cpp
+	display_drivers/rst_display_driver.cpp
 	parsers/md_parser.cpp) 
 
 set_target_properties(mdlbin
