@@ -24,6 +24,9 @@ void PlainTextDisplayDriver::display(Document * doc, ostream & output) {
 			case Paragraph::Level::UList1:
 				output << "* ";
 				break;
+			case Paragraph::Level::UList2:
+				output << "  * ";
+				break;
 			default:
 				output << "    ";
 				break;
