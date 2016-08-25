@@ -20,11 +20,10 @@ using namespace std;
 
 NcursesDisplayDriver::NcursesDisplayDriver() :
 	DisplayDriver(true),
-	_width(COLS),
-	_title_window(new NCursesColorWindow(1,_width,0,0)),
-	_display_window(new NCursesColorWindow(LINES-4,_width,2,0)),
-	_footer_window(new NCursesColorWindow(1, _width, LINES-1, 0)),
-	_url_window(new NCursesColorWindow(1, _width, 2, 0)),
+	_title_window(new NCursesColorWindow(1,_tty.columns(),0,0)),
+	_display_window(new NCursesColorWindow(_tty.lines()-4,_tty.columns(),2,0)),
+	_footer_window(new NCursesColorWindow(1, _tty.columns(), _tty.lines()-1, 0)),
+	_url_window(new NCursesColorWindow(1, _tty.columns(), 2, 0)),
 	_display_offset(0) {
 	assert(_title_window);
 	assert(_display_window);
@@ -93,14 +92,14 @@ void NcursesDisplayDriver::display(Document * doc) {
 			update_body = false;
 			max_offset = render(doc, offset);
 			if (!display_urls) {
-				_display_window->wresize(LINES-4, COLS);
+				_display_window->wresize(_tty.lines()-4, _tty.columns());
 				_display_window->refresh();
 			}
 		}
 
 		if (display_urls) {
 			_url_window->refresh();
-			_display_window->wresize(LINES-4-url_h, COLS);
+			_display_window->wresize(_tty.lines()-4-url_h, _tty.columns());
 			_display_window->refresh();
 		}
 	
@@ -177,7 +176,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	int olist1_index(1);
 
 	_url_window->mvwin(2, 0);
-	_url_window->wresize(1, COLS);
+	_url_window->wresize(1, _tty.columns());
 	_url_window->attron(A_UNDERLINE);
 	_url_window->printw(0, 0, "Url list");
 	_url_window->attroff(A_UNDERLINE);
@@ -277,7 +276,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				++url_count;
 				if (bounds_check(_display_window, cursor_y, cursor_x)) {
 					++displayed_url_count;
-					_url_window->wresize(displayed_url_count+1, COLS);
+					_url_window->wresize(displayed_url_count+1, _tty.columns());
 					_url_window->printw(displayed_url_count, 0, "[%d] %s", url_count, u->url().c_str());
 				}
 			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
@@ -347,7 +346,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 		}
 	}
 	
-	_url_window->mvwin(LINES-3-displayed_url_count, 0);
+	_url_window->mvwin(_tty.lines()-3-displayed_url_count, 0);
 
 	return cursor_y+line_offset;
 }

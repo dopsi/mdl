@@ -3,6 +3,8 @@
 
 #include "display_driver.hpp"
 
+#include "tools/tty.hpp"
+
 #include "document/paragraph.hpp"
 
 #include <cursesw.h>
@@ -11,6 +13,7 @@
  **/
 class NcursesDisplayDriver : public DisplayDriver {
 	private:
+		TTY _tty;
 		NCursesColorWindow* _stdscr; /**< @brief The screen **/
 		NCursesColorWindow* _title_window; /**< @brief The title window **/
 		NCursesColorWindow* _display_window; /**< @brief The display window **/
