@@ -5,18 +5,17 @@
 
 #include "document/paragraph.hpp"
 
-#include <ncurses.h>
-
+#include <cursesw.h>
 /**
  * @brief Ncurses implementation of the DisplayDriver class
  **/
 class NcursesDisplayDriver : public DisplayDriver {
 	private:
-		WINDOW* _stdscr; /**< @brief The screen **/
-		WINDOW* _title_window; /**< @brief The title window **/
-		WINDOW* _display_window; /**< @brief The display window **/
-		WINDOW* _footer_window; /**< @brief The footer window **/
-		WINDOW* _url_window; /**< @brief The url display window **/
+		NCursesColorWindow* _stdscr; /**< @brief The screen **/
+		NCursesColorWindow* _title_window; /**< @brief The title window **/
+		NCursesColorWindow* _display_window; /**< @brief The display window **/
+		NCursesColorWindow* _footer_window; /**< @brief The footer window **/
+		NCursesColorWindow* _url_window; /**< @brief The url display window **/
 		int _display_offset; /**< @brief The display_offset **/
 		int _width; /**< @brief The screen width **/
 		int _url_count; /**< @brief The number of urls to display **/
@@ -47,7 +46,7 @@ class NcursesDisplayDriver : public DisplayDriver {
 		 *
 		 * @return true if the coordinates are within the window
 		 **/
-		static bool bounds_check(WINDOW* w, int y, int x);
+		static bool bounds_check(NCursesWindow* w, int y, int x);
 	public:
 		NcursesDisplayDriver();
 		virtual ~NcursesDisplayDriver();
