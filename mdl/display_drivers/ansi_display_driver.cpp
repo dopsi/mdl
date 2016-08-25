@@ -45,6 +45,12 @@ void AnsiDisplayDriver::display(Document * doc, ostream & output) {
 				wrapper << "* ";
 				wrapper.reset();
 				break;
+			case Paragraph::Level::UList2:
+				wrapper << "      ";
+				wrapper.fg(Color::Cyan);
+				wrapper << "* ";
+				wrapper.reset();
+				break;
 			default:
 				wrapper << "    ";
 				break;
