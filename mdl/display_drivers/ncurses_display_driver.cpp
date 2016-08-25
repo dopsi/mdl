@@ -214,6 +214,12 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				}
 				cursor_x=0;
 				break;
+			case Paragraph::Level::UList2:
+				if (!is_first) {
+					cursor_y+=1;
+				}
+				cursor_x=2;
+				break;
 			case Paragraph::Level::Code:
 				if (!is_first) {
 					cursor_y+=1;
@@ -244,6 +250,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 		if (bounds_check(_display_window, cursor_y, cursor_x)) {
 			switch (p->level()) {
 				case Paragraph::Level::UList1:
+				case Paragraph::Level::UList2:
 					_display_window->attron(COLOR_PAIR(ULIST1_PAIR));
 					_display_window->printw("*");
 					_display_window->attroff(COLOR_PAIR(ULIST1_PAIR));
