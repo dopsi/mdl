@@ -270,7 +270,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 		for (size_t j(0); j < p->size(); ++j) {
 			l = (*p)[j];
 			tmp_str = l->content();
-			if ( (u=dynamic_cast<UrlLineElement*>(l)) ) { // this is an UrlLineElement
+			if ( (u=dynamic_cast<UrlLineElement*>(l)) and bounds_check(_display_window, cursor_y, cursor_x)) { // this is an UrlLineElement
 				current = _display_window->attrget();
 				_display_window->attron(A_UNDERLINE);
 				_display_window->attron(COLOR_PAIR(ULIST1_PAIR));
