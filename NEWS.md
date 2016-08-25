@@ -5,6 +5,7 @@
 ### New features
 
 * [libmdl] Introduce ordered list (level 1) paragraph
+* [libmdl] Introduce unordered list (level 2) paragraph
 * [libmdl_tools] Introduce the library
 * [mdl] Introduce the MarkDown display driver
 * [mdl] Introduce the reStructuredText display driver
@@ -18,6 +19,8 @@
 * [mdl] Implement Title3 for `NcursesDisplayDriver`
 * [mdl] Implement Title3 for `HtmlDisplayDriver`
 * [mdl] Implement Title3 for `LaTeXDisplayDriver`
+* [mdl] Implement level 2 unordered lists for `NcursesDisplayDriver`,
+`AnsiDisplayDriver`, `PlainTextDisplayDriver` and `MdDisplayDriver`
 * [mdl] `NcursesDisplayDriver`: URLs are now displayed at bottom
 * [mdl] Various bugfixes
 

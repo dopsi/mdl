@@ -13,6 +13,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * mdl/display_drivers/rst_display_driver.cpp: introduce RstDisplayDriver
 * libmdl/includes/document/olist1_paragraph.hpp: introduce OList1Paragraph
 * libmdl/document/olist1_paragraph.cpp: introduce OList1Paragraph
+* libmdl/includes/document/olist1_paragraph.hpp: introduce UList2Paragraph
+* libmdl/document/olist1_paragraph.cpp: introduce UList2Paragraph
 
 ### Changed
 
@@ -22,7 +24,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * mdl/display_drivers/ncurses_display_driver.cpp: add OList1 to display()
 * mdl/display_drivers/ncurses_display_driver.cpp: resize _display_window when 
 displaying _url_window and move _url_window to the bottom
+* mdl/display_drivers/ncurses_display_driver.cpp: use ncurses C++ bindings
+* mdl/display_drivers/ncurses_display_driver.cpp: use bounds_check for URL numbers
 * mdl/display_drivers/ncurses_display_driver.cpp: hide cursor 
+* mdl/display_drivers/ncurses_display_driver.cpp: implement UList2Paragraph
+* mdl/display_drivers/ansi_display_driver.cpp: implement UList2Paragraph
+* mdl/display_drivers/plaintext_display_driver.cpp: implement UList2Paragraph
 * mdl/display_drivers/html_display_driver.cpp: add Title3 to display()
 * mdl/display_drivers/html_display_driver.cpp: add OList1 to display()
 * mdl/display_drivers/latex_display_driver.cpp: add Title3 to display()
