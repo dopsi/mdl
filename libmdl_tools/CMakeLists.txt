@@ -28,6 +28,7 @@ include_directories(BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/includes)
 
 add_library(libmdl_tools
 	ansi_wrapper.cpp
+	tty.cpp
 	)
 
 set_target_properties(libmdl_tools
