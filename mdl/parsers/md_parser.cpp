@@ -11,6 +11,7 @@
 #include "document/title2_paragraph.hpp"
 #include "document/title3_paragraph.hpp"
 #include "document/ulist1_paragraph.hpp"
+#include "document/ulist2_paragraph.hpp"
 #include "document/olist1_paragraph.hpp"
 #include "document/code_paragraph.hpp"
 #include "document/quote_paragraph.hpp"
@@ -160,6 +161,13 @@ void MdParser::parse() {
 				}
 				current_p = new UList1Paragraph();
 				parse_line(current_p, line.substr(2));
+			} else if (string_startswith(line, "  * ") or string_startswith(line, "  - ")) { // level 2 list delimiter
+				if (current_p and current_p->size()) {
+					_document->append_paragraph(current_p);
+					current_p=nullptr;
+				}
+				current_p = new UList2Paragraph();
+				parse_line(current_p, line.substr(4));
 			} else if (regex_search(line, match, olist1_regex)) { // ordered list level 1
 				if (current_p and current_p->size()) {
 					_document->append_paragraph(current_p);
