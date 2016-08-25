@@ -79,6 +79,7 @@ class Paragraph {
 			Title6 /** Sixth title **/,
 			OList1 /** Ordered list **/,
 			UList1 /** Unordered list **/,
+			UList2 /** Unordered list **/,
 			Quote /** Quote paragraph **/,
 			Code /** Code paragraph **/
 		};

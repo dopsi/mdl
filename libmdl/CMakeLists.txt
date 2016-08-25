@@ -41,6 +41,7 @@ add_library(libmdl
 	document/title3_paragraph.cpp
 	document/olist1_paragraph.cpp
 	document/ulist1_paragraph.cpp
+	document/ulist2_paragraph.cpp
 	document/code_paragraph.cpp
 	document/quote_paragraph.cpp
 	display_driver.cpp
