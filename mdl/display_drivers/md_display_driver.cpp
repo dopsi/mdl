@@ -38,6 +38,9 @@ void MdDisplayDriver::display(Document * doc, ostream & output) {
 			case Paragraph::Level::UList1:
 				output << "* ";
 				break;
+			case Paragraph::Level::UList2:
+				output << "  * ";
+				break;
 			case Paragraph::Level::OList1:
 				output << olist1_index << ") ";
 				++olist1_index;
