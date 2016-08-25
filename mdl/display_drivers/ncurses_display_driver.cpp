@@ -308,7 +308,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 					}
 				}
 			}
-			if (dynamic_cast<UrlLineElement*>(l)) { // this is an UrlLineElement
+			if (dynamic_cast<UrlLineElement*>(l) and bounds_check(_display_window, cursor_y, cursor_x)) { // this is an UrlLineElement
 				wprintw(_display_window, "[%d]", url_count);
 				wattr_set(_display_window, current, current_color, nullptr);
 			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
