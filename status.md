@@ -8,7 +8,8 @@ Status
 * [x] Title 1
 * [x] Title 2
 * [x] Title 3
-* [x] Unordered lists
+* [x] Unordered lists (level 1)
+* [x] Unordered lists (level 2)
 * [x] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
@@ -24,7 +25,8 @@ Status
 * [x] Title 1
 * [x] Title 2
 * [ ] Title 3
-* [x] Unordered lists
+* [x] Unordered lists (level 1)
+* [x] Unordered lists (level 2)
 * [ ] Ordered lists
 * [ ] URL's in Pandoc style
 * [ ] indented code blocks
@@ -38,7 +40,8 @@ Status
 * [x] Title 1
 * [x] Title 2
 * [x] Title 3
-* [x] Unordered lists
+* [x] Unordered lists (level 1)
+* [x] Unordered lists (level 2)
 * [x] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
@@ -52,7 +55,8 @@ Status
 * [x] Title 1
 * [x] Title 2
 * [x] Title 3
-* [x] Unordered lists
+* [x] Unordered lists (level 1)
+* [ ] Unordered lists (level 2)
 * [x] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
@@ -66,7 +70,8 @@ Status
 * [x] Title 1
 * [x] Title 2
 * [x] Title 3
-* [x] Unordered lists
+* [x] Unordered lists (level 1)
+* [ ] Unordered lists (level 2)
 * [x] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
@@ -80,7 +85,8 @@ Status
 * [x] Title 1
 * [x] Title 2
 * [x] Title 3
-* [x] Unordered lists
+* [x] Unordered lists (level 1)
+* [ ] Unordered lists (level 2)
 * [ ] Ordered lists
 * [ ] URL's in Pandoc style
 * [ ] indented code blocks
@@ -94,7 +100,8 @@ Status
 * [x] Title 1
 * [x] Title 2
 * [x] Title 3
-* [x] Unordered lists
+* [x] Unordered lists (level 1)
+* [x] Unordered lists (level 2)
 * [ ] Ordered lists
 * [ ] URL's in Pandoc style
 * [ ] indented code blocks
@@ -108,7 +115,8 @@ Status
 * [x] Title 1
 * [x] Title 2
 * [x] Title 3
-* [x] Unordered lists
+* [x] Unordered lists (level 1)
+* [x] Unordered lists (level 2)
 * [x] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
@@ -122,7 +130,8 @@ Status
 * [x] Title 1
 * [x] Title 2
 * [x] Title 3
-* [x] Unordered lists
+* [x] Unordered lists (level 1)
+* [ ] Unordered lists (level 2)
 * [x] Ordered lists
 * [x] URL's in Pandoc style
 * [x] indented code blocks
