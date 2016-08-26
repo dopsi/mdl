@@ -5,15 +5,7 @@
 ### New features
 
 * Add RstParser for reStructuredText
-* Add new options
-  * `--wrap`, `-W`: boolean flag to enable or disable the *exterior* of 
-the document (for example, if `false`, only display the inside of the
-`body` tag in HTML)
 * New MarkDown dialects (GitHub Flavored, with tables support, `mdl`)
-
-### Other changes
-
-* Rewrite the NcursesDisplayDriver display and render functions (for code clarity)
 
 ## Version 2.x.x
 
@@ -28,6 +20,9 @@ class system)
 * Add a configuration file
 * Add new options
   * `--width`, `-w` and `--height`, `-h`: to limit the maximum width and height
+  * `--wrap`, `-W`: boolean flag to enable or disable the *exterior* of 
+the document (for example, if `false`, only display the inside of the
+`body` tag in HTML)
 of the display window
 
 ### Other changes
