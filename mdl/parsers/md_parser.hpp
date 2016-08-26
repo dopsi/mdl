@@ -8,6 +8,10 @@
  **/
 class MdParser : public Parser {
 	private:
+		/**
+		 * @brief The actual parsing function, which does interpret the data
+		 * inside a single line.
+		 **/
 		LineElement* parse_line(Paragraph *p, const std::string & line);
 	public:
 		MdParser(const std::string & filename);

@@ -13,7 +13,7 @@
  **/
 class NcursesDisplayDriver : public DisplayDriver {
 	private:
-		TTY _tty;
+		TTY _tty; /**< @brief The TTY handling object **/
 		NCursesColorWindow* _stdscr; /**< @brief The screen **/
 		NCursesColorWindow* _title_window; /**< @brief The title window **/
 		NCursesColorWindow* _display_window; /**< @brief The display window **/

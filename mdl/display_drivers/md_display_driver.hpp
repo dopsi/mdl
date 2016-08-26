@@ -5,8 +5,6 @@
 
 /**
  * @brief Plaintext display driver
- *
- * This class does output a space padded document
  **/
 class MdDisplayDriver : public DisplayDriver {
 	public:
