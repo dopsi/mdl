@@ -1,5 +1,15 @@
 # News
 
+## [No version] No date
+
+### New features
+
+* TBD
+
+### Changed
+
+* [mdl] Various bugfixes
+
 ## [v1.1.0] 2016-08-26
 
 ### New features

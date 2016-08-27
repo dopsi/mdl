@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [No version] No date
+
+### New features
+
+* TBD
+
+### Changed
+
+* `mdl/parsers/md_parser.cpp`: fix the removal of blank characters in 
+a CodeParagraph
+
 ## [v1.1.0] 2016-08-26
 
 ### New features
