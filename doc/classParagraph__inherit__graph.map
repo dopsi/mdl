@@ -1,0 +1,11 @@
+<map id="Paragraph" name="Paragraph">
+<area shape="rect" id="node2" href="$classCodeParagraph.html" title="Code paragraph. " alt="" coords="5,277,136,384"/>
+<area shape="rect" id="node3" href="$classOList1Paragraph.html" title="Ordered list paragraph (level 1) " alt="" coords="160,277,299,384"/>
+<area shape="rect" id="node4" href="$classQuoteParagraph.html" title="Quote paragraph. " alt="" coords="323,277,459,384"/>
+<area shape="rect" id="node5" href="$classTextParagraph.html" title="A basic text paragraph. " alt="" coords="483,292,589,369"/>
+<area shape="rect" id="node6" href="$classTitle1Paragraph.html" title="Title1 paragraph. " alt="" coords="614,277,746,384"/>
+<area shape="rect" id="node7" href="$classTitle2Paragraph.html" title="Title2 paragraph. " alt="" coords="770,277,902,384"/>
+<area shape="rect" id="node8" href="$classTitle3Paragraph.html" title="Title3 paragraph. " alt="" coords="926,277,1058,384"/>
+<area shape="rect" id="node9" href="$classUList1Paragraph.html" title="Unordered list paragraph (level 1) " alt="" coords="1083,277,1221,384"/>
+<area shape="rect" id="node10" href="$classUList2Paragraph.html" title="Unordered list paragraph (level 2) " alt="" coords="1245,277,1384,384"/>
+</map>
