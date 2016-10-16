@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v1.1.1] 2016-10-16
+
+### Changed
+
+* `mdl/CMakeLists.txt`: remove ncurses++w library
+* `mdl/display_drivers/ncurses_display_driver.hpp`: revert to ncurses C bindings
+* `mdl/display_drivers/ncurses_display_driver.cpp`: revert to ncurses C bindings
+
 ## [v1.1.0] 2016-08-26
 
 ### New features

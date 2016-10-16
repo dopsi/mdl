@@ -1,5 +1,11 @@
 # News
 
+## [v1.1.1] 2016-10-26
+
+### Changed
+
+* [mdl] Revert to ncurses C API
+
 ## [v1.1.0] 2016-08-26
 
 ### New features
