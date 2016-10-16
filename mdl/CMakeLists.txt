@@ -51,8 +51,7 @@ target_compile_features(mdlbin PRIVATE cxx_nullptr cxx_strong_enums)
 
 target_link_libraries(mdlbin 
 	${Boost_LIBRARIES}
-	ncurses++w
-	ncursesw
+	ncurses
 	libmdl
 	libmdl_tools)
 

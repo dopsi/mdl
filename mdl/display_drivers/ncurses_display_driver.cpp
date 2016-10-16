@@ -19,24 +19,31 @@ using namespace std;
 #define COLOR_NONE -1
 
 NcursesDisplayDriver::NcursesDisplayDriver() :
-	DisplayDriver(true),
-	_title_window(new NCursesColorWindow(1,_tty.columns(),0,0)),
-	_display_window(new NCursesColorWindow(_tty.lines()-4,_tty.columns(),2,0)),
-	_footer_window(new NCursesColorWindow(1, _tty.columns(), _tty.lines()-1, 0)),
-	_url_window(new NCursesColorWindow(1, _tty.columns(), 2, 0)),
+	DisplayDriver(true), _stdscr(initscr()),
+	_width(COLS),
+	_title_window(newwin(1,_width,0,0)),
+	_display_window(newwin(LINES-4,_width,2,0)),
+	_footer_window(newwin(1, _width, LINES-1, 0)),
+	_url_window(newwin(1, _width, 2, 0)),
 	_display_offset(0) {
-	assert(_title_window);
-	assert(_display_window);
-	assert(_url_window);
-	assert(_footer_window);
+	//Check if all windows have been initialized
+	while(!_title_window) {
+		_title_window = newwin(1,_width,0,0);
+	}
+	
+	while(!_display_window) {
+		_display_window = newwin(LINES-4,_width,2,0);
+	}
+
+	while(!_footer_window) {
+		_footer_window = newwin(1, _width, LINES-1, 0);
+	}
+	assert(has_colors());
 
 	// Begin ncurses mode
 	cbreak();
 	noecho();
-	_title_window->keypad(TRUE);
-	_display_window->keypad(TRUE);
-	_url_window->keypad(TRUE);
-	_footer_window->keypad(TRUE);
+	keypad(stdscr, TRUE);
 	curs_set(0);
 
 	// Set up colors
@@ -69,7 +76,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 	while (go) {
 		if (update_title) {
 			update_title = false;
-			_title_window->erase();
+			werase(_title_window);
 			fullname = doc->filename();
 			filename = fullname.substr(fullname.find_last_of('/')+1);
 			if (!fullname.find("/")) {
@@ -77,40 +84,40 @@ void NcursesDisplayDriver::display(Document * doc) {
 			} else {
 				path = ".";
 			}
-			_title_window->attron(COLOR_PAIR(WIN_TITLE_PAIR));
-			_title_window->printw(string("mdl - "+filename+" ["+path+"]").c_str());
-			_title_window->attroff(COLOR_PAIR(WIN_TITLE_PAIR));
-			_title_window->refresh();
+			wattron(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
+			wprintw(_title_window, string("mdl - "+filename+" ["+path+"]").c_str());
+			wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
+			wrefresh(_title_window);
 		}
 
 		int display_h, display_w;
-		_display_window->getmaxyx(display_h,display_w);
+		getmaxyx(_display_window,display_h,display_w);
 		int url_h, url_w;
-		_url_window->getmaxyx(url_h,url_w);
+		getmaxyx(_url_window,url_h,url_w);
 
 		if (update_body or !display_urls) {
 			update_body = false;
 			max_offset = render(doc, offset);
 			if (!display_urls) {
-				_display_window->wresize(_tty.lines()-4, _tty.columns());
-				_display_window->refresh();
+				wresize(_display_window, LINES-4, COLS);
+				wrefresh(_display_window);
 			}
 		}
 
 		if (display_urls) {
-			_url_window->refresh();
-			_display_window->wresize(_tty.lines()-4-url_h, _tty.columns());
-			_display_window->refresh();
+			wrefresh(_url_window);
+			wresize(_display_window, LINES-4-url_h, COLS);
+			wrefresh(_display_window);
 		}
 	
 		if (update_footer) {
 			update_footer = false;
-			_footer_window->erase();
-			_footer_window->printw("%d line(s) hidden on top", offset);
-			_footer_window->refresh();
+			werase(_footer_window);
+			wprintw(_footer_window, "%d line(s) hidden on top", offset);
+			wrefresh(_footer_window);
 		}
 
-		switch(_display_window->getch()) {
+		switch(getch()) {
 			case 'q': // quit program
 				go = false;
 				break;
@@ -162,7 +169,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 }
 
 int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
-	_display_window->erase();
+	werase(_display_window);
 	Paragraph *p(nullptr);
 	LineElement *l(nullptr);
 	UrlLineElement *u(nullptr);
@@ -170,37 +177,38 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	bool is_first(true);
 	int cursor_x, cursor_y(-line_offset);
 	string tmp_str;
-	int current;
+	attr_t current;
+	short current_color;
 	int url_count(0);
 	int displayed_url_count(0);
 	int olist1_index(1);
 
-	_url_window->mvwin(2, 0);
-	_url_window->wresize(1, _tty.columns());
-	_url_window->attron(A_UNDERLINE);
-	_url_window->printw(0, 0, "Url list");
-	_url_window->attroff(A_UNDERLINE);
+	mvwin(_url_window, 2, 0);
+	wresize(_url_window, 1, COLS);
+	wattron(_url_window, A_UNDERLINE);
+	mvwprintw(_url_window, 0, 0, "Url list");
+	wattroff(_url_window, A_UNDERLINE);
 
 	for (size_t i(0); i < doc->size(); ++i) {
 		p = (*doc)[i];
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
-				_display_window->attron(A_UNDERLINE);
-				_display_window->attron(COLOR_PAIR(TITLE1_PAIR));
+				wattron(_display_window, A_UNDERLINE);
+				wattron(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				if (!is_first) {
 					cursor_y+=2;
 				}
 				cursor_x=9;
 				break;
 			case Paragraph::Level::Title2:
-				_display_window->attron(COLOR_PAIR(TITLE1_PAIR));
+				wattron(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				if (!is_first) {
 					cursor_y+=2;
 				}
 				cursor_x=5;
 				break;
 			case Paragraph::Level::Title3:
-				_display_window->attron(COLOR_PAIR(TITLE1_PAIR));
+				wattron(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				if (!is_first) {
 					cursor_y+=2;
 				}
@@ -224,16 +232,16 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 					cursor_y+=1;
 				}
 				cursor_x=4;
-				_display_window->chgat(cursor_y, 0, -1, A_REVERSE, 0, NULL);
+				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, 0, NULL);
 				break;
 			case Paragraph::Level::Quote:
-				_display_window->attron(A_REVERSE);
-				_display_window->attron(COLOR_PAIR(TITLE1_PAIR));
+				wattron(_display_window, A_REVERSE);
+				wattron(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				if (!is_first) {
 					cursor_y+=1;
 				}
 				cursor_x=0;
-				_display_window->chgat(cursor_y, 0, -1, A_REVERSE, TITLE1_PAIR, NULL);
+				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, TITLE1_PAIR, NULL);
 				break;
 			default:
 				if (!is_first) {
@@ -245,21 +253,20 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 		if (is_first) {
 			is_first = false;
 		}
-		_display_window->move(cursor_y, cursor_x);
+		wmove(_display_window, cursor_y, cursor_x);
 		if (bounds_check(_display_window, cursor_y, cursor_x)) {
 			switch (p->level()) {
 				case Paragraph::Level::UList1:
-				case Paragraph::Level::UList2:
-					_display_window->attron(COLOR_PAIR(ULIST1_PAIR));
-					_display_window->printw("*");
-					_display_window->attroff(COLOR_PAIR(ULIST1_PAIR));
-					_display_window->printw(" ");
+					wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
+					wprintw(_display_window, "*");
+					wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
+					wprintw(_display_window, " ");
 					break;
 				case Paragraph::Level::OList1:
-					_display_window->attron(COLOR_PAIR(ULIST1_PAIR));
-					_display_window->printw("%d)", olist1_index);
-					_display_window->attroff(COLOR_PAIR(ULIST1_PAIR));
-					_display_window->printw(" ");
+					wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
+					wprintw(_display_window, "%d)", olist1_index);
+					wattroff(_display_window, COLOR_PAIR(ULIST1_PAIR));
+					wprintw(_display_window, " ");
 					++olist1_index;
 					break;
 				default:
@@ -269,73 +276,73 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 		for (size_t j(0); j < p->size(); ++j) {
 			l = (*p)[j];
 			tmp_str = l->content();
-			if ( (u=dynamic_cast<UrlLineElement*>(l)) and bounds_check(_display_window, cursor_y, cursor_x)) { // this is an UrlLineElement
-				current = _display_window->attrget();
-				_display_window->attron(A_UNDERLINE);
-				_display_window->attron(COLOR_PAIR(ULIST1_PAIR));
+			if ( (u=dynamic_cast<UrlLineElement*>(l)) and bounds_check(_display_window, cursor_y, cursor_x) ) { // this is an UrlLineElement
+				wattr_get(_display_window, &current, &current_color, nullptr);
+				wattron(_display_window, A_UNDERLINE);
+				wattron(_display_window, COLOR_PAIR(ULIST1_PAIR));
 				++url_count;
 				if (bounds_check(_display_window, cursor_y, cursor_x)) {
 					++displayed_url_count;
-					_url_window->wresize(displayed_url_count+1, _tty.columns());
-					_url_window->printw(displayed_url_count, 0, "[%d] %s", url_count, u->url().c_str());
+					wresize(_url_window, displayed_url_count+1, COLS);
+					mvwprintw(_url_window, displayed_url_count, 0, "[%d] %s", url_count, u->url().c_str());
 				}
 			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
-				current = _display_window->attrget();
+				wattr_get(_display_window, &current, &current_color, nullptr);
 				if (current&A_REVERSE) {
-					_display_window->attroff(A_REVERSE);
+					wattroff(_display_window, A_REVERSE);
 				} else {
-					_display_window->attron(A_REVERSE);
+					wattron(_display_window, A_REVERSE);
 				}
 			} else if (dynamic_cast<BoldLineElement*>(l)) { // Bold element
-				_display_window->attron(A_BOLD);
+				wattron(_display_window, A_BOLD);
 			} else if (dynamic_cast<ItalicLineElement*>(l)) { // Italic element
-				_display_window->attron(A_ITALIC);
+				wattron(_display_window, A_ITALIC);
 			}
 			if (tmp_str.size() < _width - cursor_x) {
 				if (bounds_check(_display_window, cursor_y, cursor_x)) {
-					_display_window->printw(tmp_str.c_str());
+					wprintw(_display_window, tmp_str.c_str());
 				}
 			} else {
 				for (size_t i(0); i < tmp_str.size(); i+=_width) {
 					if (i != 0) {
 						cursor_x = 0;
 						cursor_y += 1;
-						_display_window->move(cursor_y, cursor_x);
+						wmove(_display_window, cursor_y, cursor_x);
 					}
 					if (bounds_check(_display_window, cursor_y, cursor_x)) {
-						_display_window->printw(tmp_str.substr(i, _width).c_str());
+						wprintw(_display_window, tmp_str.substr(i, _width).c_str());
 					}
 				}
 			}
 			if (dynamic_cast<UrlLineElement*>(l) and bounds_check(_display_window, cursor_y, cursor_x)) { // this is an UrlLineElement
-				_display_window->printw("[%d]", url_count);
-				_display_window->attrset(current);
+				wprintw(_display_window, "[%d]", url_count);
+				wattr_set(_display_window, current, current_color, nullptr);
 			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
 				if (current&A_REVERSE) {
-					_display_window->attron(A_REVERSE);
+					wattron(_display_window, A_REVERSE);
 				} else {
-					_display_window->attroff(A_REVERSE);
+					wattroff(_display_window, A_REVERSE);
 				}
 			} else if (dynamic_cast<BoldLineElement*>(l)) { // Bold element
-				_display_window->attroff(A_BOLD);
+				wattroff(_display_window, A_BOLD);
 			} else if (dynamic_cast<ItalicLineElement*>(l)) { // Italic element
-				_display_window->attroff(A_ITALIC);
+				wattroff(_display_window, A_ITALIC);
 			}
 		}
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
-				_display_window->attroff(A_UNDERLINE);
+				wattroff(_display_window, A_UNDERLINE);
 			case Paragraph::Level::Title2:
 			case Paragraph::Level::Title3:
-				_display_window->attroff(COLOR_PAIR(TITLE1_PAIR));
+				wattroff(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				break;
 			case Paragraph::Level::Code:
-				_display_window->attroff(A_REVERSE);
-				_display_window->move(cursor_y, cursor_x);
+				wattroff(_display_window, A_REVERSE);
+				wmove(_display_window, cursor_y, cursor_x);
 				break;
 			case Paragraph::Level::Quote:
-				_display_window->attroff(A_REVERSE);
-				_display_window->attroff(COLOR_PAIR(TITLE1_PAIR));
+				wattroff(_display_window, A_REVERSE);
+				wattroff(_display_window, COLOR_PAIR(TITLE1_PAIR));
 				break;
 			default:
 				break;
@@ -346,14 +353,14 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 		}
 	}
 	
-	_url_window->mvwin(_tty.lines()-3-displayed_url_count, 0);
+	mvwin(_url_window, LINES-3-displayed_url_count, 0);
 
 	return cursor_y+line_offset;
 }
 
-bool NcursesDisplayDriver::bounds_check(NCursesWindow* w, int y, int x) {
+bool NcursesDisplayDriver::bounds_check(WINDOW* w, int y, int x) {
 	int win_x, win_y;
-	w->getmaxyx(win_y, win_x);
+	getmaxyx(w, win_y, win_x);
 
 	if (y > (win_y-1) or x > (win_x-1) or x < 0 or y < 0) {
 		return false;
@@ -364,15 +371,14 @@ bool NcursesDisplayDriver::bounds_check(NCursesWindow* w, int y, int x) {
 
 void NcursesDisplayDriver::check_capabilities(void) const {
 	if (!tigetstr("sitm") or !tigetstr("ritm")) {
-		_display_window->erase();
-		_display_window->attron(A_NORMAL);
-		_display_window->attron(COLOR_PAIR(RED_PAIR));
-		_display_window->printw("Italics capability not detected for this terminal");
+		werase(_display_window);
+		wattr_set(_display_window, A_NORMAL, RED_PAIR, nullptr);
+		wprintw(_display_window, "Italics capability not detected for this terminal");
 		int y, x;
-		_display_window->getyx(y, x);
-		_display_window->move(y+1, 0);
-		_display_window->printw("Press any key to continue");
-		_display_window->refresh();
+		getyx(_display_window, y, x);
+		wmove(_display_window, y+1, 0);
+		wprintw(_display_window, "Press any key to continue");
+		wrefresh(_display_window);
 		sleep(1);
 		getch();
 	}
