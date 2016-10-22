@@ -70,3 +70,5 @@ Author
 ======
 
 Copyright 2016 Simon Doppler <dopsi@member.fsf.org>
+
+The main development repo is [here](https://git.dopsi.ch/mdl.git).
