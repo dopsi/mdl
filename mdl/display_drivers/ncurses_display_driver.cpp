@@ -20,23 +20,22 @@ using namespace std;
 
 NcursesDisplayDriver::NcursesDisplayDriver() :
 	DisplayDriver(true), _stdscr(initscr()),
-	_width(COLS),
-	_title_window(newwin(1,_width,0,0)),
-	_display_window(newwin(LINES-4,_width,2,0)),
-	_footer_window(newwin(1, _width, LINES-1, 0)),
-	_url_window(newwin(1, _width, 2, 0)),
+	_title_window(newwin(1,_tty.columns(),0,0)),
+	_display_window(newwin(_tty.lines()-4,_tty.columns(),2,0)),
+	_footer_window(newwin(1, _tty.columns(), _tty.lines()-1, 0)),
+	_url_window(newwin(1, _tty.columns(), 2, 0)),
 	_display_offset(0) {
 	//Check if all windows have been initialized
 	while(!_title_window) {
-		_title_window = newwin(1,_width,0,0);
+		_title_window = newwin(1,_tty.columns(),0,0);
 	}
 	
 	while(!_display_window) {
-		_display_window = newwin(LINES-4,_width,2,0);
+		_display_window = newwin(_tty.lines()-4,_tty.columns(),2,0);
 	}
 
 	while(!_footer_window) {
-		_footer_window = newwin(1, _width, LINES-1, 0);
+		_footer_window = newwin(1, _tty.columns(), _tty.lines()-1, 0);
 	}
 	assert(has_colors());
 
@@ -99,14 +98,14 @@ void NcursesDisplayDriver::display(Document * doc) {
 			update_body = false;
 			max_offset = render(doc, offset);
 			if (!display_urls) {
-				wresize(_display_window, LINES-4, COLS);
+				wresize(_display_window, _tty.lines()-4, _tty.columns());
 				wrefresh(_display_window);
 			}
 		}
 
 		if (display_urls) {
 			wrefresh(_url_window);
-			wresize(_display_window, LINES-4-url_h, COLS);
+			wresize(_display_window, _tty.lines()-4-url_h, _tty.columns());
 			wrefresh(_display_window);
 		}
 	
@@ -184,7 +183,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	int olist1_index(1);
 
 	mvwin(_url_window, 2, 0);
-	wresize(_url_window, 1, COLS);
+	wresize(_url_window, 1, _tty.columns());
 	wattron(_url_window, A_UNDERLINE);
 	mvwprintw(_url_window, 0, 0, "Url list");
 	wattroff(_url_window, A_UNDERLINE);
@@ -283,7 +282,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				++url_count;
 				if (bounds_check(_display_window, cursor_y, cursor_x)) {
 					++displayed_url_count;
-					wresize(_url_window, displayed_url_count+1, COLS);
+					wresize(_url_window, displayed_url_count+1, _tty.columns());
 					mvwprintw(_url_window, displayed_url_count, 0, "[%d] %s", url_count, u->url().c_str());
 				}
 			} else if (dynamic_cast<CodeLineElement*>(l)) { // this is a CodeLineElement
@@ -298,19 +297,19 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 			} else if (dynamic_cast<ItalicLineElement*>(l)) { // Italic element
 				wattron(_display_window, A_ITALIC);
 			}
-			if (tmp_str.size() < _width - cursor_x) {
+			if (tmp_str.size() < _tty.columns() - cursor_x) {
 				if (bounds_check(_display_window, cursor_y, cursor_x)) {
 					wprintw(_display_window, tmp_str.c_str());
 				}
 			} else {
-				for (size_t i(0); i < tmp_str.size(); i+=_width) {
+				for (size_t i(0); i < tmp_str.size(); i+=_tty.columns()) {
 					if (i != 0) {
 						cursor_x = 0;
 						cursor_y += 1;
 						wmove(_display_window, cursor_y, cursor_x);
 					}
 					if (bounds_check(_display_window, cursor_y, cursor_x)) {
-						wprintw(_display_window, tmp_str.substr(i, _width).c_str());
+						wprintw(_display_window, tmp_str.substr(i, _tty.columns()).c_str());
 					}
 				}
 			}
@@ -353,7 +352,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 		}
 	}
 	
-	mvwin(_url_window, LINES-3-displayed_url_count, 0);
+	mvwin(_url_window, _tty.lines()-3-displayed_url_count, 0);
 
 	return cursor_y+line_offset;
 }
