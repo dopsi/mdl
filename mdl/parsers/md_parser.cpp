@@ -109,7 +109,11 @@ void MdParser::parse() {
 				// This is a code paragraph
 				delete current_p;
 				current_p = new CodeParagraph();
-				line = string_clear_leading(line, " \t");
+				if (line.substr(0, 4) == "    ") {
+					line = line.substr(4);
+				} else {
+					line = line.substr(1);
+				}
 				current_p->append_line_element(new CodeLineElement(line));
 				_document->append_paragraph(current_p);
 				current_p = new TextParagraph();
