@@ -2,6 +2,8 @@ before_script:
         - pacman --noconfirm -Syu cmake boost boost-libs gcc make
 
 build:
+        tags:
+                - archlinux
         script:
                 - mkdir build
                 - cd build
