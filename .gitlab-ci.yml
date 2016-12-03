@@ -1,5 +1,5 @@
 before_script:
-        - pacman --noconfirm -Syu cmake boost boost-libs ncurses
+        - pacman --noconfirm -Syu cmake boost boost-libs ncurses g++
 
 build:
         script:
