@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/libmdl_tools/ansi_wrapper.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl_tools/tty.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl_tools/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl_tools/includes/configure.hpp.in" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/title1_paragraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/italic_line_element.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/ulist1_paragraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/title3_paragraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/code_line_element.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/url_line_element.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/document.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/olist1_paragraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/text_paragraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/bold_line_element.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/ulist2_paragraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/code_paragraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/title2_paragraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/quote_paragraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/paragraph.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/text_line_element.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/document/line_element.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/parser.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/display_driver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libmdl/includes/configure.hpp.in" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/parsers/md_parser.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/parsers/md_parser.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/options.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/latex_display_driver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/troff_display_driver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/latex_display_driver.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/troff_display_driver.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/ansi_display_driver.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/html_display_driver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/ansi_display_driver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/plaintext_display_driver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/rst_display_driver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/plaintext_display_driver.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/html_display_driver.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/rst_display_driver.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/md_display_driver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/ncurses_display_driver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/md_display_driver.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/display_drivers/ncurses_display_driver.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/options.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mdl/configure.hpp.in" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Header Search Paths">
+        <CLASSES>
+          <root url="file:///usr/include" />
+          <root url="file:///usr/lib/gcc/x86_64-pc-linux-gnu/6.2.1/include" />
+          <root url="file:///usr/lib/gcc/x86_64-pc-linux-gnu/6.2.1/include-fixed" />
+          <root url="file:///usr/local/include" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Release/libmdl_tools" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Release/mdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Release/libmdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Debug/libmdl_tools" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Debug/mdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Debug/libmdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/RelWithDebInfo/libmdl_tools" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/RelWithDebInfo/mdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/RelWithDebInfo/libmdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/MinSizeRel/libmdl_tools" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/MinSizeRel/libmdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/MinSizeRel/mdl" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/include" />
+          <root url="file:///usr/lib/gcc/x86_64-pc-linux-gnu/6.2.1/include" />
+          <root url="file:///usr/lib/gcc/x86_64-pc-linux-gnu/6.2.1/include-fixed" />
+          <root url="file:///usr/local/include" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Release/libmdl_tools" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Release/mdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Release/libmdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Debug/libmdl_tools" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Debug/mdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/Debug/libmdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/RelWithDebInfo/libmdl_tools" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/RelWithDebInfo/mdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/RelWithDebInfo/libmdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/MinSizeRel/libmdl_tools" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/MinSizeRel/libmdl" />
+          <root url="file://$USER_HOME$/.CLion2016.2/system/cmake/generated/mdl-62721c2f/62721c2f/MinSizeRel/mdl" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
