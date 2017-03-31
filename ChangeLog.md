@@ -13,6 +13,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 * `mdl/parsers/md_parser.cpp`: fix the removal of blank characters in 
 a CodeParagraph
+* `mdl/options.hpp`: do not require a string argument for `--help` and add a short
+options `-h`
 
 ## [v1.1.1] 2016-10-16
 

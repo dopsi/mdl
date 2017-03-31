@@ -17,7 +17,7 @@ MdlOptions::MdlOptions(int argc, char ** argv) :
 	const string usage("Usage: mdl [OPTIONS] <input-file>");
 	po::options_description desc(usage);
 	desc.add_options()
-		("help", po::value<string>(), "produce help message and exit")
+		("help,h", "produce help message and exit")
 		("display-driver,d", po::value<string>(), "set display driver")
 		("input-parser,p", po::value<string>(), "set input parser")
 		("input-file,i", po::value<string>(), "input file to be used")
