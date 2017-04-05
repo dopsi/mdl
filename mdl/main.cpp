@@ -11,8 +11,6 @@
 
 #include "options.hpp"
 
-#include <iostream>
-#include <locale.h>
 #include <cassert>
 
 using namespace std;
