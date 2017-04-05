@@ -1,4 +1,5 @@
 build/
 doc/
 .idea/workspace.xml
+.idea/preferred-vcs.xml
 cmake-build-*
