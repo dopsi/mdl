@@ -1,10 +1,9 @@
 mdl - a command line Markdown viewer
 ====================================
 
-[![build
-status](https://git.dopsi.ch/dopsi/mdl/badges/master/build.svg)](https://git.dopsi.ch/dopsi/mdl/commits/master)
-[![coverage
-report](https://git.dopsi.ch/dopsi/mdl/badges/master/coverage.svg)](https://git.dopsi.ch/dopsi/mdl/commits/master)
+[![build status](https://git.dopsi.ch/dopsi/mdl/badges/master/build.svg)](https://git.dopsi.ch/dopsi/mdl/commits/master)
+[![AUR](https://img.shields.io/aur/version/mdl.svg)](https://aur.archlinux.org/packages/mdl)
+[![GitHub release](https://img.shields.io/github/release/dopsi/mdl.svg)](https://github.com/dopsi/mdl/releases/latest)
 
 Goal
 ----
