@@ -26,7 +26,7 @@ find_package(Curses REQUIRED)
 configure_file(${PROJECT_SOURCE_DIR}/includes/configure.hpp.in ${PROJECT_BINARY_DIR}/configure.hpp)
 include_directories(BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/includes)
 
-add_library(libmdl_tools
+add_library(libmdl_tools SHARED
 	ansi_wrapper.cpp
 	tty.cpp
 	)

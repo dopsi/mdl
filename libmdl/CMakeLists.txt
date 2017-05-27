@@ -26,7 +26,7 @@ find_package(Curses REQUIRED)
 configure_file(${PROJECT_SOURCE_DIR}/includes/configure.hpp.in ${PROJECT_BINARY_DIR}/configure.hpp)
 include_directories(BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR})
 
-add_library(libmdl
+add_library(libmdl SHARED
 	document/document.cpp
 	document/line_element.cpp
 	document/text_line_element.cpp
