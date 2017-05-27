@@ -1,4 +1,3 @@
-#include "configure.hpp"
 #include "parsers/md_parser.hpp"
 #include "display_drivers/ncurses_display_driver.hpp"
 #include "display_drivers/plaintext_display_driver.hpp"
