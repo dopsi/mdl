@@ -8,7 +8,7 @@
 namespace po = boost::program_options;
 using namespace std;
 
-MdlOptions::MdlOptions(int argc, char ** argv) :
+MdlOptions::MdlOptions(int argc, const char *const *argv) :
 	_standalone(true),
 	_display_driver("ncurses"),
 	_input_file(""),

@@ -26,7 +26,7 @@ class MdlOptions {
 		 * @param argc The number of arguments provided to the program
 		 * @param argv Array of C-strings cointaining the arguments
 		 **/
-		MdlOptions(int argc, char **argv);
+		MdlOptions(int argc, const char *const *argv);
 		
 		/**
 		 * @brief Destructor

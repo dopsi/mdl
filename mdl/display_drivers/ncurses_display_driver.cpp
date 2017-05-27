@@ -89,9 +89,9 @@ void NcursesDisplayDriver::display(Document * doc) {
 			wrefresh(_title_window);
 		}
 
-		int display_h, display_w;
+		int display_h, display_w; // display_w required for getmaxyx
 		getmaxyx(_display_window,display_h,display_w);
-		int url_h, url_w;
+		int url_h, url_w; // url_w required for getmaxyx
 		getmaxyx(_url_window,url_h,url_w);
 
 		if (update_body or !display_urls) {
@@ -176,8 +176,8 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	bool is_first(true);
 	int cursor_x, cursor_y(-line_offset);
 	string tmp_str;
-	attr_t current;
-	short current_color;
+	attr_t current = 0;
+	short current_color = 0;
 	int url_count(0);
 	int displayed_url_count(0);
 	int olist1_index(1);
@@ -302,14 +302,14 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 					wprintw(_display_window, tmp_str.c_str());
 				}
 			} else {
-				for (size_t i(0); i < tmp_str.size(); i+=_tty.columns()) {
-					if (i != 0) {
+				for (size_t k(0); k < tmp_str.size(); k+=_tty.columns()) {
+					if (k != 0) {
 						cursor_x = 0;
 						cursor_y += 1;
 						wmove(_display_window, cursor_y, cursor_x);
 					}
 					if (bounds_check(_display_window, cursor_y, cursor_x)) {
-						wprintw(_display_window, tmp_str.substr(i, _tty.columns()).c_str());
+						wprintw(_display_window, tmp_str.substr(k, _tty.columns()).c_str());
 					}
 				}
 			}
@@ -361,11 +361,7 @@ bool NcursesDisplayDriver::bounds_check(WINDOW* w, int y, int x) {
 	int win_x, win_y;
 	getmaxyx(w, win_y, win_x);
 
-	if (y > (win_y-1) or x > (win_x-1) or x < 0 or y < 0) {
-		return false;
-	} else {
-		return true;
-	}
+	return !(y > (win_y - 1) or x > (win_x - 1) or x < 0 or y < 0);
 }
 
 void NcursesDisplayDriver::check_capabilities(void) const {
@@ -373,7 +369,7 @@ void NcursesDisplayDriver::check_capabilities(void) const {
 		werase(_display_window);
 		wattr_set(_display_window, A_NORMAL, RED_PAIR, nullptr);
 		wprintw(_display_window, "Italics capability not detected for this terminal");
-		int y, x;
+		int y, x; // x required for getyx
 		getyx(_display_window, y, x);
 		wmove(_display_window, y+1, 0);
 		wprintw(_display_window, "Press any key to continue");

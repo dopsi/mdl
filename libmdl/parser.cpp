@@ -1,7 +1,5 @@
 #include "includes/parser.hpp"
 
-#include <stdexcept>
-
 Parser::Parser(const std::string & filename) :
 	_filename(filename),
 	_input_file(filename),

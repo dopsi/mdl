@@ -25,15 +25,6 @@ namespace {
 		return (s.find_first_not_of(c) == std::string::npos);
 	}
 
-	template<class T>
-	T max(const T & a, const T & b) {
-		if (a > b) {
-			return a;
-		} else {
-			return b;
-		}
-	}
-
 	size_t string_startswith(const std::string & s, const char & c) {
 		size_t i(0);
 		while (s[i] == c and i < s.length()){
@@ -52,12 +43,9 @@ namespace {
 		while (s[i] == c[i] and i < c.length() ){
 			++i;
 		}
-		
-		if (i != c.length()) {
-			return false;
-		}
 
-		return true;
+		return i == c.length();
+
 	}
 
 	std::string string_clear_leading(const std::string & s, const std::string & subset) {
@@ -84,7 +72,7 @@ void MdParser::parse() {
 	std::string line;
 	_document = new Document(_filename);
 	Paragraph *current_p(nullptr), *temp_p(nullptr);
-	LineElement *e = nullptr, *last_e = nullptr;
+	LineElement *last_e = nullptr;
 	size_t sharps(0);
 
 	smatch match;
@@ -95,7 +83,6 @@ void MdParser::parse() {
 			// end of line, change paragraph
 			if (current_p and current_p->size()) {
 				_document->append_paragraph(current_p);
-				current_p = nullptr;
 			}
 			current_p = new TextParagraph();
 		} else {
@@ -151,31 +138,26 @@ void MdParser::parse() {
 				delete current_p;
 				current_p = nullptr;
 				_document->append_paragraph(temp_p);
-				temp_p = nullptr;
 			} else if (string_has_only(line, '-')) { // title 2 delimiter
 				temp_p = new Title2Paragraph(current_p);
 				delete current_p;
 				current_p = nullptr;
 				_document->append_paragraph(temp_p);
-				temp_p = nullptr;
 			} else if (string_startswith(line, "* ") or string_startswith(line, "- ")) { // level 1 list delimiter
-				if (current_p and current_p->size()) {
+				if (current_p->size()) {
 					_document->append_paragraph(current_p);
-					current_p=nullptr;
 				}
 				current_p = new UList1Paragraph();
 				parse_line(current_p, line.substr(2));
 			} else if (string_startswith(line, "  * ") or string_startswith(line, "  - ")) { // level 2 list delimiter
-				if (current_p and current_p->size()) {
+				if (current_p->size()) {
 					_document->append_paragraph(current_p);
-					current_p=nullptr;
 				}
 				current_p = new UList2Paragraph();
 				parse_line(current_p, line.substr(4));
 			} else if (regex_search(line, match, olist1_regex)) { // ordered list level 1
-				if (current_p and current_p->size()) {
+				if (current_p->size()) {
 					_document->append_paragraph(current_p);
-					current_p=nullptr;
 				}
 				current_p = new OList1Paragraph();
 				parse_line(current_p, line.substr(line.find_first_not_of("0123456789)")+1));

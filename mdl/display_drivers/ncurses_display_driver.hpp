@@ -21,7 +21,7 @@ class NcursesDisplayDriver : public DisplayDriver {
 		WINDOW* _footer_window; /**< @brief The footer window **/
 		WINDOW* _url_window; /**< @brief The url display window **/
 		int _display_offset; /**< @brief The display_offset **/
-		int _url_count; /**< @brief The number of urls to display **/
+	/**< @brief The number of urls to display **/
 
 		/**
 		 * @brief Actually render the document on the _display_window
