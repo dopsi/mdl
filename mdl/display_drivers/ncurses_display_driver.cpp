@@ -169,7 +169,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 
 int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	werase(_display_window);
-	Paragraph *p(nullptr);
+	Paragraph *p(nullptr), *prev_p(nullptr);
 	LineElement *l(nullptr);
 	UrlLineElement *u(nullptr);
 
@@ -188,7 +188,8 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 	mvwprintw(_url_window, 0, 0, "Url list");
 	wattroff(_url_window, A_UNDERLINE);
 
-	for (size_t i(0); i < doc->size(); ++i) {
+	for (size_t i(0); i < doc->size(); ++i) { // Iterate over all paragraphs in the document
+        prev_p = p;
 		p = (*doc)[i];
 		switch (p->level()) {
 			case Paragraph::Level::Title1:
@@ -228,7 +229,11 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 				break;
 			case Paragraph::Level::Code:
 				if (!is_first) {
-					cursor_y+=1;
+					if (prev_p->level() != Paragraph::Level::Code) {
+                        cursor_y+=2;
+                    } else {
+                        cursor_y += 1;
+                    }
 				}
 				cursor_x=4;
 				mvwchgat(_display_window, cursor_y, 0, -1, A_REVERSE, 0, NULL);
@@ -272,7 +277,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 					break;
 			}
 		}
-		for (size_t j(0); j < p->size(); ++j) {
+		for (size_t j(0); j < p->size(); ++j) { // Iterate over all line elements in the document
 			l = (*p)[j];
 			tmp_str = l->content();
 			if ( (u=dynamic_cast<UrlLineElement*>(l)) and bounds_check(_display_window, cursor_y, cursor_x) ) { // this is an UrlLineElement
