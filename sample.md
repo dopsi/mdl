@@ -14,6 +14,7 @@ This list does summarize the supported functions :
 * titles (up to 2 levels at the moment)
 * unnumberred lists (up to 1 level at the moment)
 * URL's in [Pandoc](http://pandoc.org/) style
+* two [urls](https://example.com) in one [line](https://example2.com)
 * indented code blocks
 
     #include <stdio.h>

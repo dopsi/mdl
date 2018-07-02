@@ -177,7 +177,7 @@ void MdParser::parse() {
 }
 
 LineElement* MdParser::parse_line(Paragraph *p, const std::string & line) {
-	regex url_regex("\\[.*\\]\\([^)]*\\)"),
+	regex url_regex("\\[((?:!\\[)(.*)(?:\\][^\\[\\]]*\\))|([^\\]]*))\\]\\(([^\\[\\]]*)\\)"),
 	      code_regex("`[^`]*`"),
 	      bold_regex("(\\*\\*|__)[^\\*_]+(\\*\\*|__)"),
 	      italic_regex("(\\*|_)[^\\*_]+(\\*|_)");
