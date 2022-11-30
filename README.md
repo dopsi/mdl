@@ -1,6 +1,15 @@
 mdl - a command line Markdown viewer
 ====================================
 
+--------
+
+**Unmaintained package! Use at your own risk!**
+
+You want to take over development?
+File an issue and we can arrange ownership transfer of the AUR package too.
+
+--------
+
 [![build status](https://git.dopsi.ch/dopsi/mdl/badges/master/build.svg)](https://git.dopsi.ch/dopsi/mdl/commits/master)
 [![AUR](https://img.shields.io/aur/version/mdl.svg)](https://aur.archlinux.org/packages/mdl)
 [![GitHub release](https://img.shields.io/github/release/dopsi/mdl.svg)](https://github.com/dopsi/mdl/releases/latest)
