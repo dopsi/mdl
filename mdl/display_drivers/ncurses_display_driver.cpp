@@ -84,7 +84,7 @@ void NcursesDisplayDriver::display(Document * doc) {
 				path = ".";
 			}
 			wattron(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
-			wprintw(_title_window, string("mdl - "+filename+" ["+path+"]").c_str());
+			wprintw(_title_window, "%s", string("mdl - "+filename+" ["+path+"]").c_str());
 			wattroff(_title_window, COLOR_PAIR(WIN_TITLE_PAIR));
 			wrefresh(_title_window);
 		}
@@ -304,7 +304,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 			}
 			if (tmp_str.size() < _tty.columns() - cursor_x) {
 				if (bounds_check(_display_window, cursor_y, cursor_x)) {
-					wprintw(_display_window, tmp_str.c_str());
+					wprintw(_display_window, "%s", tmp_str.c_str());
 				}
 			} else {
 				for (size_t k(0); k < tmp_str.size(); k+=_tty.columns()) {
@@ -314,7 +314,7 @@ int NcursesDisplayDriver::render(Document* doc, const int & line_offset) const {
 						wmove(_display_window, cursor_y, cursor_x);
 					}
 					if (bounds_check(_display_window, cursor_y, cursor_x)) {
-						wprintw(_display_window, tmp_str.substr(k, _tty.columns()).c_str());
+						wprintw(_display_window, "%s", tmp_str.substr(k, _tty.columns()).c_str());
 					}
 				}
 			}
